@@ -57,7 +57,7 @@
                         @lang('app.job_seeker')
                     </h4>
                     <hr>
-                    <img style="" src="{{asset('assets/images/employee.png')}}" width="60%" class="mb-3" />
+                    <img src="{{asset('assets/images/employee.png')}}" width="60%" class="mb-3" />
                     <p class="card-text">@lang('app.job_seeker_new_desc')</p>
                     <a href="{{route('register_job_seeker')}}" class="btn btn-success"><i class="fa fa-user"
                             aria-hidden="true"></i>

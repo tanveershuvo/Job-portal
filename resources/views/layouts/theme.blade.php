@@ -33,17 +33,19 @@
     class="{{request()->routeIs('home') ? ' home ' : ''}} {{request()->routeIs('job_view') ? ' job-view-page ' : ''}}">
 
     <div id="app">
-        <nav class="navbar navbar-expand-md sticky-top navbar-custom" style="">
+        <nav class="navbar navbar-expand-md navbar-toggleable-sm sticky-top navbar-custom">
             <div class="container">
                 <a class="navbar-brand" href="{{ route('dashboard') }}">
                     <img src=" {{asset('assets/images/logo.png')}}" width="30" height="30"
                         class="d-inline-block align-top" alt="" loading="lazy">
                     <span style="color:#ffe484 !important;font-weight:bold;">JobPortal</span>
                 </a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse"
+                <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
                     data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
                     aria-label="{{ __('Toggle navigation') }}">
-                    <span class="navbar-toggler-icon"></span>
+                    <span class="navbar-toggler-icon">
+                        <i class="fa fa-navicon" style="color:#ffffff;font-size:26px;"></i>
+                    </span>
                 </button>
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -51,8 +53,6 @@
                     <ul class="navbar-nav mr-auto">
                         <li class="nav-item"><a class="nav-link" href="{{route('home')}}">
                                 @lang('app.home')</a> </li>
-
-
 
                         <li class="nav-item"><a class="nav-link" href="{{route('pricing')}}">@lang('app.pricing')</a>
                         </li>
@@ -68,18 +68,69 @@
                     <ul class="navbar-nav ml-auto">
 
                         <li class="nav-item">
-                            <a class="nav-link btn btn-bd-post d-lg-inline-block mb-3 mb-md-0 ml-md-1"
+                            <a class="nav-link btn btn-bd-post d-sm-inline-block mb-3 mb-md-0 ml-md-1"
                                 href="{{route('post_new_job')}}">{{__('app.post_new_job')}}
                             </a>
                         </li>
 
                         <!-- Authentication Links -->
                         @guest
-                        <li class="nav-item">
+                        {{-- <li class="nav-item">
                             <a class="nav-link" href="{{ route('login') }}">
-                                {{ __('app.login') }}</a>
-                        </li>
-                        <li class="nav-item">
+                        {{ __('app.login') }}</a>
+                        </li> --}}
+                        <div class="dropdown ml-2">
+                            <button class=" btn btn-dropdown nav-item dropdown-toggle" type="button"
+                                data-toggle="dropdown">Login
+                                <span class="caret"></span></button>
+                            {{-- <li class="dropdown-menu" style="width: 18rem;"> --}}
+                            <div class="flex-column dropdown-menu dropdown-menu-right"
+                                style="width: 21rem;background-color:#F5F5F5;">
+                                <div class="d-inline-flex flex-column login-flex p-2 mx-2 mb-2">
+                                    <div class="row">
+                                        <div class="col-4">
+                                            <img src="{{asset('assets/images/employee.png')}}" width="100%" alt="">
+                                        </div>
+                                        <div class="col-8">
+                                            <h5 class="" style="font-weight:bold;">@lang('app.job_seeker')</h5>
+                                            <p>@lang('app.job_seeker_new_desc')</p>
+                                        </div>
+                                    </div>
+                                    <div class="row justify-content-center">
+
+                                        <a class="btn btn-outline-success col-5"
+                                            href="{{route('register_job_seeker')}}"><i class="fa fa-user"
+                                                aria-hidden="true"></i>
+                                            @lang('app.register_account') </a>
+
+                                        <a class="btn btn-light col-4 ml-4" href="{{ route('login') }}">
+                                            <i class="fa fa-sign-in" aria-hidden="true"></i> {{ __('app.login') }}</a>
+                                    </div>
+                                </div>
+                                <div class="d-inline-flex flex-column login-flex p-2 mx-2 mb-2">
+                                    <div class="row">
+                                        <div class="col-4">
+                                            <img src="{{asset('assets/images/enterprises.png')}}" width="100%" alt="">
+                                        </div>
+                                        <div class="col-8">
+                                            <h5 class="" style="font-weight:bold;">@lang('app.employer')</h5>
+                                            <p>@lang('app.employer_new_desc')</p>
+                                        </div>
+                                    </div>
+                                    <div class="row justify-content-center">
+
+                                        <a class="btn btn-outline-primary col-5"
+                                            href="{{route('register_employer')}}"><i class="fa fa-user"
+                                                aria-hidden="true"></i>
+                                            @lang('app.register_account') </a>
+
+                                        <a class="btn btn-light col-4 ml-4" href="{{ route('login') }}">
+                                            <i class="fa fa-sign-in" aria-hidden="true"></i> {{ __('app.login') }}</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <li class=" nav-item">
                             @if (Route::has('new_register'))
                             <a class="nav-link" href="{{ route('new_register') }}">
                                 {{ __('app.register') }}</a>

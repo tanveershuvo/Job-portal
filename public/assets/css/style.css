@@ -1,5 +1,19 @@
 @import url('../line-awesome/css/line-awesome.min.css');
 
+.btn:hover,
+.btn:focus,
+.btn:active
+ {
+  outline: none;
+  box-shadow: none !important;
+  -webkit-appearance: none;
+}
+@media screen and (max-width: 768px) {
+    #navbarSupportedContent{
+    max-height: 70vh;
+    overflow-y: auto;
+    }
+}
 .navbar-custom {
     color: #dff1e7 !important;
     background-color: #7952b3;
@@ -14,14 +28,44 @@
     font-weight: bold;
     text-decoration: none;
 }
-
-.btn{
-    border-radius: 0 !important;
+.navbar-toggler{
+    border:1px solid #ffffff; 
 }
 
+.btn{
+    border-radius: 2 !important;
+}
+/* @media screen and (max-width: 768px) {
+.dropdown:hover > .dropdown-menu {
+    display: block;
+}
+.dropdown > .dropdown-toggle:active {
+    pointer-events: none; 
+}
+} */
+.btn-dropdown{
+    background-color: #7952b3;
+    background-repeat:no-repeat;
+    border: none;
+    cursor:pointer;
+    overflow: hidden;
+    outline:none;
+    color: #dff1e7 !important;
+    font-size:15px;
+}
+
+.dropdown:hover > .btn-dropdown{
+    color: #ffffff !important;
+    font-weight: bold;
+    text-decoration: none;
+}
 .card-custom:hover {
       box-shadow: 0 4px 8px 0 #b5a4ceb0, 0 6px 20px 0 #d1bbf1;
     }
+.login-flex{
+    background-color:rgb(255, 255, 255);
+    box-shadow: 0 4px 8px 0 #69686bb0, 0 6px 10px 0 #aeadb1;
+}
 /**
 Home Page
  */
@@ -52,11 +96,7 @@ transform: scale(1.05);
 transition: transform .3s ease;
 }
 
-.transparent-navbar{
-    background-color: transparent;
-    padding: 20px 0;
-    z-index: 9;
-}
+
 .navbar-brand{
     padding: 0;
 }

@@ -2,10 +2,10 @@
 
 namespace App;
 
-use Illuminate\Database\Eloquent\Model;
 use App\Events\CategoryCreated;
 use App\Events\CategoryDeleted;
 use App\Events\CategoryUpdated;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
 
 class Category extends Model
@@ -14,14 +14,15 @@ class Category extends Model
     protected $guarded = [];
     public $timestamps = false;
 
-    public function jobs(){
+    public function jobs()
+    {
         return $this->hasMany(Job::class);
     }
 
-    public function active_jobs(){
-        return $this->hasMany(Job::class)->whereStatus(1)->where('deadline', '>=', date('Y-m-d').' 00:00:00');
+    public function active_jobs()
+    {
+        return $this->hasMany(Job::class)->whereStatus(1)->where('deadline', '>=', date('Y-m-d') . ' 00:00:00');
     }
-
 
     // public function getCategoryNameAttribute($value){
     //     $last_cached = (int) get_option('category_count_cached');
@@ -37,13 +38,14 @@ class Category extends Model
     //     return $value;
     // }
 
-        protected $dispatchesEvents = [
+    protected $dispatchesEvents = [
         'created' => CategoryCreated::class,
         'deleted' => CategoryDeleted::class,
         'updated' => CategoryUpdated::class,
     ];
 
-        public function job_count(){
-           return $this->hasMany(Job::class)->whereStatus(1)->count();
-        }
+    public function job_count()
+    {
+        return $this->hasMany(Job::class)->whereStatus(1)->count();
+    }
 }

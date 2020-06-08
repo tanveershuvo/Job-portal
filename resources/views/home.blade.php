@@ -72,7 +72,6 @@
             @foreach($premium_jobs as $job)
             <div class="col-md-4 mb-3">
                 <div class="premium-job-box p-3 bg-white box-shadow">
-
                     <div class="row">
                         <div class="col-md-4 col-sm-6">
                             <div class="premium-job-logo">
@@ -162,7 +161,6 @@
 
 <div class="pricing-section bg-white pb-5 pt-5">
     <div class="container">
-
         <div class="row">
             <div class="col-md-12">
 
