@@ -2,10 +2,6 @@
 
 namespace App\Providers;
 
-use App\Option;
-use App\Post;
-use App\Category;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -23,11 +19,11 @@ class AppServiceProvider extends ServiceProvider
 
         //     $options = Option::all()->pluck('option_value', 'option_key')->toArray();
         //     $allOptions = [];
-        //     $allOptions['options'] = $options; 
+        //     $allOptions['options'] = $options;
         //     $allOptions['header_menu_pages'] = Post::whereStatus('1')->where('show_in_header_menu', 1)->get();
         //     $allOptions['footer_menu_pages'] = Post::whereStatus('1')->where('show_in_footer_menu', 1)->get();
         //     config($allOptions);
-           
+
         //     /**
         //      * Set dynamic configuration for third party services
         //      */
@@ -73,7 +69,7 @@ class AppServiceProvider extends ServiceProvider
     public function register()
     {
         if ($this->app->isLocal()) {
-        $this->app->register(TelescopeServiceProvider::class);
-    }
+            $this->app->register(TelescopeServiceProvider::class);
+        }
     }
 }

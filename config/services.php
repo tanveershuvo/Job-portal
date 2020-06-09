@@ -12,7 +12,7 @@ return [
     | default location for this type of information, allowing packages
     | to have a conventional place to find your various credentials.
     |
-    */
+     */
 
     'mailgun' => [
         'domain' => env('MAILGUN_DOMAIN'),
@@ -38,6 +38,12 @@ return [
             'secret' => env('STRIPE_WEBHOOK_SECRET'),
             'tolerance' => env('STRIPE_WEBHOOK_TOLERANCE', 300),
         ],
+    ],
+    'github' =>
+    [
+        'client_id' => '41cba4f6181e33d8f00b', //Facebook API
+        'client_secret' => '51cca03c2c0a0ea0c24bfa3cec7bf6d4962c0e2f', //Facebook Secret
+        'redirect' => 'http://jobportal.test/job-seeker-register/github/callback',
     ],
 
 ];

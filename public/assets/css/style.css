@@ -1,12 +1,9 @@
 @import url('../line-awesome/css/line-awesome.min.css');
-
-.btn:hover,
-.btn:focus,
-.btn:active
- {
+* {
   outline: none;
   box-shadow: none !important;
   -webkit-appearance: none;
+  border-radius: 0 !important;
 }
 @media screen and (max-width: 768px) {
     #navbarSupportedContent{
@@ -32,8 +29,8 @@
     border:1px solid #ffffff; 
 }
 
-.btn{
-    border-radius: 2 !important;
+.error {
+    color:rgb(255, 0, 0);
 }
 /* @media screen and (max-width: 768px) {
 .dropdown:hover > .dropdown-menu {
@@ -60,11 +57,11 @@
     text-decoration: none;
 }
 .card-custom:hover {
-      box-shadow: 0 4px 8px 0 #b5a4ceb0, 0 6px 20px 0 #d1bbf1;
+      box-shadow: 0 4px 8px 0 #b5a4ceb0, 0 6px 20px 0 #d1bbf1 !important;
     }
 .login-flex{
     background-color:rgb(255, 255, 255);
-    box-shadow: 0 4px 8px 0 #69686bb0, 0 6px 10px 0 #aeadb1;
+    box-shadow: 0 4px 8px 0 #69686bb0, 0 6px 10px 0 #aeadb1 !important;
 }
 /**
 Home Page
@@ -328,5 +325,13 @@ button.updating-btn i.la:before{
     color: #eeeeee;
 }
 .main-footer{
-    color: #C7C9C9;
+    background-color: rgba(219, 219, 219, 0.842);
+}
+.list-unstyled a{
+    font-size: 16px; 
+    color: rgb(92, 90, 90); 
+    text-decoration: none;
+}
+.list-unstyled a:hover{
+    color: black;
 }

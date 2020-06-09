@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=2">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
@@ -18,11 +18,13 @@
     <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet" type="text/css">
 
     <!-- Styles -->
+    <link href="{{ asset('assets/css/bootsrapSocial.css') }}" rel="stylesheet">
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('assets/css/style.css') }}" rel="stylesheet">
-
+    @yield('page-css')
     <script type='text/javascript'>
-        /* <![CDATA[ */
+        /*
+    <![CDATA[ */
         var page_data = {!! pageJsonData() !!};
         /* ]]> */
     </script>
@@ -172,69 +174,69 @@
             @yield('content')
         </div>
 
-        <div id="main-footer" class="main-footer bg-dark py-5">
+        <div id="main-footer" class="main-footer text-dark pt-5 pb-2">
 
-            <div class="container">
+            <div class="container text-md-left text-center">
                 <div class="row">
-                    <div class="col-md-4">
-
+                    <div class="col-md-3">
                         <div class="footer-logo-wrap mb-3">
-                            <a class="navbar-brand" href="{{ url('/') }}">
-                                <img src="{{asset('assets/images/logo-alt.png')}}" />
+                            <a class="navbar-brand " href="{{ url('/') }}">
+                                <h3 class="text-dark"> JobPortal</h3>
                             </a>
                         </div>
-
-
                     </div>
-
-
-                    <div class="col-md-4">
-
+                    <div class="col-md-3">
                         <div class="footer-menu-wrap mt-2">
                             <h4 class="mb-3">@lang('app.job_seeker')</h4>
-
                             <ul class="list-unstyled">
                                 <li><a href="{{route('register_job_seeker')}}">@lang('app.create_account')</a> </li>
                                 <li><a href="{{route('jobs_listing')}}">@lang('app.search_jobs')</a> </li>
                                 <li><a href="{{route('applied_jobs')}}">@lang('app.applied_jobs')</a> </li>
                             </ul>
-
                         </div>
-
                     </div>
-
-                    <div class="col-md-4">
-
+                    <div class="col-md-3">
                         <div class="footer-menu-wrap  mt-2">
                             <h4 class="mb-3">@lang('app.employer')</h4>
-
                             <ul class="list-unstyled">
                                 <li><a href="{{route('register_employer')}}">@lang('app.create_account')</a> </li>
                                 <li><a href="{{route('post_new_job')}}">@lang('app.post_new_job')</a> </li>
                                 <li><a href="{{route('pricing')}}">@lang('app.buy_premium_package')</a> </li>
                             </ul>
-
                         </div>
-
                     </div>
 
+                    <div class="col-md-3">
+                        <div class="footer-menu-wrap  mt-2">
+                            <h4 class="mb-3">Social links</h4>
 
+
+                            <a href="https://www.facebook.com/" target="_blank"
+                                class="btn btn-social-icon btn-circle-facebook text-light mr-2">
+                                <span class="fa fa-facebook"></span>
+                            </a>
+                            <a class="btn btn-social-icon btn-circle-google text-light mr-2">
+                                <span class="fa fa-google"></span>
+                            </a>
+                            <a class="btn btn-social-icon btn-circle-linkedin text-light mr-2">
+                                <span class="fa fa-linkedin"></span>
+                            </a>
+                            <a style="border-radius: 5 !important;"
+                                class="btn btn-social-icon btn-circle-github text-light mr-2">
+                                <span class="fa fa-github"></span>
+                            </a>
+                        </div>
+                    </div>
                 </div>
-
-
                 <div class="row">
                     <div class="col-md-12">
-                        <div class="footer-copyright-text-wrap text-center mt-4">
-                            <p>Copyright © 2019 JobFair</p>
+                        <div class="footer-copyright-text-wrap text-center mt-5">
+                            <p>Copyright © 2020 JobPortal</p>
                         </div>
                     </div>
                 </div>
-
             </div>
-
         </div>
-
-
     </div>
 
 

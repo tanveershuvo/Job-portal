@@ -245,7 +245,7 @@
                 <div class="blog-card-wrap bg-white p-3 mb-4">
 
                     <div class="blog-card-img mb-4">
-                        <img src="{{$post->feature_image_thumb_uri}}" class="card-img" />
+                        <img src="{{$post->feature_image_thumb_uri}}" loading="lazy" class="card-img" />
                     </div>
 
                     <h4 class="mb-3">{{$post->title}}</h4>
