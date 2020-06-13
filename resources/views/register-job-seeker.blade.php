@@ -7,7 +7,14 @@
         <div class="mr-auto col-md-8 p-2">
             <h3 class="mb-4 text-primary">@lang('app.register')</h3>
             @if (Session::has('message'))
-            <div class="alert alert-danger">{{ Session::get('message') }}</div>
+            @php
+            $message = Session::get('message');
+            @endphp
+            @foreach($message as $messages)
+            <div class="alert alert-danger">
+                <b>ERROR : {{ $messages['code'] }} </b> , {{ $messages['reason'] }}
+            </div>
+            @endforeach
             @endif
             <form action="" enctype="multipart/form-data">
                 @csrf

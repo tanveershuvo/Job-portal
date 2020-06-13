@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use Exception;
+use GuzzleHttp\Exception\RequestException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use Redirect;
@@ -33,11 +33,17 @@ class SocialiteController extends Controller
             $arr = ['name' => $userSocial->getName(), 'email' => $userSocial->getEmail()];
             return view('register-job-seeker')->with('arr', $arr);
 
-        } catch (\Exception $e) {
-            $msg = Session::flash('message', 'Something went wrong!');
-            return Redirect::to('/job-seeker-register')->with('msg', $msg);
-        }
+        } catch (RequestException $e) {
+            // $response = 0;
+            $response = array([
+                'reason' => $e->getResponse()->getReasonPhrase(),
+                'code' => $e->getResponse()->getStatusCode(),
+            ]);
+            // dd($response);
+            Session::flash('message', $response);
+            return Redirect::to('/job-seeker-register');
 
+        }
     }
 
 }

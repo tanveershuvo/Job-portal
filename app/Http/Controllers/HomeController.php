@@ -70,19 +70,18 @@ class HomeController extends Controller
 
         $this->validate($request, $rules);
 
-        // try {
+        try {
 
-        SendContactUsMailJob::withChain([
-            new SendContactUsSendToSenderMailJob($request->all()),
-        ])->dispatch($request->all())
-            ->delay(Carbon::now()->addSeconds(10));
-        // SendContactUsSendToSenderMailJob::dispatch($request->all())
-        //     ->delay(Carbon::now()->addSeconds(5));
+            SendContactUsMailJob::withChain([
+                new SendContactUsSendToSenderMailJob($request->all()),
+            ])->dispatch($request->all())
+                ->delay(Carbon::now()->addSeconds(10));
+            SendContactUsSendToSenderMailJob::dispatch($request->all())
+                ->delay(Carbon::now()->addSeconds(5));
 
-        // } catch (\Exception $exception) {
-        //     // dd($exception);
-        //     return redirect()->back()->with('error', '<h4>' . trans('app.smtp_error_message') . '</h4>' . $exception->getMessage());
-        // }
+        } catch (\Exception $exception) {
+            return redirect()->back()->with('error', '<h4>' . 'smtp_error_message' . '</h4>' . $exception->getMessage());
+        }
 
         return redirect()->back()->with('success', trans('app.message_has_been_sent'));
     }
