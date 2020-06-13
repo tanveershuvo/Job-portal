@@ -2,9 +2,8 @@
 
 namespace App;
 
-use Illuminate\Notifications\Notifiable;
-use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\Auth;
 
 class User extends Authenticatable
@@ -27,53 +26,62 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
-
-    public function jobs(){
+    public function jobs()
+    {
         return $this->hasMany(Job::class)->orderBy('id', 'desc');
     }
-    public function is_user(){
+    public function is_user()
+    {
         return $this->user_type === 'user';
     }
-    public function is_admin(){
+    public function is_admin()
+    {
         return $this->user_type === 'admin';
     }
-    public function is_employer(){
+    public function is_employer()
+    {
         return $this->user_type === 'employer';
     }
-    public function is_agent(){
+    public function is_agent()
+    {
         return $this->user_type === 'agent';
     }
 
-    public function scopeEmployer($query){
+    public function scopeEmployer($query)
+    {
         return $query->whereUserType('employer');
     }
-    public function scopeAgent($query){
+    public function scopeAgent($query)
+    {
         return $query->whereUserType('agent');
     }
-    public function isEmployerFollowed($employer_id = null){
-        if ( ! $employer_id || ! Auth::check()){
+    public function isEmployerFollowed($employer_id = null)
+    {
+        if (!$employer_id || !Auth::check()) {
             return false;
         }
 
         $user = Auth::user();
         $isFollowed = UserFollowingEmployer::whereUserId($user->id)->whereEmployerId($employer_id)->first();
 
-        if($isFollowed){
+        if ($isFollowed) {
             return true;
         }
         return false;
     }
 
-    public function getFollowersAttribute(){
+    public function getFollowersAttribute()
+    {
         $followersCount = UserFollowingEmployer::whereEmployerId($this->id)->count();
-        if ($followersCount){
+        if ($followersCount) {
             return number_format($followersCount);
         }
         return 0;
     }
 
-    public function getFollowableAttribute(){
-        if ( ! Auth::check()){
+    public function getFollowableAttribute()
+    {
+        if (!Auth::check()) {
             return true;
         }
 
@@ -81,21 +89,25 @@ class User extends Authenticatable
         return $this->id !== $user->id;
     }
 
-    public function getLogoUrlAttribute(){
-        if ($this->logo){
-            return asset('storage/uploads/images/logos/'.$this->logo);
+    public function getLogoUrlAttribute()
+    {
+        if ($this->logo) {
+            return asset('storage/uploads/images/logos/' . $this->logo);
         }
         return asset('assets/images/company.png');
     }
 
-    public function payments(){
+    public function payments()
+    {
         return $this->hasMany(Payment::class);
     }
-    public function getPremiumJobsBalanceAttribute($value){
+    public function getPremiumJobsBalanceAttribute($value)
+    {
         return $value;
     }
 
-    public function checkJobBalace(){
+    public function checkJobBalace()
+    {
         $totalPremiumJobsPaid = $this->payments()->success()->sum('premium_job');
         $totalPosted = $this->jobs()->whereIsPremium(1)->count();
         $balance = $totalPremiumJobsPaid - $totalPosted;
@@ -104,16 +116,18 @@ class User extends Authenticatable
         $this->save();
     }
 
-    public function signed_up_datetime(){
-        $created_date_time = $this->created_at->timezone(get_option('default_timezone'))->format(get_option('date_format_custom').' '.get_option('time_format_custom'));
- 
+    public function signed_up_datetime()
+    {
+        $created_date_time = $this->created_at->timezone(get_option('default_timezone'))->format(get_option('date_format_custom') . ' ' . get_option('time_format_custom'));
+
         return $created_date_time;
     }
-    public function status_context(){
+    public function status_context()
+    {
         $status = $this->active_status;
 
         $context = '';
-        switch ($status){
+        switch ($status) {
             case '0':
                 $context = 'Pending';
                 break;

@@ -5,12 +5,11 @@
 <div class="row">
     <div class="col-md-12">
 
-        @if($user->is_employer() || $user->is_agent())
+        @if($user->is_employer() || $user->is_agent() || $user->is_admin())
         <div class="profile-company-logo mb-3">
             <img src="{{$user->logo_url}}" class="img-fluid" style="max-width: 100px;" />
         </div>
         @endif
-
         <table class="table table-bordered table-striped mb-4">
 
             <tr>
@@ -52,10 +51,6 @@
                 <td>{{ $user->status_context() }}</td>
             </tr>
         </table>
-
-
-
-
         @if($user->is_employer() || $user->is_agent())
         <h3 class="mb-4">About Company</h3>
 

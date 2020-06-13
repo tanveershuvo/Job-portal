@@ -1,5 +1,6 @@
 <?php
 
+use Carbon\Carbon;
 use Illuminate\Database\Seeder;
 
 class UsersTableSeeder extends Seeder
@@ -18,6 +19,7 @@ class UsersTableSeeder extends Seeder
             'gender' => 'male',
             'user_type' => 'admin',
             'active_status' => '1',
+            'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
         ]);
     }
 }

@@ -462,28 +462,28 @@ class JobController extends Controller
             });
         }
 
-        if ($request->location) {
-            $jobs = $jobs->where('city_name', 'like', "%{$request->location}%");
-        }
+        // if ($request->location) {
+        //     $jobs = $jobs->where('city_name', 'like', "%{$request->location}%");
+        // }
 
-        if ($request->gender) {
-            $jobs = $jobs->whereGender($request->gender);
-        }
-        if ($request->exp_level) {
-            $jobs = $jobs->whereExpLevel($request->exp_level);
-        }
-        if ($request->job_type) {
-            $jobs = $jobs->whereJobType($request->job_type);
-        }
-        if ($request->country) {
-            $jobs = $jobs->whereCountryId($request->country);
-        }
-        if ($request->state) {
-            $jobs = $jobs->whereStateId($request->state);
-        }
-        if ($request->category) {
-            $jobs = $jobs->whereCategoryId($request->category);
-        }
+        // if ($request->gender) {
+        //     $jobs = $jobs->whereGender($request->gender);
+        // }
+        // if ($request->exp_level) {
+        //     $jobs = $jobs->whereExpLevel($request->exp_level);
+        // }
+        // if ($request->job_type) {
+        //     $jobs = $jobs->whereJobType($request->job_type);
+        // }
+        // if ($request->country) {
+        //     $jobs = $jobs->whereCountryId($request->country);
+        // }
+        // if ($request->state) {
+        //     $jobs = $jobs->whereStateId($request->state);
+        // }
+        // if ($request->category) {
+        //     $jobs = $jobs->whereCategoryId($request->category);
+        // }
 
         $jobs = $jobs->orderBy('id', 'desc')->with('employer')->paginate(20);
 
