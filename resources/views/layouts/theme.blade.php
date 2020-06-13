@@ -1,15 +1,13 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<html lang="{{App::getlocale()}}">
 
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
+    <link rel="shortcut icon" href="{{asset('assets/images/logo.png')}}" />
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
-
-    <title>{!! !empty($title) ? $title : 'JobFair' !!}</title>
-
+    <title>{{ $title ?? 'JobFair' }}</title>
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" {{ ! request()->is('payment*')? 'defer' : ''}}></script>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -38,73 +36,69 @@
         <nav class="navbar navbar-expand-md navbar-toggleable-sm sticky-top navbar-custom">
             <div class="container">
                 <a class="navbar-brand" href="{{ route('dashboard') }}">
-                    <img src=" {{asset('assets/images/logo.png')}}" width="30" height="30"
-                        class="d-inline-block align-top" alt="" loading="lazy">
-                    <span style="color:#ffe484 !important;font-weight:bold;">JobPortal</span>
+                    <h3><img src=" {{asset('assets/images/logo.png')}}" width="30" height="30"
+                            class="d-inline-block align-top" alt="" loading="lazy"> JobPortal</h3>
                 </a>
                 <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
                     data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
                     aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon">
-                        <i class="fa fa-navicon" style="color:#ffffff;font-size:26px;"></i>
+                        <i class="fa fa-navicon"></i>
                     </span>
                 </button>
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
-                        <li class="nav-item"><a class="nav-link" href="{{route('home')}}">
-                                @lang('app.home')</a> </li>
-
-                        <li class="nav-item"><a class="nav-link" href="{{route('pricing')}}">@lang('app.pricing')</a>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{route('home')}}">@lang('app.home')</a>
                         </li>
-                        <li class="nav-item"><a class="nav-link" href="{{route('jobs_listing')}}">
-                                @lang('app.jobs')</a> </li>
-                        <li class="nav-item"><a class="nav-link" href="{{route('blog_index')}}"> @lang('app.blog')</a>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{route('pricing')}}">@lang('app.pricing')</a>
                         </li>
-                        <li class="nav-item"><a class="nav-link" href="{{route('contact_us')}}">
-                                @lang('app.contact_us')</a> </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{route('jobs_listing')}}">@lang('app.jobs')</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{route('blog_index')}}"> @lang('app.blog')</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{route('contact_us')}}">@lang('app.contact_us')</a>
+                        </li>
                     </ul>
 
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ml-auto">
-
                         <li class="nav-item">
                             <a class="nav-link btn btn-bd-post d-sm-inline-block mb-3 mb-md-0 ml-md-1"
                                 href="{{route('post_new_job')}}">{{__('app.post_new_job')}}
                             </a>
                         </li>
-
                         <!-- Authentication Links -->
                         @guest
-                        {{-- <li class="nav-item">
-                            <a class="nav-link" href="{{ route('login') }}">
-                        {{ __('app.login') }}</a>
-                        </li> --}}
-                        <div class="dropdown ml-2">
+                        <div class="dropdown sm-ml-2">
                             <button class=" btn btn-dropdown nav-item dropdown-toggle" type="button"
                                 data-toggle="dropdown">Login
-                                <span class="caret"></span></button>
-                            {{-- <li class="dropdown-menu" style="width: 18rem;"> --}}
-                            <div class="flex-column dropdown-menu dropdown-menu-right"
-                                style="width: 21rem;background-color:#F5F5F5;">
+                                <span class="caret"></span>
+                            </button>
+                            <div class="flex-column dropdown-menu dropdown-menu-right">
                                 <div class="d-inline-flex flex-column login-flex p-2 mx-2 mb-2">
                                     <div class="row">
                                         <div class="col-4">
-                                            <img src="{{asset('assets/images/employee.png')}}" width="100%" alt="">
+                                            <img src="{{asset('assets/images/employee.png')}}" width="100%"
+                                                alt="Job Seeker">
                                         </div>
                                         <div class="col-8">
-                                            <h5 class="" style="font-weight:bold;">@lang('app.job_seeker')</h5>
+                                            <h5><b>@lang('app.job_seeker')</b></h5>
                                             <p>@lang('app.job_seeker_new_desc')</p>
                                         </div>
                                     </div>
                                     <div class="row justify-content-center">
-
                                         <a class="btn btn-outline-success col-5"
                                             href="{{route('register_job_seeker')}}"><i class="fa fa-user"
                                                 aria-hidden="true"></i>
-                                            @lang('app.register_account') </a>
-
+                                            @lang('app.register_account')
+                                        </a>
                                         <a class="btn btn-light col-4 ml-4" href="{{ route('login') }}">
                                             <i class="fa fa-sign-in" aria-hidden="true"></i> {{ __('app.login') }}</a>
                                     </div>
@@ -115,19 +109,19 @@
                                             <img src="{{asset('assets/images/enterprises.png')}}" width="100%" alt="">
                                         </div>
                                         <div class="col-8">
-                                            <h5 class="" style="font-weight:bold;">@lang('app.employer')</h5>
+                                            <h5><b>@lang('app.employer')</b></h5>
                                             <p>@lang('app.employer_new_desc')</p>
                                         </div>
                                     </div>
                                     <div class="row justify-content-center">
-
                                         <a class="btn btn-outline-primary col-5"
                                             href="{{route('register_employer')}}"><i class="fa fa-user"
                                                 aria-hidden="true"></i>
-                                            @lang('app.register_account') </a>
-
+                                            @lang('app.register_account')
+                                        </a>
                                         <a class="btn btn-light col-4 ml-4" href="{{ route('login') }}">
-                                            <i class="fa fa-sign-in" aria-hidden="true"></i> {{ __('app.login') }}</a>
+                                            <i class="fa fa-sign-in" aria-hidden="true"></i> {{ __('app.login') }}
+                                        </a>
                                     </div>
                                 </div>
                             </div>
@@ -135,7 +129,7 @@
                         <li class=" nav-item">
                             @if (Route::has('new_register'))
                             <a class="nav-link" href="{{ route('new_register') }}">
-                                {{ __('app.register') }}</a>
+                                @lang('app.register')</a>
                             @endif
                         </li>
                         @else
@@ -150,14 +144,11 @@
                             </a>
 
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="{{route('dashboard')}}">{{__('app.dashboard')}} </a>
-
-
+                                <a class="dropdown-item" href="{{route('dashboard')}}">{{__('app.dashboard')}}</a>
                                 <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
                                     {{ __('Logout') }}
                                 </a>
-
                                 <form id="logout-form" action="{{ route('logout') }}" method="POST"
                                     style="display: none;">
                                     @csrf
@@ -166,8 +157,18 @@
                         </li>
                         @endguest
                     </ul>
+                    <div class="btn-group ml-sm-2 mt-2 mt-lg-0" role="group">
+                        <a href="{{url('lang/en')}}" type="button"
+                            class="btn btn-outline-light btn-sm @if(Session::get('locale') == 'en' || App::getlocale() == 'en'){ {{'active'}} }@endif"><b>EN
+                            </b></a>
+                        <a href="{{url('lang/bn')}}" type="button"
+                            class="btn btn-outline-light btn-sm @if(Session::get('locale') == 'bn'){ {{'active'}} }@endif"><b>বাংলা</b>
+                        </a>
+                    </div>
                 </div>
+
             </div>
+
         </nav>
 
         <div class="main-container">
@@ -180,8 +181,10 @@
                 <div class="row">
                     <div class="col-md-3">
                         <div class="footer-logo-wrap mb-3">
-                            <a class="navbar-brand " href="{{ url('/') }}">
-                                <h3 class="text-dark"> JobPortal</h3>
+                            <a class="navbar-brand" href="{{ route('dashboard') }}">
+                                <h3>
+                                    <img src=" {{asset('assets/images/logo-alt.png')}}" width="40" height="40"
+                                        class="d-inline-block align-top" alt="logo-alt" loading="lazy"> JobPortal</h3>
                             </a>
                         </div>
                     </div>
@@ -209,8 +212,6 @@
                     <div class="col-md-3">
                         <div class="footer-menu-wrap  mt-2">
                             <h4 class="mb-3">Social links</h4>
-
-
                             <a href="https://www.facebook.com/" target="_blank"
                                 class="btn btn-social-icon btn-circle-facebook text-light mr-2">
                                 <span class="fa fa-facebook"></span>
@@ -221,8 +222,7 @@
                             <a class="btn btn-social-icon btn-circle-linkedin text-light mr-2">
                                 <span class="fa fa-linkedin"></span>
                             </a>
-                            <a style="border-radius: 5 !important;"
-                                class="btn btn-social-icon btn-circle-github text-light mr-2">
+                            <a class="btn btn-social-icon btn-circle-github text-light mr-2">
                                 <span class="fa fa-github"></span>
                             </a>
                         </div>
@@ -238,12 +238,12 @@
             </div>
         </div>
     </div>
-
-
-
     <!-- Scripts -->
-    @yield('page-js')
+
+    <!-- Latest compiled and minified JavaScript -->
     <script src="{{ asset('assets/js/main.js') }}" defer></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    @yield('page-js')
 
 </body>
 

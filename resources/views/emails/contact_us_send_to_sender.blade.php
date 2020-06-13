@@ -1,20 +1,20 @@
 @component('mail::message')
 
-Hi {{$data->name}},
+Hi {{$data['name']}},
 
 We've received your message and let us thanks to you for contacting with us. Please find your information you have send.
 
 ##Name
 
-{{$data->name}}
+{{$data['name']}}
 
 ##Subject
 
-{{$data->subject}}
+{{$data['subject']}}
 
 ## Message
 
-{{$data->message}}
+{{$data['message']}}
 
 Thanks,<br>
 {{ get_option('site_name') }}

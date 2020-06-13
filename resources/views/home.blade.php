@@ -31,7 +31,7 @@
         </div>
     </div>
 </div>
-@if($categories->count())
+@if(isset($categories))
 <div class="home-categories-wrap pb-3 pt-4">
     <div class="container col-md-11 col-sm-8">
         <div class="card card-custom">
@@ -235,7 +235,7 @@
             </div>
         </div>
 
-
+        @if (isset($blog_posts))
         <div class="row">
 
             @foreach($blog_posts as $post)
@@ -268,6 +268,7 @@
             @endforeach
 
         </div>
+        @endif
 
 
         <div class="row">

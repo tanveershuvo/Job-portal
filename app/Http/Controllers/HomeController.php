@@ -3,12 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Job;
+use App\Jobs\SendContactUsMailJob;
+use App\Jobs\SendContactUsSendToSenderMailJob;
 use App\Mail\ContactUs;
-use App\Mail\ContactUsSendToSender;
 use App\Pricing;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Cache;
-use Illuminate\Support\Facades\Mail;
 
 class HomeController extends Controller
 {
@@ -58,6 +60,8 @@ class HomeController extends Controller
 
     public function contactUsPost(Request $request)
     {
+        ini_set('memory_limit', -1);
+
         $rules = [
             'name' => 'required',
             'email' => 'required|email',
@@ -66,12 +70,19 @@ class HomeController extends Controller
 
         $this->validate($request, $rules);
 
-        try {
-            Mail::send(new ContactUs($request));
-            Mail::send(new ContactUsSendToSender($request));
-        } catch (\Exception $exception) {
-            return redirect()->back()->with('error', '<h4>' . trans('app.smtp_error_message') . '</h4>' . $exception->getMessage());
-        }
+        // try {
+
+        SendContactUsMailJob::withChain([
+            new SendContactUsSendToSenderMailJob($request->all()),
+        ])->dispatch($request->all())
+            ->delay(Carbon::now()->addSeconds(10));
+        // SendContactUsSendToSenderMailJob::dispatch($request->all())
+        //     ->delay(Carbon::now()->addSeconds(5));
+
+        // } catch (\Exception $exception) {
+        //     // dd($exception);
+        //     return redirect()->back()->with('error', '<h4>' . trans('app.smtp_error_message') . '</h4>' . $exception->getMessage());
+        // }
 
         return redirect()->back()->with('success', trans('app.message_has_been_sent'));
     }

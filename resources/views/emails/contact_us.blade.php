@@ -1,18 +1,18 @@
 @component('mail::message')
 
-A contact query has been placed by {{$data->name}}
+A contact query has been placed by {{$data['name']}}
 
 ##Name
 
-{{$data->name}}
+{{$data['name']}}
 
 ##Subject
 
-{{$data->subject}}
+{{$data['subject']}}
 
 ## Message
 
-{{$data->message}}
+{{$data['subject']}}
 
 
 Thanks,<br>

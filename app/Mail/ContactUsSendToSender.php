@@ -5,7 +5,6 @@ namespace App\Mail;
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
-use Illuminate\Contracts\Queue\ShouldQueue;
 
 class ContactUsSendToSender extends Mailable
 {
@@ -29,6 +28,10 @@ class ContactUsSendToSender extends Mailable
      */
     public function build()
     {
-        return $this->from(get_option('email_address'))->to($this->data->email)->subject("[".get_option('site_name')."] Contact Us Query Received")->markdown('emails.contact_us_send_to_sender');
+        return $this->from(get_option('email_address'))
+            ->to($this->data['email'])
+            ->subject("[" . get_option('site_name') . "] Contact Us Query Received")
+            ->markdown('emails.contact_us_send_to_sender');
+
     }
 }

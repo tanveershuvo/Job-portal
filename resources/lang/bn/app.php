@@ -35,8 +35,8 @@ return [
     'profile' => 'Profile',
     'logout' => 'Logout',
     'login' => 'Login',
-    'register' => 'Register',
-    'job_seeker' => 'Job Seeker',
+    'register' => 'রেজিস্টার',
+    'job_seeker' => 'প্রার্থী',
     'agency' => 'Agency',
     'register_account' => 'Create Account',
     'job_seeker_new_desc' => 'Create an account to find and apply job and track your application',
@@ -369,5 +369,4 @@ return [
     'send_feedback' => 'Send Feedback',
     'message_has_been_sent' => 'Your Message has been sent, please check your E-Mail for confirmation',
     'payment_id' => 'Payment ID',
-    'contact_ex' => '01XX-XXXXXXX',
 ];
