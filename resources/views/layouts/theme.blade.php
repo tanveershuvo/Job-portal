@@ -248,12 +248,6 @@
     <!-- Latest compiled and minified JavaScript -->
     <script src="{{ asset('assets/js/main.js') }}" defer></script>
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-    <script>
-        $(document).ready(function () {
-    if (window.location.href.indexOf('#_=_') > 0) {
-    window.location = window.location.href.replace(/#.*/, '');
-    }});
-    </script>
     @yield('page-js')
 
 </body>
