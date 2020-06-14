@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8">
-    @if (config('app.env')=='development')
+    @if (config('app.env')=='production')
     <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
     @endif
     <meta name="viewport" content="width=device-width, initial-scale=1">
