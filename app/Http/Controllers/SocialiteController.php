@@ -28,9 +28,10 @@ class SocialiteController extends Controller
     public function handleProviderCallback($social)
     {
         try {
-            $userSocial = Socialite::driver($social)->user();
+            $userSocial = Socialite::driver($social)->stateless()->user();
             $arr = ['name' => $userSocial->getName(), 'email' => $userSocial->getEmail()];
-            return view('register-job-seeker')->with('arr', $arr);
+            // return view('register-job-seeker');
+            return redirect()->to('/register-job-seeker')->with('arr', $arr);
 
         } catch (RequestException $e) {
             $response = array([
