@@ -177,7 +177,7 @@ return [
         App\Providers\RouteServiceProvider::class,
 
         //Custom
-        Barryvdh\Debugbar\ServiceProvider::class,
+        // Barryvdh\Debugbar\ServiceProvider::class,
         Intervention\Image\ImageServiceProvider::class,
         Laravel\Socialite\SocialiteServiceProvider::class,
 
