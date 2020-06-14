@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+    {{-- <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests"> --}}
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="shortcut icon" href="{{asset('assets/images/logo.png')}}" />
     <!-- CSRF Token -->
@@ -30,10 +30,12 @@
 
 </head>
 
+
 <body
     class="{{request()->routeIs('home') ? ' home ' : ''}} {{request()->routeIs('job_view') ? ' job-view-page ' : ''}}">
 
     <div id="app">
+        @yield('construction')
         <nav class="navbar navbar-expand-md navbar-toggleable-sm sticky-top navbar-custom">
             <div class="container">
                 <a class="navbar-brand" href="{{ route('dashboard') }}">

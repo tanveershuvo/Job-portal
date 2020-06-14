@@ -1,5 +1,17 @@
 @extends('layouts.theme')
 
+@section('construction')
+<article class="text-center">
+    <h3 class="mt-2 text-danger"><i class="fa fa-exclamation-triangle text-danger" aria-hidden="true"></i>
+        Under-Construction!</h3>
+    <div>
+        <p class="my-1">Sorry for the inconvenience but the site is under construction! So, some of the feature
+            may not work
+            properly!</p>
+        <p class="my-1">&mdash; Tanvir(Developer)</p>
+    </div>
+</article>
+@endsection
 @section('content')
 
 <div class="home-hero-section mt-1">
