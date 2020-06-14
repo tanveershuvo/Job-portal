@@ -32,7 +32,7 @@ class SocialiteController extends Controller
             $arr = ['name' => $userSocial->getName(), 'email' => $userSocial->getEmail()];
             //return view('register-job-seeker')->with('arr', $arr);
 
-            return redirect()->back()->with('arr', $arr);
+            return redirect('/job-seeker-register')->with('arr', $arr);
 
         } catch (RequestException $e) {
             $response = array([
