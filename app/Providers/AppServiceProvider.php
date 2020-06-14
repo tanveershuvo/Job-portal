@@ -31,7 +31,7 @@ class AppServiceProvider extends ServiceProvider
                 [
                     'client_id' => get_option('fb_app_id'),
                     'client_secret' => get_option('fb_app_secret'),
-                    'redirect' => url('job-seeker-register/facebook/facebook-callback'),
+                    'redirect' => url('job-seeker-register/facebook/callback'),
                 ],
             ];
             $googleConfig = [
@@ -51,6 +51,7 @@ class AppServiceProvider extends ServiceProvider
                 ],
             ];
             config($githubConfig);
+            config($facebookConfig);
 
         } catch (\Exception $e) {
             echo $e->getMessage();
