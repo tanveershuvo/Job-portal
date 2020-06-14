@@ -9,6 +9,7 @@
             @if (Session::has('message'))
             @php
             $message = Session::get('message');
+
             @endphp
             @foreach($message as $messages)
             <div class="alert alert-danger">
@@ -18,12 +19,19 @@
             @endif
             <form action="{{route('register_job_seek')}}" method="POST" enctype="multipart/form-data">
                 @csrf
+                @if (!empty(session('arr')))
+                @php
+                $name = session('arr.name');
+                $email = session('arr.email');
+                @endphp
+                @endif
+
                 <div class="form-row">
                     <div class="form-group col-md-6">
                         <label for="name">@lang('app.name') <span class="mendatory-mark">*</span></label>
                         <input id="name" type="text"
                             class="form-control {{ $errors->has('name') ? ' is-invalid' : '' }}" name="name"
-                            value="@if(!empty($arr['name'])){{$arr['name']}}@else{{ old('name') }}@endif"
+                            value="@if(isset($name)){{$name}}@else{{ old('name') }}@endif"
                             placeholder="@lang('app.your_name')" required autofocus>
 
                         @if ($errors->has('name'))
@@ -57,7 +65,7 @@
                         <label for="email">@lang('app.email_address') <span class="mendatory-mark">*</span></label>
                         <input id="email" type="email"
                             class="form-control {{ $errors->has('email') ? ' is-invalid' : '' }}" name="email"
-                            value="@if(!empty($arr['email'])){{$arr['email']}}@else{{ old('email') }}@endif"
+                            value="@if(isset($email)){{$email}}@else{{ old('email') }}@endif"
                             placeholder="@lang('app.email_ie')" required>
 
                         @if ($errors->has('email'))
