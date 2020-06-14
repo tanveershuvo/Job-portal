@@ -18,7 +18,7 @@ Route::get('clear', 'HomeController@clearCache')->name('clear_cache');
 
 Route::get('new-register', 'HomeController@newRegister')->name('new_register');
 Route::get('job-seeker-register', 'UserController@registerJobSeeker')->name('register_job_seeker');
-Route::post('job-seeker-register', 'UserController@registerJobSeekerPost');
+Route::post('job-seeker-register', 'UserController@registerJobSeekerPost')->name('register_job_seek');
 
 Route::get('/job-seeker-register/{social}', 'SocialiteController@socialLogin')->where('social', 'facebook|linkedin|google|github');
 Route::get('/job-seeker-register/{social}/callback', 'SocialiteController@handleProviderCallback')->where('social', 'facebook|linkedin|google|github');

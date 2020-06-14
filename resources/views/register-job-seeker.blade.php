@@ -16,7 +16,7 @@
             </div>
             @endforeach
             @endif
-            <form action="" enctype="multipart/form-data">
+            <form action="{{route('register_job_seek')}}" method="POST" enctype="multipart/form-data">
                 @csrf
                 <div class="form-row">
                     <div class="form-group col-md-6">

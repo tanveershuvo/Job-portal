@@ -9,6 +9,8 @@ use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Facades\Image;
 
@@ -82,15 +84,19 @@ class UserController extends Controller
         $this->validate($request, $rules);
 
         $data = $request->input();
-        User::create([
+
+        $user = User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'user_type' => 'user',
-            'password' => Hash::make($data['password']),
+            'password' => bcrypt($data['password']),
             'active_status' => 1,
         ]);
+        //dd($user);
+        Session::flash('message', 'Registration Successfull');
+        return Redirect::to('/login');
 
-        return redirect(route('login'))->with('success', __('app.registration_successful'));
+        // return view('auth.login');
     }
 
     public function registerEmployer()

@@ -30,7 +30,7 @@ class SocialiteController extends Controller
         try {
             $userSocial = Socialite::driver($social)->stateless()->user();
             $arr = ['name' => $userSocial->getName(), 'email' => $userSocial->getEmail()];
-            return view('register-job-seeker')->with('arr', $arr);
+            return Redirect::route('register_job_seeker')->with('arr', $arr);
 
         } catch (RequestException $e) {
             $response = array([
@@ -38,7 +38,7 @@ class SocialiteController extends Controller
                 'code' => $e->getResponse()->getStatusCode(),
             ]);
             Session::flash('message', $response);
-            return Redirect::to('/job-seeker-register');
+            return view('register-job-seeker');
 
         }
     }
