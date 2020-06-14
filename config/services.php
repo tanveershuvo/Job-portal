@@ -39,23 +39,24 @@ return [
             'tolerance' => env('STRIPE_WEBHOOK_TOLERANCE', 300),
         ],
     ],
-    'github' =>
-    [
-        'client_id' => '41cba4f6181e33d8f00b', //Facebook API
-        'client_secret' => '51cca03c2c0a0ea0c24bfa3cec7bf6d4962c0e2f', //Facebook Secret
-        'redirect' => 'http://jobportal.test/job-seeker-register/github/callback',
-    ],
-    'facebook' =>
-    [
-        'client_id' => '691549344753724', //Facebook API
-        'client_secret' => '73af4de3753b43301337036f2b43b775', //Facebook Secret
-        'redirect' => 'http://jobportal.test/job-seeker-register/facebook/callback',
-    ],
-    'linkedin' =>
-    [
-        'client_id' => '86kh8ssmrldjvt', //Facebook API
-        'client_secret' => '5S4jiOjPwSHezlwV', //Facebook Secret
-        'redirect' => 'http://jobportal.test/job-seeker-register/linkedin/callback',
-    ],
+
+    // 'github' =>
+    // [
+    //     'client_id' => '',
+    //     'client_secret' => '',
+    //     'redirect' => 'http://jobportal.test/job-seeker-register/github/callback',
+    // ],
+    // 'facebook' =>
+    // [
+    //     'client_id' => '', //Facebook API
+    //     'client_secret' => '', //Facebook Secret
+    //     'redirect' => 'http://jobportal.test/job-seeker-register/facebook/callback',
+    // ],
+    // 'linkedin' =>
+    // [
+    //     'client_id' => '', //Facebook API
+    //     'client_secret' => '', //Facebook Secret
+    //     'redirect' => 'http://jobportal.test/job-seeker-register/linkedin/callback',
+    // ],
 
 ];

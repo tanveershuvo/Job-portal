@@ -145,7 +145,6 @@ function update_option($key, $value)
 function get_option($option_key = '', $default = false)
 {
     $options = config('options');
-    //dd($options);
     if (isset($options[$option_key])) {
         return $options[$option_key];
     }

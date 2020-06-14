@@ -10,7 +10,7 @@
     <link rel="shortcut icon" href="{{asset('assets/images/logo.png')}}" />
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>{{ $title ?? 'JobFair' }}</title>
+    <title>{{ $title ?? 'JobPortal' }}</title>
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" {{ ! request()->is('payment*')? 'defer' : ''}}></script>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
