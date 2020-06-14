@@ -30,7 +30,6 @@ class SocialiteController extends Controller
         try {
             $userSocial = Socialite::driver($social)->stateless()->user();
             $arr = ['name' => $userSocial->getName(), 'email' => $userSocial->getEmail()];
-            dd($arr);
             return redirect('/job-seeker-register')->with('arr', $arr);
 
         } catch (RequestException $e) {

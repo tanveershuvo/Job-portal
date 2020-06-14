@@ -320,12 +320,12 @@ class OptionsTableSeeder extends Seeder
             93 => array(
                 'id' => 96,
                 'option_key' => 'git_app_id',
-                'option_value' => 'Iv1.ba421f989e2383b1',
+                'option_value' => '41cba4f6181e33d8f00b',
             ),
             94 => array(
                 'id' => 97,
                 'option_key' => 'git_app_secret',
-                'option_value' => '67cb335190c3e57b7d12a4bba0ea77b44c7b7f3e',
+                'option_value' => '51cca03c2c0a0ea0c24bfa3cec7bf6d4962c0e2f',
             ),
 
         ]);
