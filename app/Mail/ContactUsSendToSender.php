@@ -19,6 +19,7 @@ class ContactUsSendToSender extends Mailable
     public function __construct($request)
     {
         $this->data = $request;
+        //dd($this->data['email']);
     }
 
     /**

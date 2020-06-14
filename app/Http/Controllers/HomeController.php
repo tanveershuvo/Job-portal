@@ -7,10 +7,11 @@ use App\Jobs\SendContactUsMailJob;
 use App\Jobs\SendContactUsSendToSenderMailJob;
 use App\Mail\ContactUs;
 use App\Pricing;
-use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Redirect;
 
 class HomeController extends Controller
 {
@@ -31,6 +32,7 @@ class HomeController extends Controller
      */
     public function index()
     {
+
         $categories = cache()->get('categoryCache');
         $premium_jobs = Job::active()->premium()->orderBy('id', 'desc')->with('employer')->get();
         $regular_jobs = Job::active()->orderBy('id', 'desc')->take(15)->get();
@@ -76,8 +78,6 @@ class HomeController extends Controller
                 new SendContactUsSendToSenderMailJob($request->all()),
             ])->dispatch($request->all())
                 ->delay(Carbon::now()->addSeconds(10));
-            SendContactUsSendToSenderMailJob::dispatch($request->all())
-                ->delay(Carbon::now()->addSeconds(5));
 
         } catch (\Exception $exception) {
             return redirect()->back()->with('error', '<h4>' . 'smtp_error_message' . '</h4>' . $exception->getMessage());

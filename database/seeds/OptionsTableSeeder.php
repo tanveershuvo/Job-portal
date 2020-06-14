@@ -70,7 +70,7 @@ class OptionsTableSeeder extends Seeder
             11 => array(
                 'id' => 13,
                 'option_key' => 'email_address',
-                'option_value' => 'admin@demo.com',
+                'option_value' => 'tanveershuvos@gmail.com',
             ),
             12 => array(
                 'id' => 14,
