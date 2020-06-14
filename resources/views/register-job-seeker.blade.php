@@ -23,7 +23,7 @@
                         <label for="name">@lang('app.name') <span class="mendatory-mark">*</span></label>
                         <input id="name" type="text"
                             class="form-control {{ $errors->has('name') ? ' is-invalid' : '' }}" name="name"
-                            value="@if(!empty($name)){{'name'}}@else{{ old('name') }}@endif"
+                            value="@if(!empty($arr['name'])){{$arr['name']}}@else{{ old('name') }}@endif"
                             placeholder="@lang('app.your_name')" required autofocus>
 
                         @if ($errors->has('name'))
