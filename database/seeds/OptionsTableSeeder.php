@@ -150,8 +150,7 @@ class OptionsTableSeeder extends Seeder
             31 => array(
                 'id' => 34,
                 'option_key' => 'fb_app_id',
-                'option_value' => '691549344753724
-',
+                'option_value' => '691549344753724',
             ),
             32 => array(
                 'id' => 35,
