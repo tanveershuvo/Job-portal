@@ -77,7 +77,7 @@ class HomeController extends Controller
             SendContactUsMailJob::withChain([
                 new SendContactUsSendToSenderMailJob($request->all()),
             ])->dispatch($request->all())
-                ->delay(Carbon::now()->addSeconds(5));
+                ->delay(Carbon::now()->addSeconds(10));
 
             // SendContactUsMailJob::dispatch($request->all());
 
