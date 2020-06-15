@@ -11,6 +11,7 @@ class ContactUsSendToSender extends Mailable
     use Queueable, SerializesModels;
 
     public $data;
+    public $subject;
     /**
      * Create a new message instance.
      *
@@ -19,7 +20,8 @@ class ContactUsSendToSender extends Mailable
     public function __construct($request)
     {
         $this->data = $request;
-        //dd($this->data['email']);
+        $this->subject = "[ Contact Us Query Received]";
+
     }
 
     /**
@@ -29,9 +31,10 @@ class ContactUsSendToSender extends Mailable
      */
     public function build()
     {
+
         return $this->from(get_option('email_address'))
             ->to($this->data['email'])
-            ->subject("[" . get_option('site_name') . "] Contact Us Query Received")
+            ->subject($this->subject)
             ->markdown('emails.contact_us_send_to_sender');
 
     }

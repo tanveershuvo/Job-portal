@@ -77,7 +77,11 @@ class HomeController extends Controller
             SendContactUsMailJob::withChain([
                 new SendContactUsSendToSenderMailJob($request->all()),
             ])->dispatch($request->all())
-                ->delay(Carbon::now()->addSeconds(10));
+                ->delay(Carbon::now()->addSeconds(5));
+
+            // SendContactUsMailJob::dispatch($request->all());
+
+            // Mail::send(new ContactUs($request->all()));
 
         } catch (\Exception $exception) {
             return redirect()->back()->with('error', '<h4>' . 'smtp_error_message' . '</h4>' . $exception->getMessage());
