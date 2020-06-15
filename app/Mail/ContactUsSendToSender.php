@@ -20,7 +20,7 @@ class ContactUsSendToSender extends Mailable
     public function __construct($request)
     {
         $this->data = $request;
-        $this->subject = "[ Contact Us Query Received]";
+        $this->subject = get_option('site_title') . " | We Got Your Message";
 
     }
 
@@ -31,7 +31,6 @@ class ContactUsSendToSender extends Mailable
      */
     public function build()
     {
-
         return $this->from(get_option('email_address'))
             ->to($this->data['email'])
             ->subject($this->subject)

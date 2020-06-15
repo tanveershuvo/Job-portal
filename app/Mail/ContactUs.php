@@ -11,6 +11,7 @@ class ContactUs extends Mailable
     use Queueable, SerializesModels;
 
     public $data;
+    public $subject;
 
     /**
      * Create a new message instance.
@@ -20,6 +21,7 @@ class ContactUs extends Mailable
     public function __construct($request)
     {
         $this->data = $request;
+        $this->subject = get_option('site_title') . " | New Contact-Us Query";
         //dd($this->data->email);
     }
 
@@ -32,7 +34,7 @@ class ContactUs extends Mailable
     {
         return $this->from($this->data['email'])
             ->to(get_option('email_address'))
-            ->subject("[" . get_option('site_title') . "] Contact Us Query")
+            ->subject($this->subject)
             ->markdown('emails.contact_us');
     }
 }

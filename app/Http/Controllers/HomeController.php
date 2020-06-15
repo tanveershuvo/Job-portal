@@ -62,7 +62,7 @@ class HomeController extends Controller
 
     public function contactUsPost(Request $request)
     {
-        ini_set('memory_limit', -1);
+        // ini_set('memory_limit', -1);
 
         $rules = [
             'name' => 'required',
@@ -79,9 +79,8 @@ class HomeController extends Controller
             ])->dispatch($request->all())
                 ->delay(Carbon::now()->addSeconds(10));
 
-            // SendContactUsMailJob::dispatch($request->all());
-
-            // Mail::send(new ContactUs($request->all()));
+            // $mailable = new ContactUsSendToSender($request->all());
+            // Mail::send($mailable);
 
         } catch (\Exception $exception) {
             return redirect()->back()->with('error', '<h4>' . 'smtp_error_message' . '</h4>' . $exception->getMessage());
