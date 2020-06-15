@@ -185,19 +185,9 @@
                             </li>
 
 
-                            <li class="{{request()->is('dashboard/cms*')? 'active' : ''}}">
-                                <a href="#" class="list-group-item-action">
-                                    <span class="sidebar-icon"><i class="la la-file-text-o"></i> </span>
-                                    <span class="title">@lang('app.cms')</span>
-                                    <span class="arrow"><i class="la la-arrow-right"></i> </span>
-                                </a>
-
-                                <ul class="dropdown-menu" style="display: none;">
-                                    <li><a class="sidebar-link" href="{{route('pages')}}">@lang('app.pages')</a></li>
-                                    <li><a class="sidebar-link" href="{{route('posts')}}">@lang('app.posts')</a></li>
-                                </ul>
+                            <li class="{{request()->is('dashboard/posts*')? 'active' : ''}}">
+                                <a class=" sidebar-link" href="{{route('posts')}}">@lang('app.posts')</a>
                             </li>
-
 
                             <li class="{{request()->is('dashboard/settings*')? 'active' : ''}}">
                                 <a href="#" class="list-group-item-action">
@@ -211,8 +201,6 @@
                                             href="{{route('general_settings')}}">@lang('app.general_settings')</a></li>
                                     <li><a class="sidebar-link"
                                             href="{{route('pricing_settings')}}">@lang('app.pricing')</a></li>
-                                    <li><a class="sidebar-link"
-                                            href="{{route('gateways_settings')}}">@lang('app.gateways')</a></li>
                                 </ul>
                             </li>
 
@@ -289,8 +277,8 @@
                         </div>
 
                         <div class="dashboard-footer mb-3">
-                            <a href="https://www.themeqx.com/product/jobfair-premium-laravel-php-job-board-script/"
-                                target="_blank">JobFair</a> Version {{config('app.version')}}
+                            <a href="https://bd-job-portal.herokuapp.com/" target="_blank">Job Portal</a> Version
+                            {{config('app.version')}}
                         </div>
                     </div>
 

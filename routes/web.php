@@ -107,26 +107,16 @@ Route::group(['prefix' => 'dashboard', 'middleware' => 'dashboard'], function ()
 
         Route::get('flagged', 'JobController@flaggedMessage')->name('flagged_jobs');
 
-        Route::group(['prefix' => 'cms'], function () {
-            Route::get('/', 'PostController@index')->name('pages');
-            Route::get('page/add', 'PostController@addPage')->name('add_page');
-            Route::post('page/add', 'PostController@store');
-
-            Route::get('page/edit/{id}', 'PostController@pageEdit')->name('page_edit');
-            Route::post('page/edit/{id}', 'PostController@pageEditPost');
-
-            Route::get('posts', 'PostController@indexPost')->name('posts');
-            Route::get('post/add', 'PostController@addPost')->name('add_post');
-            Route::post('post/add', 'PostController@storePost');
-
-            Route::get('post/edit/{id}', 'PostController@postEdit')->name('post_edit');
-            Route::post('post/edit/{id}', 'PostController@postUpdate');
-
-        });
-
     });
 
     Route::group(['middleware' => 'only_admin_access'], function () {
+
+        Route::get('posts', 'PostController@indexPost')->name('posts');
+        Route::get('post/add', 'PostController@addPost')->name('add_post');
+        Route::post('post/add', 'PostController@storePost');
+
+        Route::get('post/edit/{id}', 'PostController@postEdit')->name('post_edit');
+        Route::post('post/edit/{id}', 'PostController@postUpdate');
 
         Route::group(['prefix' => 'categories'], function () {
             Route::get('/', ['as' => 'dashboard_categories', 'uses' => 'CategoriesController@index']);
@@ -141,9 +131,6 @@ Route::group(['prefix' => 'dashboard', 'middleware' => 'dashboard'], function ()
         //Settings
         Route::group(['prefix' => 'settings'], function () {
             Route::get('/', 'SettingsController@GeneralSettings')->name('general_settings');
-
-            Route::get('theme-settings', 'SettingsController@ThemeSettings')->name('theme_settings');
-            Route::get('gateways', 'SettingsController@GatewaySettings')->name('gateways_settings');
             Route::get('pricing', 'SettingsController@PricingSettings')->name('pricing_settings');
             Route::post('pricing', 'SettingsController@PricingSave');
 
