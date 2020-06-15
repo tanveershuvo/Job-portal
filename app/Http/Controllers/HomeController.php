@@ -3,14 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Job;
-use App\Jobs\SendContactUsMailJob;
-use App\Jobs\SendContactUsSendToSenderMailJob;
 use App\Mail\ContactUs;
 use App\Pricing;
 use Illuminate\Http\Request;
-use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Redirect;
 
 class HomeController extends Controller
@@ -74,13 +72,13 @@ class HomeController extends Controller
 
         try {
 
-            SendContactUsMailJob::withChain([
-                new SendContactUsSendToSenderMailJob($request->all()),
-            ])->dispatch($request->all())
-                ->delay(Carbon::now()->addSeconds(10));
+            // SendContactUsMailJob::withChain([
+            //     new SendContactUsSendToSenderMailJob($request->all()),
+            // ])->dispatch($request->all())
+            //     ->delay(Carbon::now()->addSeconds(10));
 
-            // $mailable = new ContactUs($request->all());
-            // Mail::send($mailable);
+            $mailable = new ContactUs($request->all());
+            Mail::send($mailable);
 
         } catch (\Exception $exception) {
             return redirect()->back()->with('error', '<h4>' . 'smtp_error_message' . '</h4>' . $exception->getMessage());
