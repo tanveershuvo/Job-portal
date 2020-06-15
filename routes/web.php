@@ -31,9 +31,9 @@ Route::post('agent-register', 'UserController@registerAgentPost');
 
 Route::post('get-states-options', 'LocationController@getStatesOption')->name('get_state_option_by_country');
 
-Route::get('apply_job', function () {
-    return redirect(route('home'));
-});
+// Route::get('apply_job', function () {
+//     return redirect(route('home'));
+// });
 Route::post('apply_job', ['as' => 'apply_job', 'uses' => 'JobController@applyJob']);
 Route::post('flag-job/{id}', ['as' => 'flag_job_post', 'uses' => 'JobController@flagJob']);
 Route::post('share-by-email', ['as' => 'share_by_email', 'uses' => 'JobController@shareByEmail']);
@@ -182,7 +182,4 @@ Route::group(['prefix' => 'dashboard', 'middleware' => 'dashboard'], function ()
 
 //Single Sigment View
 Route::get('{slug}', 'JobController@view')->name('job_view');
-Route::get('lang/{locale}', function ($local) {
-    Session::put('locale', $local);
-    return redirect()->back();
-});
+Route::get('lang/{locale}', 'LanguageController@langswitch');
