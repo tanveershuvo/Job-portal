@@ -62,7 +62,7 @@ class HomeController extends Controller
 
     public function contactUsPost(Request $request)
     {
-        // ini_set('memory_limit', -1);
+        ini_set('memory_limit', -1);
 
         $rules = [
             'name' => 'required',
