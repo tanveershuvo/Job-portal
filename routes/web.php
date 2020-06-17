@@ -47,7 +47,9 @@ Route::get('p/{slug}', ['as' => 'single_page', 'uses' => 'PostController@showPag
 Route::get('blog', 'PostController@blogIndex')->name('blog_index');
 Route::get('blog/{slug}', 'PostController@view')->name('blog_post_single');
 
-Route::get('pricing', 'HomeController@pricing')->name('pricing');
+Route::group(['layout' => 'layouts.theme'], function () {
+    Route::livewire('pricing', 'package-pricing')->name('pricing');
+});
 
 Route::get('contact-us', 'HomeController@contactUs')->name('contact_us');
 Route::post('contact-us', 'HomeController@contactUsPost');

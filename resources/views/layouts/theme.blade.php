@@ -7,6 +7,7 @@
     <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
     @endif
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <link rel="shortcut icon" href="{{asset('assets/images/logo.png')}}" />
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
@@ -22,14 +23,12 @@
     <link href="{{ asset('assets/css/bootsrapSocial.css') }}" rel="stylesheet">
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('assets/css/style.css') }}" rel="stylesheet">
-    @yield('page-css')
-    <script type='text/javascript'>
-        /*
-    <![CDATA[ */
-        var page_data = {!! pageJsonData() !!};
-        /* ]]> */
-    </script>
 
+    <script type='text/javascript'>
+        var page_data = {!! pageJsonData() !!};
+    </script>
+    @yield('page-css')
+    @livewireStyles
 </head>
 
 
@@ -66,6 +65,9 @@
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="{{route('blog_index')}}"> @lang('app.blog')</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{route('article')}}"> article</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="{{route('contact_us')}}">@lang('app.contact_us')</a>
@@ -247,9 +249,10 @@
 
     <!-- Latest compiled and minified JavaScript -->
     <script src="{{ asset('assets/js/main.js') }}" defer></script>
+    <script src="{{ asset('assets/js/app.js') }}"></script>
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     @yield('page-js')
-
+    @livewireScripts
 </body>
 
 </html>

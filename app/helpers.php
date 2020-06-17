@@ -1,7 +1,7 @@
 <?php
 /**
  * @return mixed
- * Custom functions made by themeqx
+ * Custom functions
  */
 
 /**
@@ -17,22 +17,19 @@ if (!function_exists('pageJsonData')) {
         }
 
         $data = [
-            'home_url' => route('home'),
-            'asset_url' => asset('assets'),
-            'csrf_token' => csrf_token(),
             'jobModalOpen' => $jobModalOpen,
             'flag_job_validation_fails' => session('flag_job_validation_fails'),
             'share_job_validation_fails' => session('share_job_validation_fails'),
             //'my_dashboard' => route('my_dashboard'),
         ];
 
-        $routeLists = \Illuminate\Support\Facades\Route::getRoutes();
+        // $routeLists = \Illuminate\Support\Facades\Route::getRoutes();
 
-        $routes = [];
-        foreach ($routeLists as $route) {
-            $routes[$route->getName()] = $data['home_url'] . '/' . $route->uri;
-        }
-        $data['routes'] = $routes;
+        // $routes = [];
+        // foreach ($routeLists as $route) {
+        //     $routes[$route->getName()] = $data['home_url'] . '/' . $route->uri;
+        // }
+        // $data['routes'] = $routes;
 
         return json_encode($data);
     }

@@ -2,18 +2,11 @@
 
 A contact query has been placed by {{$data['name']}}
 
-##Name
+<b>Name :</b> {{$data['name']}}
 
-{{$data['name']}}
+<b>Subject :</b> {{$data['subject']}}
 
-##Subject
-
-{{$data['subject']}}
-
-## Message
-
-{{$data['subject']}}
-
+<b>Message :</b> {{$data['message']}}
 
 Thanks,<br>
 {{ get_option('site_name') }}
