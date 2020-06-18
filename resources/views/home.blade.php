@@ -14,18 +14,19 @@
 @endsection
 @section('content')
 
-<div class="home-hero-section mt-1">
-    <div class="job-search-bar pull-right">
-        <div class="container mb-3">
-            <div class="row ">
-                <div class="col-md-8">
-                    <h1>The fastest way to search jobs</h1>
-                    <p class="mt-4 mb-4 job-search-sub-text">More than 3000+ trusted live jobs available from 500+
-                        different employer,<br> and agents on this website to take your career next level</p>
-                </div>
-            </div>
-            <form action="{{route('jobs_listing')}}" class="form" method="get">
-                <div class="row pr-2 " style="background-color:rgb(121, 82, 179);">
+<div class="home-hero-section">
+    <div class="container">
+        <div class="job-search-bar" style="">
+            <h1 class="mt-2"><b>Find the right job</b></h1>
+            <hr>
+            <p class="mb-5 mt-3 job-search-sub-text">
+                More than 3000+ trusted live jobs available from 500+ different employer. Work with the best talent from
+                around the world on our secure,
+                flexible and cost-effective platform.
+            </p>
+
+            <form action="{{route('jobs_listing')}}" method="get">
+                <div class="row pr-2" style="background-color:rgb(121, 82, 179);">
                     <div class="col-md-5 col-xs-12 mt-2">
                         <input type="text" name="q" class="form-control"
                             placeholder="@lang('app.job_title_placeholder')">
@@ -43,6 +44,54 @@
         </div>
     </div>
 </div>
+
+<div class="job-stats py-2" style="background-color: #dfdddd8f;">
+    <div class="container">
+        <div class="row ">
+            <div class="col-md-3">
+                <div class="d-flex flex-row justify-content-center">
+                    <div class="p-2"><i class="fa fa-users"></i></div>
+                    <div class="p-2">
+                        <h3><b>2000</b></h3>
+                        <h5>Job Posted</h5>
+                    </div>
+
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="d-flex flex-row justify-content-center">
+                    <div class="p-2"><i class="fa fa-user"></i></div>
+                    <div class="p-2">
+                        <h3><b>10,000</b></h3>
+                        <h5>Job Seeker</h5>
+                    </div>
+
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="d-flex flex-row justify-content-center">
+                    <div class="p-2"><i class="fa fa-print"></i></div>
+                    <div class="p-2">
+                        <h3><b>2500</b></h3>
+                        <h5>Employers</h5>
+                    </div>
+
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="d-flex flex-row justify-content-center">
+                    <div class="p-2"><i class="fa fa-list"></i></div>
+                    <div class="p-2">
+                        <h3><b>3500</b></h3>
+                        <h5>Recruiters</h5>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 @if(isset($categories))
 <div class="home-categories-wrap pb-3 pt-4">
     <div class="container col-md-11 col-sm-8">
@@ -104,7 +153,9 @@
                                     class="text-muted">
                                     {{$job->employer->company}}
                                 </a>
-                            </p>
+                            </p>hr.new4 {
+                            border: 1px solid red;
+                            }
 
                             <p class="text-muted m-0">
                                 <i class="la la-map-marker"></i>
@@ -170,68 +221,6 @@
     </div>
 </div>
 @endif
-
-<div class="pricing-section bg-white pb-5 pt-5">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12">
-
-                <div class="pricing-section-heading mb-5 text-center">
-
-                    <h1>Pricing</h1>
-                    <h5 class="text-muted">Choose a package to unlock Premium/Regular jobs posting ability.</h5>
-                    <h5 class="text-muted">To get a large amount of quality application, choose the premium package</h5>
-                </div>
-
-            </div>
-        </div>
-
-
-        <div class="row">
-
-            <div class="col-xs-12 col-md-4">
-                <div class="pricing-table-wrap bg-light pt-5 pb-5 text-center">
-                    <h1 class="display-4">$0</h1>
-                    <h3>Free</h3>
-
-                    <div class="pricing-package-ribbon pricing-package-ribbon-light">Regular</div>
-
-                    <p class="mb-2 text-muted"> No Premium Job Post</p>
-                    <p class="mb-2 text-muted"> Unlimited Regular Job Post</p>
-                    <p class="mb-2 text-muted"> Unlimited Applicants</p>
-                    <p class="mb-2 text-muted"> Dashboard access to manage application</p>
-                    <p class="mb-2 text-muted"> No support available</p>
-
-                    <a href="{{route('new_register')}}" class="btn btn-success mt-4"><i class="la la-user-plus"></i>
-                        Sign Up</a>
-                </div>
-            </div>
-
-            @foreach($packages as $package)
-            <div class="col-xs-12 col-md-4">
-                <div class="pricing-table-wrap bg-light pt-5 pb-5 text-center">
-                    <h1 class="display-4">{!! get_amount($package->price) !!}</h1>
-                    <h3>{{$package->package_name}}</h3>
-                    <div class="pricing-package-ribbon pricing-package-ribbon-green">Premium</div>
-
-                    <p class="mb-2 text-muted"> {{$package->premium_job}} Premium Jobs Post</p>
-                    <p class="mb-2 text-muted"> Unlimited Regular Job Post</p>
-                    <p class="mb-2 text-muted"> Unlimited Applicants</p>
-                    <p class="mb-2 text-muted"> Dashboard access to manage application</p>
-                    <p class="mb-2 text-muted"> E-Mail support available</p>
-                    <a href="{{route('checkout', $package->id)}}" class="btn btn-success mt-4"> <i
-                            class="la la-shopping-cart"></i> Purchase Package</a>
-                </div>
-            </div>
-            @endforeach
-        </div>
-
-    </div>
-</div>
-
-
-
-
 
 <div class="home-blog-section pb-5 pt-5">
     <div class="container">
@@ -328,40 +317,7 @@
     </div>
 </div>
 
-<div class="job-stats-footer pb-5 pt-5 text-center">
-    <div class="container">
 
-        <div class="row">
-            <div class="col-md-12">
-                <h2 class="text-muted mb-3">Our website stats</h2>
-                <p class="text-muted mb-4">Here the stats of how many people we've helped them to find jobs, hired
-                    talents</p>
-
-            </div>
-        </div>
-
-
-        <div class="row">
-            <div class="col-md-3">
-                <h3>15M</h3>
-                <h5>Job Applicants</h5>
-            </div>
-
-            <div class="col-md-3">
-                <h3>12M</h3>
-                <h5>Job Posted</h5>
-            </div>
-            <div class="col-md-3">
-                <h3>8M</h3>
-                <h5>Employers</h5>
-            </div>
-            <div class="col-md-3">
-                <h3>15M</h3>
-                <h5>Recruiters</h5>
-            </div>
-        </div>
-    </div>
-</div>
 
 
 @endsection

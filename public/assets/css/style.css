@@ -1,4 +1,5 @@
-@import url('../line-awesome/css/line-awesome.min.css');
+@import url('../../css/app.css');
+@import url('bootsrapSocial.css');
 * {
     outline: none;
     box-shadow: none !important;
@@ -129,11 +130,11 @@ Home Page
 }
 
 .home-hero-section {
-    background: #f6fff5 url("../images/hero-image.png") no-repeat scroll left 70px center;
+    background: #ffffff url("../images/hero-image.png") no-repeat scroll right;
     background-size: contain;
     /*color: #0baf00;*/
     color: #252424;
-    min-height: 400px;
+    min-height: 380px;
     padding-top: 60px;
     margin-top: -18px;
     position: relative;
@@ -141,29 +142,28 @@ Home Page
 }
 
 .home-hero-section:before {
-    background-color: #c1a0eeab;
+    background-color: #ffffff;
     content: "";
     height: 100%;
-    left: 0;
-    opacity: 0.5;
+    left: '';
+    opacity: 0.1;
     position: absolute;
     top: 0;
     width: 100%;
 }
 
-@media screen and (max-width: 768px) {
-    .home-hero-section {
-        background: none;
-    }
-    .home-hero-section:before {
-        background: none;
-    }
+.job-search-bar hr {
+    border-image: linear-gradient(to left, rgba(0, 0, 0, 1) 1%, rgb(170, 21, 240) 50%, rgba(0, 0, 0, 1) 100%) 100% 0 100% 0/5px 0 5px 0 stretch;
+    width: 50%;
+    margin-left: 0;
+}
+
+.job-search-bar {
+    width: 55%;
 }
 
 .job-search-bar input, .job-search-bar button {
-    border: none;
     height: 40px;
-    border-radius: 0;
     vertical-align: top !important;
 }
 
@@ -228,8 +228,9 @@ a.category-link:hover {
     color: #ff0800;
 }
 
-.job-stats-footer h3 {
-    color: #2fa360;
+.job-stats i {
+    color: purple;
+    font-size: 50px;
 }
 
 .blog-card-text-preview, .blog-card-footer {
@@ -410,5 +411,20 @@ button.updating-btn i.la:before {
     .collapse .navbar-collapse {
         max-height: 70vh;
         overflow-y: auto;
+    }
+    .home-hero-section {
+        background: none;
+    }
+    .home-hero-section:before {
+        background: none;
+    }
+    .job-search-bar {
+        width: 100%;
+    }
+}
+
+@media only screen and (min-width: 991px) {
+    .job-search-bar {
+        width: 60%;
     }
 }

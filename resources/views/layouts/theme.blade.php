@@ -16,12 +16,8 @@
     <script src="{{ asset('js/app.js') }}" {{ ! request()->is('payment*')? 'defer' : ''}}></script>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <!-- Fonts -->
-    <link rel="dns-prefetch" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet" type="text/css">
 
     <!-- Styles -->
-    <link href="{{ asset('assets/css/bootsrapSocial.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('assets/css/style.css') }}" rel="stylesheet">
 
     <script type='text/javascript'>
@@ -98,7 +94,7 @@
                                         </div>
                                     </div>
                                     <div class="row justify-content-center">
-                                        <a class="btn btn-outline-success col-5"
+                                        <a class="btn btn-outline-success col-6"
                                             href="{{route('register_job_seeker')}}"><i class="fa fa-user"
                                                 aria-hidden="true"></i>
                                             @lang('app.register_account')
@@ -118,7 +114,7 @@
                                         </div>
                                     </div>
                                     <div class="row justify-content-center">
-                                        <a class="btn btn-outline-primary col-5"
+                                        <a class="btn btn-outline-primary col-6"
                                             href="{{route('register_employer')}}"><i class="fa fa-user"
                                                 aria-hidden="true"></i>
                                             @lang('app.register_account')
@@ -214,21 +210,21 @@
                     </div>
 
                     <div class="col-md-3">
-                        <div class="footer-menu-wrap  mt-2">
+                        <div class="footer-menu-wrap mt-2 text-center">
                             <h4 class="mb-3">Social links</h4>
-                            <a href="https://www.facebook.com/" target="_blank"
-                                class="btn btn-social-icon btn-circle-facebook text-light mr-2">
+                            <a href="" class="btn btn-social-icon btn-circle-facebook mr-2">
                                 <span class="fa fa-facebook"></span>
                             </a>
-                            <a class="btn btn-social-icon btn-circle-google text-light mr-2">
+                            <a href="" class="btn btn-social-icon btn-circle-google mr-2">
                                 <span class="fa fa-google"></span>
                             </a>
-                            <a class="btn btn-social-icon btn-circle-linkedin text-light mr-2">
+                            <a href="" class="btn btn-social-icon btn-circle-linkedin mr-2">
                                 <span class="fa fa-linkedin"></span>
                             </a>
-                            <a class="btn btn-social-icon btn-circle-github text-light mr-2">
+                            <a href="" class="btn btn-social-icon btn-circle-github mr-2">
                                 <span class="fa fa-github"></span>
                             </a>
+
                         </div>
                     </div>
                 </div>
@@ -246,7 +242,6 @@
 
     <!-- Latest compiled and minified JavaScript -->
     <script src="{{ asset('assets/js/main.js') }}" defer></script>
-    <script src="{{ asset('assets/js/app.js') }}"></script>
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     @yield('page-js')
     @livewireScripts
