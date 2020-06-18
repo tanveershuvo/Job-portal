@@ -16,26 +16,26 @@
 
 <div class="home-hero-section">
     <div class="container">
-        <div class="job-search-bar" style="">
+        <div class="job-search-bar">
             <h1 class="mt-2"><b>Find the right job</b></h1>
             <hr>
-            <p class="mb-5 mt-3 job-search-sub-text">
+            <p class="mb-5 mt-4 mr-5 job-search-sub-text">
                 More than 3000+ trusted live jobs available from 500+ different employer. Work with the best talent from
                 around the world on our secure,
                 flexible and cost-effective platform.
             </p>
 
             <form action="{{route('jobs_listing')}}" method="get">
-                <div class="row pr-2" style="background-color:rgb(121, 82, 179);">
-                    <div class="col-md-5 col-xs-12 mt-2">
+                <div class="form-row" style="background-color:rgb(121, 82, 179);">
+                    <div class="col-md-5 col-xs-12 p-2">
                         <input type="text" name="q" class="form-control"
                             placeholder="@lang('app.job_title_placeholder')">
                     </div>
-                    <div class="col-md-4 col-xs-12 mt-2">
-                        <input type="text" name="location" class="form-control mb-3"
+                    <div class="col-md-4 col-xs-12 p-2">
+                        <input type="text" name="location" class="form-control"
                             placeholder="@lang('app.job_location_placeholder')">
                     </div>
-                    <div class="col-md-3 col-xs-6 mt-2 mb-3">
+                    <div class="col-md-3 col-xs-6 p-2">
                         <button type="submit" class="btn btn-block btn-search"><i class="la la-search"></i>
                             @lang('app.search') @lang('app.job')</button>
                     </div>

@@ -134,9 +134,8 @@ Home Page
     background-size: contain;
     /*color: #0baf00;*/
     color: #252424;
-    min-height: 380px;
-    padding-top: 60px;
-    margin-top: -18px;
+    min-height: 400px;
+    padding-top: 50px;
     position: relative;
     /* border: 0px solid #f6fff5; */
 }
@@ -146,9 +145,8 @@ Home Page
     content: "";
     height: 100%;
     left: '';
-    opacity: 0.1;
+    opacity: 0.05;
     position: absolute;
-    top: 0;
     width: 100%;
 }
 
