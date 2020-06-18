@@ -158,12 +158,20 @@
                         @endguest
                     </ul>
                     <div class="btn-group ml-sm-2 mt-2 mt-lg-0" role="group">
-                        <a href="{{url('lang/en')}}" type="button"
-                            class="btn btn-outline-light btn-sm @if(Session::get('locale') == 'en' || App::getlocale() == 'en'){ {{'active'}} }@endif"><b>EN
-                            </b></a>
-                        <a href="{{url('lang/bn')}}" type="button"
-                            class="btn btn-outline-light btn-sm @if(Session::get('locale') == 'bn'){ {{'active'}} }@endif"><b>বাংলা</b>
-                        </a>
+                        <form action="{{route('language')}}" method="post">
+                            @csrf
+                            <input type="hidden" name="locale" value="en">
+                            <button type="submit"
+                                class="btn btn-outline-light btn-sm @if(Session::get('locale') == 'en' || App::getlocale() == 'en'){ {{'active'}} }@endif"><b>EN
+                                </b></button>
+                        </form>
+                        <form action="{{route('language')}}" method="post">
+                            @csrf
+                            <input type="hidden" name="locale" value="bn">
+                            <button type="submit"
+                                class="btn btn-outline-light btn-sm @if(Session::get('locale') == 'bn'){ {{'active'}} }@endif"><b>বাংলা</b>
+                            </button>
+                        </form>
                     </div>
                 </div>
 

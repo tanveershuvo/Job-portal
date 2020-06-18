@@ -9,9 +9,9 @@ use App\Mail\ContactUs;
 use App\Pricing;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
-use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Session;
 
 class HomeController extends Controller
 {
@@ -94,17 +94,11 @@ class HomeController extends Controller
      *
      * Clear all cache
      */
-    public function clearCache()
+    public function langSwitch(Request $request)
     {
-        Artisan::call('debugbar:clear');
-        Artisan::call('view:clear');
-        Artisan::call('route:clear');
-        Artisan::call('config:clear');
-        Artisan::call('cache:clear');
-        if (function_exists('exec')) {
-            exec('rm ' . storage_path('logs/*'));
-        }
-        return redirect(route('home'));
+        Session::put('locale', $request->locale);
+        return redirect()->back();
+
     }
 
 }

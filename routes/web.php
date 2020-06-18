@@ -182,6 +182,5 @@ Route::group(['prefix' => 'dashboard', 'middleware' => 'dashboard'], function ()
 
 });
 
-//Single Sigment View
 Route::get('{slug}', 'JobController@view')->name('job_view');
-Route::get('lang/{locale}', 'LanguageController@langswitch');
+Route::post('/', 'HomeController@langswitch')->name('language');
