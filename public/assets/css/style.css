@@ -160,9 +160,13 @@ Home Page
     width: 55%;
 }
 
-.job-search-bar input, .job-search-bar button {
+.job-search-bar input, .job-search-bar button, .job-search-bar select {
     height: 40px;
     vertical-align: top !important;
+}
+
+.job-search-bar select option {
+    font-size: 15px;
 }
 
 .job-search-bar .job-search-sub-text {
@@ -224,11 +228,6 @@ a.category-link:hover {
     margin-top: .25rem;
     font-size: 80%;
     color: #ff0800;
-}
-
-.job-stats i {
-    color: purple;
-    font-size: 50px;
 }
 
 .blog-card-text-preview, .blog-card-footer {

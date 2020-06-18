@@ -249,10 +249,82 @@ if (!function_exists('get_stripe_amount')) {
  *
  * Get currencies
  */
+function allDistricts()
+{
+    $districts = array(
+        array('id' => '1', 'name' => 'Comilla', 'bn_name' => 'কুমিল্লা'),
+        array('id' => '2', 'name' => 'Feni', 'bn_name' => 'ফেনী'),
+        array('id' => '3', 'name' => 'Brahmanbaria', 'bn_name' => 'ব্রাহ্মণবাড়িয়া'),
+        array('id' => '4', 'name' => 'Rangamati', 'bn_name' => 'রাঙ্গামাটি'),
+        array('id' => '5', 'name' => 'Noakhali', 'bn_name' => 'নোয়াখালী'),
+        array('id' => '6', 'name' => 'Chandpur', 'bn_name' => 'চাঁদপুর'),
+        array('id' => '7', 'name' => 'Lakshmipur', 'bn_name' => 'লক্ষ্মীপুর'),
+        array('id' => '8', 'name' => 'Chattogram', 'bn_name' => 'চট্টগ্রাম'),
+        array('id' => '9', 'name' => 'Coxsbazar', 'bn_name' => 'কক্সবাজার'),
+        array('id' => '10', 'name' => 'Khagrachhari', 'bn_name' => 'খাগড়াছড়ি'),
+        array('id' => '11', 'name' => 'Bandarban', 'bn_name' => 'বান্দরবান'),
+        array('id' => '12', 'name' => 'Sirajganj', 'bn_name' => 'সিরাজগঞ্জ'),
+        array('id' => '13', 'name' => 'Pabna', 'bn_name' => 'পাবনা'),
+        array('id' => '14', 'name' => 'Bogura', 'bn_name' => 'বগুড়া'),
+        array('id' => '15', 'name' => 'Rajshahi', 'bn_name' => 'রাজশাহী'),
+        array('id' => '16', 'name' => 'Natore', 'bn_name' => 'নাটোর'),
+        array('id' => '17', 'name' => 'Joypurhat', 'bn_name' => 'জয়পুরহাট'),
+        array('id' => '18', 'name' => 'Chapainawabganj', 'bn_name' => 'চাঁপাইনবাবগঞ্জ'),
+        array('id' => '19', 'name' => 'Naogaon', 'bn_name' => 'নওগাঁ'),
+        array('id' => '20', 'name' => 'Jashore', 'bn_name' => 'যশোর'),
+        array('id' => '21', 'name' => 'Satkhira', 'bn_name' => 'সাতক্ষীরা'),
+        array('id' => '22', 'name' => 'Meherpur', 'bn_name' => 'মেহেরপুর'),
+        array('id' => '23', 'name' => 'Narail', 'bn_name' => 'নড়াইল'),
+        array('id' => '24', 'name' => 'Chuadanga', 'bn_name' => 'চুয়াডাঙ্গা'),
+        array('id' => '25', 'name' => 'Kushtia', 'bn_name' => 'কুষ্টিয়া'),
+        array('id' => '26', 'name' => 'Magura', 'bn_name' => 'মাগুরা'),
+        array('id' => '27', 'name' => 'Khulna', 'bn_name' => 'খুলনা'),
+        array('id' => '28', 'name' => 'Bagerhat', 'bn_name' => 'বাগেরহাট'),
+        array('id' => '29', 'name' => 'Jhenaidah', 'bn_name' => 'ঝিনাইদহ'),
+        array('id' => '30', 'name' => 'Jhalakathi', 'bn_name' => 'ঝালকাঠি'),
+        array('id' => '31', 'name' => 'Patuakhali', 'bn_name' => 'পটুয়াখালী'),
+        array('id' => '32', 'name' => 'Pirojpur', 'bn_name' => 'পিরোজপুর'),
+        array('id' => '33', 'name' => 'Barisal', 'bn_name' => 'বরিশাল'),
+        array('id' => '34', 'name' => 'Bhola', 'bn_name' => 'ভোলা'),
+        array('id' => '35', 'name' => 'Barguna', 'bn_name' => 'বরগুনা'),
+        array('id' => '36', 'name' => 'Sylhet', 'bn_name' => 'সিলেট'),
+        array('id' => '37', 'name' => 'Moulvibazar', 'bn_name' => 'মৌলভীবাজার'),
+        array('id' => '38', 'name' => 'Habiganj', 'bn_name' => 'হবিগঞ্জ'),
+        array('id' => '39', 'name' => 'Sunamganj', 'bn_name' => 'সুনামগঞ্জ'),
+        array('id' => '40', 'name' => 'Narsingdi', 'bn_name' => 'নরসিংদী'),
+        array('id' => '41', 'name' => 'Gazipur', 'bn_name' => 'গাজীপুর'),
+        array('id' => '42', 'name' => 'Shariatpur', 'bn_name' => 'শরীয়তপুর'),
+        array('id' => '43', 'name' => 'Narayanganj', 'bn_name' => 'নারায়ণগঞ্জ'),
+        array('id' => '44', 'name' => 'Tangail', 'bn_name' => 'টাঙ্গাইল'),
+        array('id' => '45', 'name' => 'Kishoreganj', 'bn_name' => 'কিশোরগঞ্জ'),
+        array('id' => '46', 'name' => 'Manikganj', 'bn_name' => 'মানিকগঞ্জ'),
+        array('id' => '47', 'name' => 'Dhaka', 'bn_name' => 'ঢাকা'),
+        array('id' => '48', 'name' => 'Munshiganj', 'bn_name' => 'মুন্সিগঞ্জ'),
+        array('id' => '49', 'name' => 'Rajbari', 'bn_name' => 'রাজবাড়ী'),
+        array('id' => '50', 'name' => 'Madaripur', 'bn_name' => 'মাদারীপুর'),
+        array('id' => '51', 'name' => 'Gopalganj', 'bn_name' => 'গোপালগঞ্জ'),
+        array('id' => '52', 'name' => 'Faridpur', 'bn_name' => 'ফরিদপুর'),
+        array('id' => '53', 'name' => 'Panchagarh', 'bn_name' => 'পঞ্চগড়'),
+        array('id' => '54', 'name' => 'Dinajpur', 'bn_name' => 'দিনাজপুর'),
+        array('id' => '55', 'name' => 'Lalmonirhat', 'bn_name' => 'লালমনিরহাট'),
+        array('id' => '56', 'name' => 'Nilphamari', 'bn_name' => 'নীলফামারী'),
+        array('id' => '57', 'name' => 'Gaibandha', 'bn_name' => 'গাইবান্ধা'),
+        array('id' => '58', 'name' => 'Thakurgaon', 'bn_name' => 'ঠাকুরগাঁও'),
+        array('id' => '59', 'name' => 'Rangpur', 'bn_name' => 'রংপুর'),
+        array('id' => '60', 'name' => 'Kurigram', 'bn_name' => 'কুড়িগ্রাম'),
+        array('id' => '61', 'name' => 'Sherpur', 'bn_name' => 'শেরপুর'),
+        array('id' => '62', 'name' => 'Mymensingh', 'bn_name' => 'ময়মনসিংহ'),
+        array('id' => '63', 'name' => 'Jamalpur', 'bn_name' => 'জামালপুর'),
+        array('id' => '64', 'name' => 'Netrokona', 'bn_name' => 'নেত্রকোণা'),
+    );
+    $allDistrics = collect($districts)->sortby('name');
+    return $allDistrics;
+
+}
 
 function get_currencies()
 {
-    return array(
+    $list = array(
         'USD' => 'United States dollar',
         'EUR' => 'Euro',
         'AED' => 'United Arab Emirates dirham',
@@ -414,6 +486,9 @@ function get_currencies()
         'ZAR' => 'South African rand',
         'ZMW' => 'Zambian kwacha',
     );
+    $listItem = collect($list)->sortKeys()->toArray();
+    return $listItem;
+
 }
 
 /**

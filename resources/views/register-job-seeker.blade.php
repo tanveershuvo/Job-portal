@@ -44,7 +44,8 @@
                         <label for="inputPassword4">Gender</label><br>
                         <div class="btn-group btn-group-toggle" data-toggle="buttons">
                             <label class="btn btn-outline-primary active">
-                                <input type="radio" name="gender" autocomplete="off"><i class="fa fa-male"></i> Male
+                                <input type="radio" name="gender" checked="true" autocomplete="off"><i
+                                    class="fa fa-male"></i> Male
                             </label>
 
                             <label class="btn btn-outline-primary mx-2">

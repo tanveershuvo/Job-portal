@@ -31,10 +31,29 @@
                         <input type="text" name="q" class="form-control"
                             placeholder="@lang('app.job_title_placeholder')">
                     </div>
-                    <div class="col-md-4 col-xs-12 p-2">
+                    {{-- <div class="col-md-4 col-xs-12 p-2">
                         <input type="text" name="location" class="form-control"
                             placeholder="@lang('app.job_location_placeholder')">
+
+                    </div> --}}
+                    <div class="col-md-4 col-xs-12 p-2">
+                        <select class="form-control form-control-md">
+                            <option disabled selected value="">
+                                location
+                            </option>
+                            @foreach (allDistricts() as $district)
+                            <option value="{{$district['name']}}">
+                                @if(App::getlocale()=='en')
+                                {{$district['name']}}
+                                @elseif(App::getlocale()=='bn')
+                                {{$district['bn_name']}}
+                                @endif
+                            </option>
+                            @endforeach
+
+                        </select>
                     </div>
+
                     <div class="col-md-3 col-xs-6 p-2">
                         <button type="submit" class="btn btn-block btn-search"><i class="la la-search"></i>
                             @lang('app.search') @lang('app.job')</button>
@@ -45,22 +64,21 @@
     </div>
 </div>
 
-<div class="job-stats py-2" style="background-color: #dfdddd8f;">
+<div class="job-stats py-4" style="background-color: #e7e2e2b0;">
     <div class="container">
         <div class="row ">
             <div class="col-md-3">
                 <div class="d-flex flex-row justify-content-center">
-                    <div class="p-2"><i class="fa fa-users"></i></div>
-                    <div class="p-2">
+                    <img src="{{asset('assets/images/job.svg')}}" alt="reqruiter" style="height:80px;">
+                    <div class="p-2 mt-1">
                         <h3><b>2000</b></h3>
                         <h5>Job Posted</h5>
                     </div>
-
                 </div>
             </div>
             <div class="col-md-3">
                 <div class="d-flex flex-row justify-content-center">
-                    <div class="p-2"><i class="fa fa-user"></i></div>
+                    <img src="{{asset('assets/images/job-seeker.svg')}}" alt="reqruiter" style="height:80px;">
                     <div class="p-2">
                         <h3><b>10,000</b></h3>
                         <h5>Job Seeker</h5>
@@ -70,7 +88,7 @@
             </div>
             <div class="col-md-3">
                 <div class="d-flex flex-row justify-content-center">
-                    <div class="p-2"><i class="fa fa-print"></i></div>
+                    <img src="{{asset('assets/images/employees.svg')}}" alt="reqruiter" style="height:80px;">
                     <div class="p-2">
                         <h3><b>2500</b></h3>
                         <h5>Employers</h5>
@@ -80,7 +98,7 @@
             </div>
             <div class="col-md-3">
                 <div class="d-flex flex-row justify-content-center">
-                    <div class="p-2"><i class="fa fa-list"></i></div>
+                    <img src="{{asset('assets/images/reqruitments.svg')}}" alt="reqruiter" style="height:80px;">
                     <div class="p-2">
                         <h3><b>3500</b></h3>
                         <h5>Recruiters</h5>
@@ -93,8 +111,8 @@
 </div>
 
 @if(isset($categories))
-<div class="home-categories-wrap pb-3 pt-4">
-    <div class="container col-md-11 col-sm-8">
+<div class="home-categories-wrap p-4">
+    <div class="container">
         <div class="card card-custom">
             <div class="card-body">
                 <h4 class="card-title mb-4" style="color:#7952b3;"><i class="fa fa-list" aria-hidden="true"></i>
@@ -102,12 +120,12 @@
                 </h4>
                 <div class="row">
                     @foreach($categories as $category)
-
                     <div class="col-md-4 col-sm-6 col-xs-12">
                         <p>
                             <a href="{{route('jobs_listing', ['category' => $category->id])}}" class="category-link"><i
                                     class="fa fa-angle-right" aria-hidden="true"></i> {{$category->category_name}} <span
-                                    class="text-muted">({{$category->job_count}})</span> </a>
+                                    class="text-muted">({{$category->job_count}})</span>
+                            </a>
                         </p>
                     </div>
                     @endforeach
