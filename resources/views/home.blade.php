@@ -19,7 +19,7 @@
         <div class="job-search-bar">
             <h1 class="mt-2"><b>Find the right job</b></h1>
             <hr>
-            <p class="mb-5 mt-4  job-search-sub-text">
+            <p class="mb-5 mt-4 mt-sm-2 mr-sm-5 job-search-sub-text">
                 More than 3000+ trusted live jobs available from 500+ different employer. Work with the best talent from
                 around the world on our secure,
                 flexible and cost-effective platform.

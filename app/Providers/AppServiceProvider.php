@@ -54,7 +54,7 @@ class AppServiceProvider extends ServiceProvider
                 ],
             ];
             config($githubConfig);
-            config($facebookConfig);
+            dd(config($facebookConfig));
 
         } catch (\Exception $e) {
             echo $e->getMessage();
