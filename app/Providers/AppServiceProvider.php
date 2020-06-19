@@ -53,8 +53,9 @@ class AppServiceProvider extends ServiceProvider
                     'redirect' => url('job-seeker-register/github/callback'),
                 ],
             ];
+            dd(get_option('fb_app_id'));
             config($githubConfig);
-            dd(config($facebookConfig));
+            config($facebookConfig);
 
         } catch (\Exception $e) {
             echo $e->getMessage();
