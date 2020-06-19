@@ -408,7 +408,7 @@ button.updating-btn i.la:before {
     .sticky-top .navbar-collapse {
         max-height: 400px;
         overflow-y: scroll;
-        overflow-x: hidden;
+        overflow-x: visible;
         -webkit-overflow-scrolling: touch;
     }
     .home-hero-section {
