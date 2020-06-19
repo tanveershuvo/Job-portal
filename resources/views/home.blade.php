@@ -19,7 +19,7 @@
         <div class="job-search-bar">
             <h1 class="mt-2"><b>Find the right job</b></h1>
             <hr>
-            <p class="mb-5 mt-4 mr-sm-5 job-search-sub-text">
+            <p class="mb-sm-5 mt-sm-4 job-search-sub-text">
                 More than 3000+ trusted live jobs available from 500+ different employer. Work with the best talent from
                 around the world on our secure,
                 flexible and cost-effective platform.
@@ -67,7 +67,7 @@
 <div class="job-stats py-4" style="background-color: #e7e2e2b0;">
     <div class="container">
         <div class="row ">
-            <div class="col-md-3">
+            <div class="col-md-3 mt-2 mt-md-0">
                 <div class="d-flex flex-row justify-content-center">
                     <img src="{{asset('assets/images/job.svg')}}" alt="reqruiter" style="height:80px;">
                     <div class="p-2 mt-1">
@@ -76,30 +76,30 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-3">
+            <div class="col-md-3 mt-2 mt-md-0">
                 <div class="d-flex flex-row justify-content-center">
                     <img src="{{asset('assets/images/job-seeker.svg')}}" alt="reqruiter" style="height:80px;;">
-                    <div class="p-2">
+                    <div class="p-2 mt-1">
                         <h3><b>10,000</b></h3>
                         <h5>Job Seeker</h5>
                     </div>
 
                 </div>
             </div>
-            <div class="col-md-3">
+            <div class="col-md-3 mt-2 mt-md-0">
                 <div class="d-flex flex-row justify-content-center">
                     <img src="{{asset('assets/images/employees.svg')}}" alt="reqruiter" style="height:80px;">
-                    <div class="p-2">
+                    <div class="p-2 mt-1">
                         <h3><b>2500</b></h3>
                         <h5>Employers</h5>
                     </div>
 
                 </div>
             </div>
-            <div class="col-md-3">
+            <div class="col-md-3 mt-2 mt-md-0">
                 <div class="d-flex flex-row justify-content-center">
                     <img src="{{asset('assets/images/reqruitments.svg')}}" alt="reqruiter" style="height:80px;">
-                    <div class="p-2">
+                    <div class="p-2 mt-1">
                         <h3><b>3500</b></h3>
                         <h5>Recruiters</h5>
                     </div>

@@ -405,12 +405,13 @@ button.updating-btn i.la:before {
 }
 
 @media screen and (max-width: 768px) {
-    .collapse .navbar-collapse {
-        max-height: 40vh;
+    .sticky-top .navbar-collapse {
+        max-height: 400px;
         overflow-y: auto;
     }
     .home-hero-section {
         background: none;
+        padding-top: 10px;
     }
     .home-hero-section:before {
         background: none;
