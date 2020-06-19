@@ -74,7 +74,7 @@ class OptionsTableSeeder extends Seeder
             ),
             18 => array(
                 'option_key' => 'fb_app_id',
-                'option_value' => '137822664236304010',
+                'option_value' => '1378226642363040',
             ),
             19 => array(
                 'option_key' => 'fb_app_secret',
