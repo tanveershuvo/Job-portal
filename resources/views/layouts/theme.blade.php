@@ -23,6 +23,15 @@
     <script type='text/javascript'>
         var page_data = {!! pageJsonData() !!};
     </script>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-170075362-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+    
+      gtag('config', 'UA-170075362-1');
+    </script>
     @yield('page-css')
     @livewireStyles
 </head>
@@ -85,7 +94,7 @@
                                 <div class="d-inline-flex flex-column login-flex p-2 mx-2 mb-2">
                                     <div class="row">
                                         <div class="col-4">
-                                            <img src="{{asset('assets/images/employee.png')}}" width="100%"
+                                            <img src="{{asset('assets/images/job-seeker.svg')}}" style="height:100px;"
                                                 alt="Job Seeker">
                                         </div>
                                         <div class="col-8">
@@ -106,12 +115,14 @@
                                 <div class="d-inline-flex flex-column login-flex p-2 mx-2 mb-2">
                                     <div class="row">
                                         <div class="col-4">
-                                            <img src="{{asset('assets/images/enterprises.png')}}" width="100%" alt="">
+                                            <img src="{{asset('assets/images/employees.svg')}}" style="height:110px;"
+                                                alt="reqruiter">
                                         </div>
                                         <div class="col-8">
                                             <h5><b>@lang('app.employer')</b></h5>
                                             <p>@lang('app.employer_new_desc')</p>
                                         </div>
+
                                     </div>
                                     <div class="row justify-content-center">
                                         <a class="btn btn-outline-primary col-6"

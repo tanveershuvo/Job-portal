@@ -77,8 +77,8 @@
     text-decoration: none;
 }
 
-.card-custom:hover {
-    box-shadow: 0 4px 8px 0 #b5a4ceb0, 0 6px 20px 0 #d1bbf1 !important;
+.card-custom {
+    box-shadow: 0 4px 4px 0 #cfced1b0, 0 3px 6px 0 #d1bbf1 !important;
 }
 
 .login-flex {

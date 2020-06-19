@@ -442,14 +442,7 @@ class JobController extends Controller
     {
 
         $title = "Browse Jobs";
-
         $categories = Category::orderBy('category_name', 'asc')->get();
-        $countries = Country::all();
-        $old_country = false;
-        if (request('country')) {
-            $old_country = Country::find(request('country'));
-        }
-
         $jobs = Job::active();
 
         if ($request->q) {
@@ -462,32 +455,26 @@ class JobController extends Controller
             });
         }
 
-        // if ($request->location) {
-        //     $jobs = $jobs->where('city_name', 'like', "%{$request->location}%");
-        // }
+        if ($request->location) {
+            $jobs = $jobs->where('city_name', 'like', "%{$request->location}%");
+        }
 
-        // if ($request->gender) {
-        //     $jobs = $jobs->whereGender($request->gender);
-        // }
-        // if ($request->exp_level) {
-        //     $jobs = $jobs->whereExpLevel($request->exp_level);
-        // }
-        // if ($request->job_type) {
-        //     $jobs = $jobs->whereJobType($request->job_type);
-        // }
-        // if ($request->country) {
-        //     $jobs = $jobs->whereCountryId($request->country);
-        // }
-        // if ($request->state) {
-        //     $jobs = $jobs->whereStateId($request->state);
-        // }
-        // if ($request->category) {
-        //     $jobs = $jobs->whereCategoryId($request->category);
-        // }
+        if ($request->gender) {
+            $jobs = $jobs->whereGender($request->gender);
+        }
+        if ($request->exp_level) {
+            $jobs = $jobs->whereExpLevel($request->exp_level);
+        }
+        if ($request->job_type) {
+            $jobs = $jobs->whereJobType($request->job_type);
+        }
+        if ($request->category) {
+            $jobs = $jobs->whereCategoryId($request->category);
+        }
 
         $jobs = $jobs->orderBy('id', 'desc')->with('employer')->paginate(20);
 
-        return view('jobs', compact('title', 'jobs', 'categories', 'countries', 'old_country'));
+        return view('jobs', compact('title', 'jobs', 'categories'));
     }
 
 }

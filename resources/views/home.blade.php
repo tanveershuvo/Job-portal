@@ -78,7 +78,7 @@
             </div>
             <div class="col-md-3">
                 <div class="d-flex flex-row justify-content-center">
-                    <img src="{{asset('assets/images/job-seeker.svg')}}" alt="reqruiter" style="height:80px;">
+                    <img src="{{asset('assets/images/job-seeker.svg')}}" alt="reqruiter" style="height:80px;;">
                     <div class="p-2">
                         <h3><b>10,000</b></h3>
                         <h5>Job Seeker</h5>
@@ -122,7 +122,7 @@
                     @foreach($categories as $category)
                     <div class="col-md-4 col-sm-6 col-xs-12">
                         <p>
-                            <a href="{{route('jobs_listing', ['category' => $category->id])}}" class="category-link"><i
+                            <a href="{{url('jobs', ['category'=>$category->category_slug])}}" class="category-link"><i
                                     class="fa fa-angle-right" aria-hidden="true"></i> {{$category->category_name}} <span
                                     class="text-muted">({{$category->job_count}})</span>
                             </a>
