@@ -6,7 +6,6 @@
         Under-Construction!</h3>
     <div>
         <p class="my-1">Sorry for the inconvenience but the site is under construction! So, some of the feature
-            {{dd(get_option('fb_app_id'))}}
             may not work
             properly!</p>
         <p class="my-1">&mdash; Tanvir(Developer)</p>
@@ -20,7 +19,7 @@
         <div class="job-search-bar">
             <h1 class="mt-2"><b>Find the right job</b></h1>
             <hr>
-            <p class="mb-5 mt-4 mt-sm-2 mr-sm-5 job-search-sub-text">
+            <p class="mb-5 mt-4 mr-sm-5 job-search-sub-text">
                 More than 3000+ trusted live jobs available from 500+ different employer. Work with the best talent from
                 around the world on our secure,
                 flexible and cost-effective platform.
