@@ -6,6 +6,7 @@
         Under-Construction!</h3>
     <div>
         <p class="my-1">Sorry for the inconvenience but the site is under construction! So, some of the feature
+            {{dd(get_option('fb_app_id'))}}
             may not work
             properly!</p>
         <p class="my-1">&mdash; Tanvir(Developer)</p>
