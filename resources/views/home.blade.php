@@ -24,7 +24,7 @@
                     More than 3000+ trusted live jobs available from 500+ different employer. Work with the best talent
                     from
                     around the world on our secure,
-                    flexible and cost-effective platform.
+                    flexible and cost-effective platforms.
                 </p>
 
                 <form action="{{route('jobs_listing')}}" method="get">
