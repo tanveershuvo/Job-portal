@@ -18,7 +18,7 @@
     <div class="">
         <div class="container">
             <div class="job-search-bar">
-                <h1 class="mt-2"><b>Find the right job</b></h1>
+                <h1 class="mt-2"><b>Find the right jobs</b></h1>
                 <hr>
                 <p class="mb-sm-5 mt-sm-4 job-search-sub-text">
                     More than 3000+ trusted live jobs available from 500+ different employer. Work with the best talent
