@@ -3,8 +3,6 @@
 namespace App\Listeners;
 
 use App\Category;
-use Illuminate\Queue\InteractsWithQueue;
-use Illuminate\Contracts\Queue\ShouldQueue;
 use Cache;
 
 class CategoryCacheListener
@@ -29,6 +27,6 @@ class CategoryCacheListener
     {
         Cache::forget('categoryCache');
         $categories = Category::orderBy('category_name', 'asc')->get();
-        Cache::forever('categoryCache',$categories);
+        Cache::forever('categoryCache', $categories);
     }
 }

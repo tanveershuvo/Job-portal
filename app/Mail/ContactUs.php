@@ -22,7 +22,6 @@ class ContactUs extends Mailable
     {
         $this->data = $request;
         $this->subject = get_option('site_title') . " | New Contact-Us Query";
-        //dd($this->data->email);
     }
 
     /**

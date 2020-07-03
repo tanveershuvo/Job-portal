@@ -15,51 +15,54 @@
 @section('content')
 
 <div class="home-hero-section">
-    <div class="container">
-        <div class="job-search-bar">
-            <h1 class="mt-2"><b>Find the right job</b></h1>
-            <hr>
-            <p class="mb-sm-5 mt-sm-4 job-search-sub-text">
-                More than 3000+ trusted live jobs available from 500+ different employer. Work with the best talent from
-                around the world on our secure,
-                flexible and cost-effective platform.
-            </p>
+    <div class="">
+        <div class="container">
+            <div class="job-search-bar">
+                <h1 class="mt-2"><b>Find the right job</b></h1>
+                <hr>
+                <p class="mb-sm-5 mt-sm-4 job-search-sub-text">
+                    More than 3000+ trusted live jobs available from 500+ different employer. Work with the best talent
+                    from
+                    around the world on our secure,
+                    flexible and cost-effective platform.
+                </p>
 
-            <form action="{{route('jobs_listing')}}" method="get">
-                <div class="form-row" style="background-color:rgb(121, 82, 179);">
-                    <div class="col-md-5 col-xs-12 p-2">
-                        <input type="text" name="q" class="form-control"
-                            placeholder="@lang('app.job_title_placeholder')">
-                    </div>
-                    {{-- <div class="col-md-4 col-xs-12 p-2">
+                <form action="{{route('jobs_listing')}}" method="get">
+                    <div class="form-row" style="background-color:rgb(121, 82, 179);">
+                        <div class="col-md-5 col-xs-12 p-2">
+                            <input type="text" name="q" class="form-control"
+                                placeholder="@lang('app.job_title_placeholder')">
+                        </div>
+                        {{-- <div class="col-md-4 col-xs-12 p-2">
                         <input type="text" name="location" class="form-control"
                             placeholder="@lang('app.job_location_placeholder')">
 
                     </div> --}}
-                    <div class="col-md-4 col-xs-12 p-2">
-                        <select class="form-control form-control-md">
-                            <option disabled selected value="">
-                                location
-                            </option>
-                            @foreach (allDistricts() as $district)
-                            <option value="{{$district['name']}}">
-                                @if(App::getlocale()=='en')
-                                {{$district['name']}}
-                                @elseif(App::getlocale()=='bn')
-                                {{$district['bn_name']}}
-                                @endif
-                            </option>
-                            @endforeach
+                        <div class="col-md-4 col-xs-12 p-2">
+                            <select class="form-control form-control-md">
+                                <option disabled selected value="">
+                                    location
+                                </option>
+                                @foreach (allDistricts() as $district)
+                                <option value="{{$district['name']}}">
+                                    @if(App::getlocale()=='en')
+                                    {{$district['name']}}
+                                    @elseif(App::getlocale()=='bn')
+                                    {{$district['bn_name']}}
+                                    @endif
+                                </option>
+                                @endforeach
 
-                        </select>
-                    </div>
+                            </select>
+                        </div>
 
-                    <div class="col-md-3 col-xs-6 p-2">
-                        <button type="submit" class="btn btn-block btn-search"><i class="la la-search"></i>
-                            @lang('app.search') @lang('app.job')</button>
+                        <div class="col-md-3 col-xs-6 p-2">
+                            <button type="submit" class="btn btn-block btn-search"><i class="la la-search"></i>
+                                @lang('app.search') @lang('app.job')</button>
+                        </div>
                     </div>
-                </div>
-            </form>
+                </form>
+            </div>
         </div>
     </div>
 </div>
@@ -123,8 +126,8 @@
                     <div class="col-md-4 col-sm-6 col-xs-12">
                         <p>
                             <a href="{{url('jobs', ['category'=>$category->category_slug])}}" class="category-link"><i
-                                    class="fa fa-angle-right" aria-hidden="true"></i> {{$category->category_name}} <span
-                                    class="text-muted">({{$category->job_count}})</span>
+                                    class="fa fa-angle-right" aria-hidden="true"></i>
+                                {{$category->category_name}} <span class="text-muted">({{$category->job_count}})</span>
                             </a>
                         </p>
                     </div>
@@ -294,7 +297,8 @@
             <div class="col-md-12">
                 <div class="home-all-blog-posts-btn-wrap text-center my-3">
 
-                    <a href="" class="btn btn-success btn-lg"><i class="la la-link"></i> @lang('app.all_blog_posts')</a>
+                    <a href="" class="btn btn-success btn-lg"><i class="la la-link"></i>
+                        @lang('app.all_blog_posts')</a>
 
                 </div>
             </div>

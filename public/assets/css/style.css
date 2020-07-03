@@ -130,14 +130,12 @@ Home Page
 }
 
 .home-hero-section {
-    background: #ffffff url("../images/hero-image.png") no-repeat scroll right;
+    background: linear-gradient(90deg, rgba(206, 188, 233, 0.753) 0%, rgba(255, 255, 255, 0.192) 70%), url("../images/hero-image.png") no-repeat scroll right;
     background-size: contain;
-    /*color: #0baf00;*/
-    color: #252424;
+    color: #000000;
     min-height: 400px;
     padding-top: 50px;
     position: relative;
-    /* border: 0px solid #f6fff5; */
 }
 
 .home-hero-section:before {

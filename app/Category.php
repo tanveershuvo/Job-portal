@@ -2,9 +2,7 @@
 
 namespace App;
 
-use App\Events\CategoryCreated;
-use App\Events\CategoryDeleted;
-use App\Events\CategoryUpdated;
+use App\Events\CategoryCacheCreated;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
 
@@ -39,9 +37,9 @@ class Category extends Model
     // }
 
     protected $dispatchesEvents = [
-        'created' => CategoryCreated::class,
-        'deleted' => CategoryDeleted::class,
-        'updated' => CategoryUpdated::class,
+        'created' => CategoryCacheCreated::class,
+        'deleted' => CategoryCacheCreated::class,
+        'updated' => CategoryCacheCreated::class,
     ];
 
     public function job_count()

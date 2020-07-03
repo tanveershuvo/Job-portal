@@ -40,23 +40,18 @@ return [
         ],
     ],
 
-    // 'github' =>
-    // [
-    //     'client_id' => '',
-    //     'client_secret' => '',
-    //     'redirect' => 'http://jobportal.test/job-seeker-register/github/callback',
-    // ],
-    // 'facebook' =>
-    // [
-    //     'client_id' => '', //Facebook API
-    //     'client_secret' => '', //Facebook Secret
-    //     'redirect' => 'http://jobportal.test/job-seeker-register/facebook/callback',
-    // ],
-    // 'linkedin' =>
-    // [
-    //     'client_id' => '', //Facebook API
-    //     'client_secret' => '', //Facebook Secret
-    //     'redirect' => 'http://jobportal.test/job-seeker-register/linkedin/callback',
-    // ],
+    'github' =>
+    [
+        'client_id' => get_option('git_app_id'),
+        'client_secret' => get_option('git_app_secret'),
+        'redirect' => url('job-seeker-register/github/callback'),
+    ],
+
+    'facebook' =>
+    [
+        'client_id' => get_option('fb_app_id'),
+        'client_secret' => get_option('fb_app_secret'),
+        'redirect' => url('job-seeker-register/facebook/callback'),
+    ],
 
 ];

@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\CategoryCacheCreated;
 use App\Job;
 use App\Jobs\SendContactUsMailJob;
 use App\Jobs\SendContactUsSendToSenderMailJob;
 use App\Mail\ContactUs;
 use App\Pricing;
+use App\Rules\SubjectDefault;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Cache;
@@ -32,7 +34,9 @@ class HomeController extends Controller
      */
     public function index()
     {
-
+        if (!Cache::has('categoryCache')) {
+            event(new CategoryCacheCreated());
+        }
         $categories = cache()->get('categoryCache');
         $premium_jobs = Job::active()->premium()->orderBy('id', 'desc')->with('employer')->get();
         $regular_jobs = Job::active()->orderBy('id', 'desc')->take(15)->get();
@@ -67,7 +71,7 @@ class HomeController extends Controller
         $rules = [
             'name' => 'required',
             'email' => 'required|email',
-            'subject' => 'required',
+            'subject' => [new SubjectDefault],
         ];
 
         $this->validate($request, $rules);
@@ -78,9 +82,6 @@ class HomeController extends Controller
                 new SendContactUsSendToSenderMailJob($request->all()),
             ])->dispatch($request->all())
                 ->delay(Carbon::now()->addSeconds(2));
-
-            // $mailable = new ContactUs($request->all());
-            // Mail::send($mailable);
 
         } catch (\Exception $exception) {
             return redirect()->back()->with('error', '<h4>' . 'smtp_error_message' . '</h4>' . $exception->getMessage());
