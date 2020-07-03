@@ -20,7 +20,7 @@ class AppServiceProvider extends ServiceProvider
             \URL::forceScheme('https');
         }
         if (Schema::hasTable('options')) {
-            $options = Option::all()->pluck('option_value', 'option_key');
+            $options = Option::all()->pluck('option_value', 'option_key')->toArray();
             Config::set(['options' => $options]);
         }
         try {
