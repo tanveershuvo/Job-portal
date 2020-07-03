@@ -40,18 +40,18 @@ return [
         ],
     ],
 
-    'github' =>
-    [
-        'client_id' => get_option('git_app_id'),
-        'client_secret' => get_option('git_app_secret'),
-        'redirect' => url('job-seeker-register/github/callback'),
-    ],
+    // 'github' =>
+    // [
+    //     'client_id' => get_option('git_app_id'),
+    //     'client_secret' => get_option('git_app_secret'),
+    //     'redirect' => url('job-seeker-register/github/callback'),
+    // ],
 
-    'facebook' =>
-    [
-        'client_id' => get_option('fb_app_id'),
-        'client_secret' => get_option('fb_app_secret'),
-        'redirect' => url('job-seeker-register/facebook/callback'),
-    ],
+    // 'facebook' =>
+    // [
+    //     'client_id' => get_option('fb_app_id'),
+    //     'client_secret' => get_option('fb_app_secret'),
+    //     'redirect' => url('job-seeker-register/facebook/callback'),
+    // ],
 
 ];
