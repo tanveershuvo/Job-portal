@@ -19,10 +19,10 @@
         "livewire/livewire": "^1.2",
         "php-parallel-lint/php-console-color": "^0.3.0",
         "php-parallel-lint/php-console-highlighter": "^0.5.0",
-        "stripe/stripe-php": "^6.24",
-        "barryvdh/laravel-debugbar": "^3.2"
+        "stripe/stripe-php": "^6.24"
     },
     "require-dev": {
+        "barryvdh/laravel-debugbar": "^3.2",
         "beyondcode/laravel-dump-server": "^1.0",
         "filp/whoops": "^2.0",
         "fzaninotto/faker": "^1.4",
@@ -70,6 +70,10 @@
         "sort-packages": true,
         "optimize-autoloader": true
     },
+    "post-install-cmd": [
+        "php artisan clear-compiled",
+        "chmod -R 777 public/"
+    ],
     "minimum-stability": "dev",
     "prefer-stable": true
 }
