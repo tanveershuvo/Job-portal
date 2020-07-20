@@ -1,8 +1,8 @@
 <?php
 
-use Illuminate\Support\Facades\Schema;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 
 class CreateUsersTable extends Migration
 {
@@ -11,7 +11,8 @@ class CreateUsersTable extends Migration
      *
      * @return void
      */
-    public function up(){
+    public function up()
+    {
         Schema::defaultStringLength(191);
 
         Schema::create('users', function (Blueprint $table) {
@@ -21,10 +22,7 @@ class CreateUsersTable extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
 
-            $table->integer('country_id')->nullable();
-            $table->string('country_name')->nullable();
-            $table->integer('state_id')->nullable();
-            $table->string('state_name')->nullable();
+            $table->string('district')->nullable();
             $table->string('city')->nullable();
             $table->enum('gender', ['male', 'female'])->nullable();
             $table->string('address')->nullable();
@@ -32,7 +30,7 @@ class CreateUsersTable extends Migration
             $table->string('website')->nullable();
             $table->string('phone')->nullable();
             $table->string('photo')->nullable();
-            $table->enum('user_type', ['user','employer','agent', 'admin']);
+            $table->enum('user_type', ['user', 'employer', 'agent', 'admin']);
 
             $table->string('company')->nullable();
             $table->string('company_slug')->nullable();

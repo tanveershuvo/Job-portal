@@ -1,17 +1,5 @@
 @extends('layouts.theme')
 
-@section('construction')
-<article class="text-center">
-    <h3 class="mt-2 text-danger"><i class="fa fa-exclamation-triangle text-danger" aria-hidden="true"></i>
-        Under-Construction!</h3>
-    <div>
-        <p class="my-1">Sorry for the inconvenience but the site is under construction! So, some of the feature
-            may not work
-            properly!</p>
-        <p class="my-1">&mdash; Tanvir(Developer)</p>
-    </div>
-</article>
-@endsection
 @section('content')
 
 <div class="home-hero-section">
@@ -33,11 +21,7 @@
                             <input type="text" name="q" class="form-control"
                                 placeholder="@lang('app.job_title_placeholder')">
                         </div>
-                        {{-- <div class="col-md-4 col-xs-12 p-2">
-                        <input type="text" name="location" class="form-control"
-                            placeholder="@lang('app.job_location_placeholder')">
 
-                    </div> --}}
                         <div class="col-md-4 col-xs-12 p-2">
                             <select class="form-control form-control-md">
                                 <option disabled selected value="">
@@ -242,72 +226,5 @@
     </div>
 </div>
 @endif
-
-<div class="home-blog-section pb-5 pt-5">
-    <div class="container">
-
-        <div class="row">
-            <div class="col-md-12">
-
-                <div class="pricing-section-heading mb-5 text-center">
-                    <h1>From Our Blog</h1>
-                    <h5 class="text-muted">Check the latest updates/news from us.</h5>
-                </div>
-
-            </div>
-        </div>
-
-        @if (isset($blog_posts))
-        <div class="row">
-
-            @foreach($blog_posts as $post)
-
-            <div class="col-md-4">
-
-                <div class="blog-card-wrap bg-white p-3 mb-4">
-
-                    <div class="blog-card-img mb-4">
-                        <img src="{{$post->feature_image_thumb_uri}}" loading="lazy" class="card-img" />
-                    </div>
-
-                    <h4 class="mb-3">{{$post->title}}</h4>
-
-                    <p class="blog-card-text-preview">{!! limit_words($post->post_content) !!}</p>
-
-                    <a href="{{route('blog_post_single', $post->slug)}}" class="btn btn-success"> <i
-                            class="la la-book"></i> Read More</a>
-
-                    <div class="blog-card-footer border-top pt-3 mt-3">
-                        <span><i class="la la-user"></i> {{$post->author->name}} </span>
-                        <span><i class="la la-clock-o"></i> {{$post->created_at->diffForHumans()}} </span>
-                        <span><i class="la la-eye"></i> {{$post->views}} </span>
-                    </div>
-                </div>
-
-
-            </div>
-
-            @endforeach
-
-        </div>
-        @endif
-
-
-        <div class="row">
-            <div class="col-md-12">
-                <div class="home-all-blog-posts-btn-wrap text-center my-3">
-
-                    <a href="" class="btn btn-success btn-lg"><i class="la la-link"></i>
-                        @lang('app.all_blog_posts')</a>
-
-                </div>
-
-            </div>
-        </div>
-
-
-    </div>
-</div>
-
 
 @endsection

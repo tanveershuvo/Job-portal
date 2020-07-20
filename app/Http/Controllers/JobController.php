@@ -38,23 +38,17 @@ class JobController extends Controller
         $user_id = Auth::user()->id;
 
         $rules = [
-            'job_title' => ['required', 'string', 'max:190'],
-            'position' => ['required', 'string', 'max:190'],
+            'job_title' => ['required', 'string', 'max:80'],
+            'position' => ['required', 'string', 'max:120'],
             'category' => 'required',
             'description' => 'required',
             'deadline' => 'required',
+            'district' => 'required',
         ];
         $this->validate($request, $rules);
 
         $job_title = $request->job_title;
         $job_slug = unique_slug($job_title, 'Job', 'job_slug');
-
-        $country = Country::find($request->country);
-        $state_name = null;
-        if ($request->state) {
-            $state = State::find($request->state);
-            $state_name = $state->state_name;
-        }
 
         $job_id = strtoupper(str_random(8));
         $data = [

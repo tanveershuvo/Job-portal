@@ -4,13 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Events\CategoryCacheCreated;
 use App\Job;
-use App\Jobs\SendContactUsMailJob;
-use App\Jobs\SendContactUsSendToSenderMailJob;
 use App\Mail\ContactUs;
+use App\Mail\ContactUsSendToSender;
 use App\Pricing;
 use Illuminate\Http\Request;
-use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Session;
 
@@ -68,21 +67,18 @@ class HomeController extends Controller
         ini_set('memory_limit', -1);
 
         $rules = [
-            'name' => 'required',
+            'name' => 'required|max:70',
             'email' => 'required|email',
+            'subject' => 'required|max:100',
+            'message' => 'required|max:255',
         ];
 
         $this->validate($request, $rules);
 
         try {
 
-            // Mail::send(new ContactUs($request->all()));
-            // Mail::send(new ContactUsSendToSender($request->all()));
-
-            SendContactUsMailJob::withChain([
-                new SendContactUsSendToSenderMailJob($request->all()),
-            ])->dispatch($request->all())
-                ->delay(Carbon::now()->addSeconds(2));
+            Mail::send(new ContactUs($request->all()));
+            Mail::send(new ContactUsSendToSender($request->all()));
 
         } catch (\Exception $exception) {
             return redirect()->back()->with('error', '<h4>' . 'smtp_error_message' . '</h4>' . $exception->getMessage());

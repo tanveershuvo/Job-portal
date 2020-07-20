@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<html lang="{{App::getlocale()}}">
 
 <head>
     <meta charset="utf-8">
@@ -56,7 +56,8 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
-                        <li class="nav-item"><a class="nav-link" href="{{route('home')}}"><i class="la la-home"></i>
+                        <li class="nav-item"><a class="nav-link" target="_blank" href="{{route('home')}}"><i
+                                    class="la la-home"></i>
                                 @lang('app.view_site')</a> </li>
                     </ul>
 

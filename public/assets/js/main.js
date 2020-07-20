@@ -2,20 +2,6 @@
     "use strict";
 
 
-    $(document).on('change', '.country_to_state', function (e) {
-        e.preventDefault();
-
-        var country_id = $(this).val();
-        $.ajax({
-            type: 'POST',
-            url: page_data.routes.get_state_option_by_country,
-            data: { country_id: country_id, _token: page_data.csrf_token },
-            success: function (data) {
-                $('.state_options').html(data.state_options);
-            }
-        });
-    });
-
 
     if (page_data.jobModalOpen) {
         $('#applyJobModal').modal('show');

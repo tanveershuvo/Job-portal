@@ -62,9 +62,6 @@
                             <a class="nav-link" href="{{route('jobs_listing')}}">@lang('app.jobs')</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{route('blog_index')}}"> @lang('app.blog')</a>
-                        </li>
-                        <li class="nav-item">
                             <a class="nav-link" href="{{route('contact_us')}}">@lang('app.contact_us')</a>
                         </li>
                     </ul>

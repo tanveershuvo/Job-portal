@@ -14,7 +14,6 @@
 Auth::routes();
 
 Route::get('/', 'HomeController@index')->name('home');
-Route::get('clear', 'HomeController@clearCache')->name('clear_cache');
 
 Route::get('new-register', 'HomeController@newRegister')->name('new_register');
 Route::get('job-seeker-register', 'UserController@registerJobSeeker')->name('register_job_seeker');
@@ -25,9 +24,6 @@ Route::get('/job-seeker-register/{social}/callback', 'SocialiteController@handle
 
 Route::get('employer-register', 'UserController@registerEmployer')->name('register_employer');
 Route::post('employer-register', 'UserController@registerEmployerPost');
-
-Route::get('agent-register', 'UserController@registerAgent')->name('register_agent');
-Route::post('agent-register', 'UserController@registerAgentPost');
 
 Route::post('get-states-options', 'LocationController@getStatesOption')->name('get_state_option_by_country');
 
@@ -43,9 +39,6 @@ Route::post('follow-unfollow', 'FollowerController@followUnfollow')->name('follo
 Route::get('jobs/', 'JobController@jobsListing')->name('jobs_listing');
 
 Route::get('p/{slug}', ['as' => 'single_page', 'uses' => 'PostController@showPage']);
-
-Route::get('blog', 'PostController@blogIndex')->name('blog_index');
-Route::get('blog/{slug}', 'PostController@view')->name('blog_post_single');
 
 Route::group(['layout' => 'layouts.theme'], function () {
     Route::livewire('pricing', 'package-pricing')->name('pricing');

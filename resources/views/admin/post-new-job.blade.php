@@ -12,61 +12,74 @@
         <form method="post" action="">
             @csrf
 
-            <div class="form-group row {{ $errors->has('company_name')? 'has-error':'' }}">
+            <div class="form-group row">
                 <label for="company_name" class="col-sm-4 control-label"> @lang('app.company_name')</label>
                 <div class="col-sm-8">
-                    <input type="text" class="form-control {{e_form_invalid_class('company_name', $errors)}}"
+                    <input type="text" class="form-control @error('company_name') is-invalid @enderror"
                         id="company_name" value="{{ auth()->user()->company }}" name="company_name"
                         placeholder="@lang('app.company_name')">
 
-                    {!! e_form_error('company_name', $errors) !!}
+                    @error('company_name')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                    @enderror
                 </div>
             </div>
 
-            <div class="form-group row {{ $errors->has('job_title')? 'has-error':'' }}">
+            <div class="form-group row ">
                 <label for="job_title" class="col-sm-4 control-label"> @lang('app.job_title')</label>
                 <div class="col-sm-8">
-                    <input type="text" class="form-control {{e_form_invalid_class('job_title', $errors)}}"
-                        id="job_title" value="{{ old('job_title') }}" name="job_title"
-                        placeholder="@lang('app.job_title')">
+                    <input type="text" class="form-control @error('job_title') is-invalid @enderror" id="job_title"
+                        value="{{ old('job_title') }}" name="job_title" placeholder="@lang('app.job_title')">
 
-                    {!! e_form_error('job_title', $errors) !!}
+                    @error('job_title')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                    @enderror
                 </div>
             </div>
 
-            <div class="form-group row {{ $errors->has('position')? 'has-error':'' }}">
+            <div class="form-group row">
                 <label for="position" class="col-sm-4 control-label"> @lang('app.position')</label>
                 <div class="col-sm-8">
-                    <input type="text" class="form-control {{e_form_invalid_class('position', $errors)}}" id="position"
+                    <input type="text" class="form-control @error('position') is-invalid @enderror" id="position"
                         value="{{ old('position') }}" name="position" placeholder="@lang('app.position')">
 
-                    {!! e_form_error('position', $errors) !!}
+                    @error('position')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                    @enderror
                 </div>
             </div>
 
-            <div class="form-group row {{ $errors->has('category')? 'has-error':'' }}">
+            <div class="form-group row">
                 <label for="category" class="col-sm-4 control-label">@lang('app.category')</label>
                 <div class="col-sm-8">
-                    <select class="form-control {{e_form_invalid_class('category', $errors)}}" name="category"
-                        id="category">
+                    <select class="form-control @error('category') is-invalid @enderror" name="category" id="category">
                         <option value="">@lang('app.select_category')</option>
                         @foreach($categories as $category)
                         <option value="{{$category->id}}">{{$category->category_name}}</option>
                         @endforeach
                     </select>
 
-                    {!! e_form_error('category', $errors) !!}
+                    @error('category')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                    @enderror
                 </div>
             </div>
 
-            <div class="form-group row {{ $errors->has('salary_cycle')? 'has-error':'' }}">
+            <div class="form-group row">
                 <label for="salary_cycle" class="col-sm-4 control-label">@lang('app.salary_cycle')</label>
                 <div class="col-sm-8">
 
                     <div class="price_input_group">
 
-                        <select class="form-control {{e_form_invalid_class('salary_cycle', $errors)}}"
-                            name="salary_cycle">
+                        <select class="form-control @error('salary_cycle') is-invalid @enderror" name="salary_cycle">
                             <option value="monthly" {{ old('salary_cycle') == 'monthly' ? 'selected':'' }}>
                                 @lang('app.monthly')</option>
                             <option value="yearly" {{ old('salary_cycle') == 'yearly' ? 'selected':'' }}>
@@ -80,21 +93,24 @@
 
                         </select>
 
-                        {!! e_form_error('salary_cycle', $errors) !!}
+                        @error('salary_cycle')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                        @enderror
                     </div>
                 </div>
             </div>
 
 
-            <div class="form-group row {{ $errors->has('salary')? 'has-error':'' }}">
+            <div class="form-group row ">
                 <label for="salary" class="col-sm-4 control-label"> @lang('app.salary')</label>
                 <div class="col-sm-8">
 
-
                     <div class="form-group row">
                         <div class="col-md-6">
-                            <input type="number" class="form-control {{e_form_invalid_class('salary', $errors)}}"
-                                id="salary" value="{{ old('salary') }}" name="salary" placeholder="@lang('app.salary')">
+                            <input type="number" class="form-control @error('salary') is-invalid @enderror" id="salary"
+                                value="{{ old('salary') }}" name="salary" placeholder="@lang('app.salary')">
                         </div>
                         <div class="col-md-6">
                             <label> <input type="checkbox" name="is_negotiable" value="1"
@@ -102,55 +118,70 @@
                         </div>
                     </div>
 
-                    {!! e_form_error('salary', $errors) !!}
+                    @error('salary')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                    @enderror
                 </div>
             </div>
 
-            <div class="form-group row {{ $errors->has('salary_upto')? 'has-error':'' }}">
+            <div class="form-group row ">
                 <label for="salary_upto" class="col-sm-4 control-label"> @lang('app.salary_upto')</label>
                 <div class="col-sm-8">
-                    <input type="text" class="form-control {{e_form_invalid_class('salary_upto', $errors)}}"
-                        id="salary_upto" value="{{ old('salary_upto') }}" name="salary_upto"
-                        placeholder="@lang('app.salary_upto')">
+                    <input type="text" class="form-control @error('salary_upto') is-invalid @enderror" id="salary_upto"
+                        value="{{ old('salary_upto') }}" name="salary_upto" placeholder="@lang('app.salary_upto')">
 
                     <p class="text-info">@lang('app.salary_upto_desc')</p>
-                    {!! e_form_error('salary_upto', $errors) !!}
+                    @error('salary_upto')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                    @enderror
                 </div>
             </div>
 
-            <div class="form-group row {{ $errors->has('salary_currency')? 'has-error':'' }}">
+            <div class="form-group row">
                 <label for="salary_currency" class="col-sm-4 control-label">@lang('app.salary_currency')</label>
                 <div class="col-sm-8">
 
                     <div class="price_input_group">
 
-                        <select class="form-control {{e_form_invalid_class('salary_currency', $errors)}}"
+                        <select class="form-control @error('salary_currency') is-invalid @enderror"
                             name="salary_currency">
                             @foreach(get_currencies() as $currency => $currency_name)
                             <option value="{{$currency}}">{{$currency}} | {{$currency_name}}</option>
                             @endforeach
                         </select>
 
-                        {!! e_form_error('salary_currency', $errors) !!}
+                        @error('salary_currency')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                        @enderror
                     </div>
                 </div>
             </div>
 
-            <div class="form-group row {{ $errors->has('vacancy')? 'has-error':'' }}">
+            <div class="form-group row">
                 <label for="vacancy" class="col-sm-4 control-label"> @lang('app.vacancy')</label>
                 <div class="col-sm-8">
-                    <input type="number" class="form-control {{e_form_invalid_class('vacancy', $errors)}}" id="vacancy"
+                    <input type="number" class="form-control @error('vacancy') is-invalid @enderror" id="vacancy"
                         value="{{ old('vacancy') }}" name="vacancy" placeholder="@lang('app.vacancy')">
 
-                    {!! e_form_error('vacancy', $errors) !!}
+                    @error('vacancy')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                    @enderror
                 </div>
             </div>
 
 
-            <div class="form-group row {{ $errors->has('gender')? 'has-error':'' }}">
+            <div class="form-group row ">
                 <label for="gender" class="col-sm-4 control-label">@lang('app.gender')</label>
                 <div class="col-sm-8">
-                    <select class="form-control {{e_form_invalid_class('gender', $errors)}}" name="gender" id="gender">
+                    <select class="form-control @error('gender') is-invalid @enderror" name="gender" id="gender">
                         <option value="any" {{ old('gender') == 'any' ? 'selected':'' }}>@lang('app.any')</option>
                         <option value="male" {{ old('gender') == 'male' ? 'selected':'' }}>@lang('app.male')</option>
                         <option value="female" {{ old('gender') == 'female' ? 'selected':'' }}>@lang('app.female')
@@ -159,15 +190,19 @@
                             @lang('app.transgender')</option>
                     </select>
 
-                    {!! e_form_error('gender', $errors) !!}
+                    @error('gender')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                    @enderror
                 </div>
             </div>
 
 
-            <div class="form-group row {{ $errors->has('exp_level')? 'has-error':'' }}">
+            <div class="form-group row">
                 <label for="exp_level" class="col-sm-4 control-label">@lang('app.exp_level')</label>
                 <div class="col-sm-8">
-                    <select class="form-control {{e_form_invalid_class('exp_level', $errors)}}" name="exp_level"
+                    <select class="form-control @error('exp_level') is-invalid @enderror" name="exp_level"
                         id="exp_level">
                         <option value="mid" {{ old('exp_level') == 'mid' ? 'selected':'' }}>@lang('app.mid')</option>
                         <option value="entry" {{ old('exp_level') == 'entry' ? 'selected':'' }}>@lang('app.entry')
@@ -176,17 +211,20 @@
                         </option>
                     </select>
 
-                    {!! e_form_error('exp_level', $errors) !!}
+                    @error('exp_level')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                    @enderror
                 </div>
             </div>
 
 
 
-            <div class="form-group row {{ $errors->has('job_type')? 'has-error':'' }}">
+            <div class="form-group row ">
                 <label for="job_type" class="col-sm-4 control-label">@lang('app.job_type')</label>
                 <div class="col-sm-8">
-                    <select class="form-control {{e_form_invalid_class('job_type', $errors)}}" name="job_type"
-                        id="job_type">
+                    <select class="form-control @error('job_type') is-invalid @enderror" name="job_type" id="job_type">
                         <option value="full_time" {{ old('job_type') == 'full_time' ? 'selected':'' }}>
                             @lang('app.full_time')</option>
                         <option value="internship" {{ old('job_type') == 'internship' ? 'selected':'' }}>
@@ -203,19 +241,22 @@
                             @lang('app.internship')</option>
                     </select>
 
-                    {!! e_form_error('job_type', $errors) !!}
+                    @error('job_type')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                    @enderror
                 </div>
             </div>
 
-            <div class="form-group row {{ $errors->has('experience_required_years')? 'has-error':'' }}">
+            <div class="form-group row ">
                 <label for="experience_required_years" class="col-sm-4 control-label">
                     @lang('app.experience_required_years')</label>
                 <div class="col-sm-8">
-
                     <div class="form-group row">
                         <div class="col-md-6">
                             <input type="number"
-                                class="form-control {{e_form_invalid_class('experience_required_years', $errors)}}"
+                                class="form-control @error('experience_required_years') is-invalid @enderror"
                                 id="experience_required_years" value="{{ old('experience_required_years') }}"
                                 name="experience_required_years" placeholder="@lang('app.experience_required_years')">
                         </div>
@@ -225,87 +266,114 @@
                         </div>
                     </div>
 
-                    {!! e_form_error('experience_required_years', $errors) !!}
+                    @error('experience_required_years')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                    @enderror
                 </div>
             </div>
 
-            <div class="form-group row {{ $errors->has('deadline')? 'has-error':'' }}">
+            <div class="form-group row">
                 <label for="deadline" class="col-sm-4 control-label"> @lang('app.deadline')</label>
                 <div class="col-sm-8">
-                    <input type="text" class="form-control {{e_form_invalid_class('deadline', $errors)}} date_picker"
+                    <input type="text" class="form-control @error('deadline') is-invalid @enderror date_picker"
                         id="deadline" value="{{ old('deadline') }}" name="deadline" placeholder="@lang('app.deadline')">
 
-                    {!! e_form_error('deadline', $errors) !!}
+                    @error('deadline')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                    @enderror
                 </div>
             </div>
 
-            <div class="form-group row {{ $errors->has('description')? 'has-error':'' }}">
+            <div class="form-group row">
                 <label class="col-sm-4 control-label"> @lang('app.description')</label>
                 <div class="col-sm-8">
-                    <textarea name="description" class="form-control {{e_form_invalid_class('description', $errors)}}"
+                    <textarea name="description" class="form-control @error('description') is-invalid @enderror"
                         rows="5">{{ old('description') }}</textarea>
-                    {!! $errors->has('description')? '<p class="help-block">'.$errors->first('description').'</p>':''
-                    !!}
+                    @error('description')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                    @enderror
                     <p class="text-info"> @lang('app.description_info_text')</p>
                 </div>
             </div>
 
 
-            <div class="form-group row {{ $errors->has('skills')? 'has-error':'' }}">
+            <div class="form-group row">
                 <label class="col-sm-4 control-label"> @lang('app.skills')</label>
                 <div class="col-sm-8">
-                    <textarea name="skills" class="form-control {{e_form_invalid_class('skills', $errors)}}"
+                    <textarea name="skills" class="form-control @error('skills') is-invalid @enderror"
                         rows="2">{{ old('skills') }}</textarea>
-                    {!! $errors->has('skills')? '<p class="help-block">'.$errors->first('skills').'</p>':'' !!}
+                    @error('skills')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                    @enderror
                     <p class="text-info"> @lang('app.skills_info_text')</p>
                 </div>
             </div>
 
-            <div class="form-group row {{ $errors->has('responsibilities')? 'has-error':'' }}">
+            <div class="form-group row">
                 <label class="col-sm-4 control-label"> @lang('app.responsibilities')</label>
                 <div class="col-sm-8">
                     <textarea name="responsibilities"
-                        class="form-control {{e_form_invalid_class('responsibilities', $errors)}}"
+                        class="form-control @error('responsibilities') is-invalid @enderror"
                         rows="3">{{ old('responsibilities') }}</textarea>
-                    {!! $errors->has('responsibilities')? '<p class="help-block">'.$errors->first('responsibilities').'
-                    </p>':'' !!}
+                    @error('responsibilities')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                    @enderror
                     <p class="text-info"> @lang('app.responsibilities_info_text')</p>
                 </div>
             </div>
 
-            <div class="form-group row {{ $errors->has('educational_requirements')? 'has-error':'' }}">
+            <div class="form-group row">
                 <label class="col-sm-4 control-label"> @lang('app.educational_requirements')</label>
                 <div class="col-sm-8">
                     <textarea name="educational_requirements"
-                        class="form-control {{e_form_invalid_class('educational_requirements', $errors)}}"
+                        class="form-control @error('educational_requirements') is-invalid @enderror"
                         rows="3">{{ old('educational_requirements') }}</textarea>
-                    {!! $errors->has('educational_requirements')? '<p class="help-block">
-                        '.$errors->first('educational_requirements').'</p>':'' !!}
+                    @error('educational_requirements')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                    @enderror
                     <p class="text-info"> @lang('app.educational_requirements_info_text')</p>
                 </div>
             </div>
 
 
-            <div class="form-group row {{ $errors->has('experience_requirements')? 'has-error':'' }}">
+            <div class="form-group row ">
                 <label class="col-sm-4 control-label"> @lang('app.experience_requirements')</label>
                 <div class="col-sm-8">
                     <textarea name="experience_requirements"
-                        class="form-control {{e_form_invalid_class('experience_requirements', $errors)}}"
+                        class="form-control @error('experience_requirements') is-invalid @enderror"
                         rows="3">{{ old('experience_requirements') }}</textarea>
-                    {!! $errors->has('experience_requirements')? '<p class="help-block">
-                        '.$errors->first('experience_requirements').'</p>':'' !!}
+                    @error('experience_requirements')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                    @enderror
                     <p class="text-info"> @lang('app.experience_requirements_info_text')</p>
                 </div>
             </div>
 
-            <div class="form-group row {{ $errors->has('additional_requirements')? 'has-error':'' }}">
+            <div class="form-group row">
                 <label class="col-sm-4 control-label"> @lang('app.additional_requirements')</label>
                 <div class="col-sm-8">
                     <textarea name="additional_requirements"
-                        class="form-control {{e_form_invalid_class('additional_requirements', $errors)}}"
+                        class="form-control @error('additional_requirements') is-invalid @enderror"
                         rows="3">{{ old('additional_requirements') }}</textarea>
-                    {!! $errors->has('additional_requirements')? '<p class="help-block">
-                        '.$errors->first('additional_requirements').'</p>':'' !!}
+                    @error('additional_requirements')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                    @enderror
                     <p class="text-info"> @lang('app.additional_requirements_info_text')</p>
                 </div>
             </div>
@@ -314,82 +382,57 @@
             <div class="form-group row {{ $errors->has('benefits')? 'has-error':'' }}">
                 <label class="col-sm-4 control-label"> @lang('app.benefits')</label>
                 <div class="col-sm-8">
-                    <textarea name="benefits" class="form-control {{e_form_invalid_class('benefits', $errors)}}"
+                    <textarea name="benefits" class="form-control @error('benefits') is-invalid @enderror"
                         rows="3">{{ old('benefits') }}</textarea>
-                    {!! $errors->has('benefits')? '<p class="help-block">'.$errors->first('benefits').'</p>':'' !!}
+                    @error('benefits')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                    @enderror
                     <p class="text-info"> @lang('app.benefits_info_text')</p>
                 </div>
             </div>
 
 
-            <div class="form-group row {{ $errors->has('apply_instruction')? 'has-error':'' }}">
+            <div class="form-group row">
                 <label class="col-sm-4 control-label"> @lang('app.apply_instruction')</label>
                 <div class="col-sm-8">
                     <textarea name="apply_instruction"
-                        class="form-control {{e_form_invalid_class('apply_instruction', $errors)}}"
+                        class="form-control @error('apply_instruction') is-invalid @enderror"
                         rows="3">{{ old('apply_instruction') }}</textarea>
-                    {!! $errors->has('apply_instruction')? '<p class="help-block">
-                        '.$errors->first('apply_instruction').'</p>':'' !!}
+                    @error('apply_instruction')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                    @enderror
                     <p class="text-info"> @lang('app.apply_instruction_info_text')</p>
                 </div>
             </div>
 
             <legend>@lang('app.job_location')</legend>
 
-
-            <div class="form-group row {{ $errors->has('is_any_where')? 'has-error':'' }}">
-                <label for="is_any_where" class="col-md-4 control-label">{{ __('app.is_any_where') }} </label>
-                <div class="col-md-8">
-                    <label> <input type="checkbox" name="is_any_where" value="1" {{checked('1', old('is_any_where'))}}>
-                        @lang('app.location_anywhere') </label>
-                    {!! e_form_error('is_any_where', $errors) !!}
-                </div>
-            </div>
-
-
-            <div class="form-group row {{ $errors->has('country')? 'has-error':'' }}">
-                <label for="country" class="col-md-4 control-label">{{ __('app.country') }} <span
-                        class="mendatory-mark">*</span></label>
-                <div class="col-md-8">
-                    <select name="country"
-                        class="form-control {{e_form_invalid_class('country', $errors)}} country_to_state">
-                        <option value="">@lang('app.select_a_country')</option>
-                        @foreach($countries as $country)
-                        <option value="{!! $country->id !!}" @if(old('country') && $country->id == old('country'))
-                            selected="selected" @endif >{!! $country->country_name !!}</option>
-                        @endforeach
-                    </select>
-
-                    {!! e_form_error('country', $errors) !!}
-                </div>
-            </div>
-
-            <div class="form-group row">
-                <label for="state" class="col-md-4 control-label">{{ __('app.state') }} </label>
-                <div class="col-md-8">
-                    <select name="state" class="form-control {{e_form_invalid_class('state', $errors)}} state_options">
-                        <option value="">Select a state</option>
-
-                        @if($old_country)
-                        @foreach($old_country->states as $state)
-                        <option value="{{$state->id}}" @if(old('state') && $state->id == old('state'))
-                            selected="selected" @endif >{!! $state->state_name !!}</option>
-                        @endforeach
-                        @endif
-
-                    </select>
-                    {!! e_form_error('state', $errors) !!}
-                </div>
-            </div>
-
-            <div class="form-group row {{ $errors->has('city_name')? 'has-error':'' }}">
-                <label for="city_name" class="col-sm-4 control-label"> @lang('app.city_name')</label>
+            <div class="form-group row py-3">
+                <label for="district" class="col-sm-4 control-label">
+                    District
+                    <span class="mendatory-mark">*</span></label>
                 <div class="col-sm-8">
-                    <input type="text" class="form-control {{e_form_invalid_class('city_name', $errors)}}"
-                        id="city_name" value="{{ old('city_name') }}" name="city_name"
-                        placeholder="@lang('app.city_name')">
+                    <select name="district" class="form-control @error('district') is-invalid @enderror" autofocus>
+                        <option disabled selected value="">
+                            location
+                        </option>
+                        @foreach (allDistricts() as $district)
+                        <option value="{{$district['name']}}" @if(old('district') && $district['name']==old('district'))
+                            selected="selected" @endif>
+                            {{$district['name']}}
+                        </option>
+                        @endforeach
+                    </select>
+                    @error('district')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                    @enderror
 
-                    {!! e_form_error('city_name', $errors) !!}
                 </div>
             </div>
 
@@ -398,7 +441,7 @@
 
                 <legend>@lang('app.premium_job')</legend>
 
-                <div class="form-group row {{ $errors->has('is_premium')? 'has-error':'' }}">
+                <div class="form-group row">
                     <label for="is_premium" class="col-md-4 control-label">{{ __('app.is_premium') }} </label>
                     <div class="col-md-8">
                         @php

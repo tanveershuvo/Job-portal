@@ -148,17 +148,6 @@ function get_option($option_key = '', $default = false)
     return $default;
 }
 
-function e_form_error($field = '', $errors)
-{
-    $output = $errors->has($field) ? '<span class="invalid-feedback" role="alert"><strong>' . $errors->first($field) . '</strong></span>' : '';
-    return $output;
-}
-
-function e_form_invalid_class($field = '', $errors)
-{
-    return $errors->has($field) ? ' is-invalid' : '';
-}
-
 /**
  * @param int $amount
  * @return string
@@ -322,6 +311,7 @@ function allDistricts()
         array('id' => '62', 'name' => 'Mymensingh', 'bn_name' => 'ময়মনসিংহ'),
         array('id' => '63', 'name' => 'Jamalpur', 'bn_name' => 'জামালপুর'),
         array('id' => '64', 'name' => 'Netrokona', 'bn_name' => 'নেত্রকোণা'),
+        array('id' => '65', 'name' => 'Anywhere in Bangladesh', 'bn_name' => 'Anywhere'),
     );
     $allDistrics = collect($districts)->sortby('name');
     return $allDistrics;

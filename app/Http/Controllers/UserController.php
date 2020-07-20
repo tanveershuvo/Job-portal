@@ -113,43 +113,31 @@ class UserController extends Controller
     public function registerEmployerPost(Request $request)
     {
         $rules = [
-            'name' => ['required', 'string', 'max:190'],
+            'employeer_name' => ['required', 'string', 'max:80'],
             'company' => 'required',
             'email' => ['required', 'string', 'email', 'max:190', 'unique:users'],
             'password' => ['required', 'string', 'min:6', 'confirmed'],
             'phone' => 'required',
             'address' => 'required',
-            'country' => 'required',
-            'state' => 'required',
+            'district' => 'required',
         ];
         $this->validate($request, $rules);
 
         $company = $request->company;
         $company_slug = unique_slug($company, 'User', 'company_slug');
 
-        $country = Country::find($request->country);
-        $state_name = null;
-        if ($request->state) {
-            $state = State::find($request->state);
-            $state_name = $state->state_name;
-        }
-
         User::create([
-            'name' => $request->name,
+            'name' => $request->employeer_name,
             'company' => $company,
             'company_slug' => $company_slug,
             'email' => $request->email,
             'user_type' => 'employer',
-            'password' => Hash::make($request->password),
+            'password' => bcrypt($request->password),
 
             'phone' => $request->phone,
             'address' => $request->address,
             'address_2' => $request->address_2,
-            'country_id' => $request->country,
-            'country_name' => $country->country_name,
-            'state_id' => $request->state,
-            'state_name' => $state_name,
-            'city' => $request->city,
+            'district' => $request->district,
             'active_status' => 1,
         ]);
 
