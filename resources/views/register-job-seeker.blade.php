@@ -9,7 +9,6 @@
             @if (Session::has('message'))
             @php
             $message = Session::get('message');
-
             @endphp
             @foreach($message as $messages)
             <div class="alert alert-danger">
@@ -19,26 +18,18 @@
             @endif
             <form action="{{route('register_job_seek')}}" method="POST" enctype="multipart/form-data">
                 @csrf
-                @if (!empty(session('arr')))
-                @php
-                $name = session('arr.name');
-                $email = session('arr.email');
-                @endphp
-                @endif
 
                 <div class="form-row">
                     <div class="form-group col-md-6">
                         <label for="name">@lang('app.name') <span class="mendatory-mark">*</span></label>
-                        <input id="name" type="text"
-                            class="form-control {{ $errors->has('name') ? ' is-invalid' : '' }}" name="name"
-                            value="@if(isset($name)){{$name}}@else{{ old('name') }}@endif"
-                            placeholder="@lang('app.your_name')" required autofocus>
+                        <input id="name" type="text" class="form-control @error('name') is-invalid @enderror"
+                            name="name" value="{{ old('name') }}" placeholder="@lang('app.your_name')" autofocus>
 
-                        @if ($errors->has('name'))
+                        @error('name')
                         <span class="invalid-feedback" role="alert">
-                            <strong>{{ $errors->first('name') }}</strong>
+                            <strong>{{ $message }}</strong>
                         </span>
-                        @endif
+                        @enderror
                     </div>
                     <div class="form-group col-md-6">
                         <label for="inputPassword4">Gender</label><br>
@@ -64,28 +55,25 @@
                 <div class="form-row">
                     <div class="form-group col-md-6">
                         <label for="email">@lang('app.email_address') <span class="mendatory-mark">*</span></label>
-                        <input id="email" type="email"
-                            class="form-control {{ $errors->has('email') ? ' is-invalid' : '' }}" name="email"
-                            value="@if(isset($email)){{$email}}@else{{ old('email') }}@endif"
-                            placeholder="@lang('app.email_ie')" required>
+                        <input id="email" type="email" class="form-control @error('email') is-invalid @enderror"
+                            name="email" value="{{ old('email') }}" placeholder="@lang('app.email_ie')">
 
-                        @if ($errors->has('email'))
+                        @error('name')
                         <span class="invalid-feedback" role="alert">
-                            <strong>{{ $errors->first('email') }}</strong>
+                            <strong>{{ $message }}</strong>
                         </span>
-                        @endif
+                        @enderror
                     </div>
                     <div class="form-group col-md-6">
                         <label for="contact">Mobile Number</label>
-                        <input id="contact" type="text"
-                            class="form-control {{ $errors->has('contact') ? ' is-invalid' : '' }}" name="contact"
-                            value="{{ old('contact') }}" placeholder="@lang('app.contact_ex')">
+                        <input id="contact" type="text" class="form-control @error('contact') is-invalid @enderror"
+                            name="contact" value="{{ old('contact') }}" placeholder="@lang('app.contact_ex')">
 
-                        @if ($errors->has('contact'))
+                        @error('contact')
                         <span class="invalid-feedback" role="alert">
-                            <strong>{{ $errors->first('contact') }}</strong>
+                            <strong>{{ $message }}</strong>
                         </span>
-                        @endif
+                        @enderror
                     </div>
                 </div>
 
@@ -94,8 +82,7 @@
                         <label for="password">@lang('app.password') <span class="mendatory-mark">*</span></label>
                         <div class="input-group">
                             <input type="password" id="password"
-                                class="form-control {{ $errors->has('password') ? ' is-invalid' : '' }}" name="password"
-                                required>
+                                class="form-control @error('password') is-invalid @enderror" name="password">
                             <div class="input-group-append" id="icon-click">
                                 <div class="input-group-text"><i class="fa fa-eye"></i></div>
                             </div>
@@ -104,11 +91,11 @@
                             Password must be contain minimum 8 characters with letters and numbers.
                         </small>
 
-                        @if ($errors->has('password'))
+                        @error('password')
                         <span class="invalid-feedback" role="alert">
-                            <strong>{{ $errors->first('password') }}</strong>
+                            <strong>{{ $message }}</strong>
                         </span>
-                        @endif
+                        @enderror
                     </div>
                     <div class="form-group col-md-6">
                         <label for="password-confirm">@lang('app.confirm_password') <span

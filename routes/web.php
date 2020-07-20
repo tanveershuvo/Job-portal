@@ -100,7 +100,7 @@ Route::group(['prefix' => 'dashboard', 'middleware' => 'dashboard'], function ()
             Route::get('applicants/{job_id}', 'JobController@jobApplicants')->name('job_applicants');
         });
 
-        Route::get('flagged', 'JobController@flaggedMessage')->name('flagged_jobs');
+        Route::get('/flagged', 'JobController@flaggedMessage')->name('flagged_jobs');
 
     });
 

@@ -79,11 +79,7 @@ class JobController extends Controller
             'additional_requirements' => $request->additional_requirements,
             'benefits' => $request->benefits,
             'apply_instruction' => $request->apply_instruction,
-            'country_id' => $request->country,
-            'country_name' => $country->country_name,
-            'state_id' => $request->state,
-            'state_name' => $state_name,
-            'city_name' => $request->city_name,
+            'district' => $request->district,
             'deadline' => $request->deadline,
             'status' => 0,
             'is_premium' => $request->is_premium,
@@ -214,6 +210,7 @@ class JobController extends Controller
     public function view($slug = null)
     {
         $job = Job::whereJobSlug($slug)->first();
+        //dd($job);
 
         if (!$slug || !$job || (!$job->is_active() && !$job->can_edit())) {
             abort(404);
@@ -339,7 +336,9 @@ class JobController extends Controller
     public function flaggedMessage()
     {
         $title = __('app.flagged_jobs');
-        $flagged = FlagJob::orderBy('id', 'desc')->paginate(20);
+        $flagged = FlagJob::with('job')->get();
+
+        // dd($flagged);
         return view('admin.flagged_jobs', compact('title', 'flagged'));
     }
 
@@ -352,9 +351,6 @@ class JobController extends Controller
      */
     public function statusChange($job_id, $status)
     {
-        if (env('IS_DEMO')) {
-            return back()->with('error', __('app.disable_for_demo'));
-        }
 
         $job = Job::find($job_id);
         if (!$job->can_edit()) {
@@ -444,7 +440,7 @@ class JobController extends Controller
                 $query->where('job_title', 'like', "%{$request->q}%")
                     ->orWhere('position', 'like', "%{$request->q}%")
                     ->orWhere('description', 'like', "%{$request->q}%")
-                    ->orWhere('country_name', 'like', "%{$request->q}%")
+                    ->orWhere('district', 'like', "%{$request->q}%")
                     ->orWhere('company_name', 'like', "%{$request->q}%");
             });
         }

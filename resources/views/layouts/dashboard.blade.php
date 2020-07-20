@@ -184,26 +184,11 @@
                                     <span class="title">@lang('app.flagged_jobs')</span>
                                 </a>
                             </li>
-
-
-                            <li class="{{request()->is('dashboard/posts*')? 'active' : ''}}">
-                                <a class=" sidebar-link" href="{{route('posts')}}">@lang('app.posts')</a>
+                            <li><a class="sidebar-link" href="{{route('pricing_settings')}}">
+                                    <span class="sidebar-icon"><i class="la la-money"></i> </span>
+                                    @lang('app.pricing')</a>
                             </li>
 
-                            <li class="{{request()->is('dashboard/settings*')? 'active' : ''}}">
-                                <a href="#" class="list-group-item-action">
-                                    <span class="sidebar-icon"><i class="la la-cogs"></i> </span>
-                                    <span class="title">@lang('app.settings')</span>
-                                    <span class="arrow"><i class="la la-arrow-right"></i> </span>
-                                </a>
-
-                                <ul class="dropdown-menu" style="display: none;">
-                                    <li><a class="sidebar-link"
-                                            href="{{route('general_settings')}}">@lang('app.general_settings')</a></li>
-                                    <li><a class="sidebar-link"
-                                            href="{{route('pricing_settings')}}">@lang('app.pricing')</a></li>
-                                </ul>
-                            </li>
 
                             @endif
 

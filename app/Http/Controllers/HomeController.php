@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Events\CategoryCacheCreated;
+use App\Category;
 use App\Job;
 use App\Mail\ContactUs;
 use App\Mail\ContactUsSendToSender;
@@ -32,10 +32,8 @@ class HomeController extends Controller
      */
     public function index()
     {
-        if (!Cache::has('categoryCache')) {
-            event(new CategoryCacheCreated());
-        }
-        $categories = cache()->get('categoryCache');
+
+        $categories = Category::orderBy('category_name', 'asc')->get();
         $premium_jobs = Job::active()->premium()->orderBy('id', 'desc')->with('employer')->get();
         $regular_jobs = Job::active()->orderBy('id', 'desc')->take(15)->get();
         $packages = Pricing::all();

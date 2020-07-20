@@ -1,8 +1,8 @@
 <?php
 
-use Illuminate\Support\Facades\Schema;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 
 class CreateJobsTable extends Migration
 {
@@ -25,11 +25,11 @@ class CreateJobsTable extends Migration
             $table->integer('salary')->default(0)->nullable(); //Salary from
             $table->integer('salary_upto')->default(0)->nullable(); //Salary to (Up range)
             $table->tinyInteger('is_negotiable')->default(0)->nullable();
-            $table->enum('salary_cycle', ['monthly','yearly','weekly', 'daily', 'hourly'])->nullable();
+            $table->enum('salary_cycle', ['monthly', 'yearly', 'weekly', 'daily', 'hourly'])->nullable();
             $table->string('salary_currency', 10)->nullable();
 
             $table->integer('vacancy')->nullable();
-            $table->enum('gender', ['male','female','transgender', 'any']);
+            $table->enum('gender', ['male', 'female', 'transgender', 'any']);
             $table->enum('job_type', ['full_time', 'part_time', 'contract', 'temporary', 'commission', 'internship'])->default('full_time')->nullable();
             $table->enum('exp_level', ['mid', 'entry', 'senior'])->nullable();
 
@@ -42,11 +42,7 @@ class CreateJobsTable extends Migration
             $table->text('benefits')->nullable();
             $table->text('apply_instruction')->nullable();
 
-            $table->integer('country_id')->nullable();
-            $table->string('country_name')->nullable();
-            $table->integer('state_id')->nullable();
-            $table->string('state_name')->nullable();
-            $table->string('city_name')->nullable();
+            $table->string('district')->nullable();
 
             $table->tinyInteger('experience_required_years')->default(0)->nullable(); //In Years
             $table->tinyInteger('experience_plus')->default(0)->nullable(); //In Years

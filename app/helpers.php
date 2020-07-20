@@ -54,6 +54,17 @@ function avatar_img_url($img = '', $source)
  * @return string
  */
 
+function e_form_error($field = '', $errors)
+{
+    $output = $errors->has($field) ? '<span class="invalid-feedback" role="alert"><strong>' . $errors->first($field) . '</strong></span>' : '';
+    return $output;
+}
+
+function e_form_invalid_class($field = '', $errors)
+{
+    return $errors->has($field) ? ' is-invalid' : '';
+}
+
 function unique_slug($title = '', $model = 'Job', $col = 'slug')
 {
     $slug = str_slug($title);

@@ -76,9 +76,10 @@ class UserController extends Controller
     public function registerJobSeekerPost(Request $request)
     {
         $rules = [
-            'name' => ['required', 'string', 'max:190'],
+            'name' => ['required', 'string', 'max:100'],
             'email' => ['required', 'string', 'email', 'max:190', 'unique:users'],
             'password' => ['required', 'string', 'min:6', 'confirmed'],
+            'contact' => ['required', 'numeric'],
         ];
 
         $this->validate($request, $rules);
@@ -92,11 +93,8 @@ class UserController extends Controller
             'password' => bcrypt($data['password']),
             'active_status' => 1,
         ]);
-        //dd($user);
         Session::flash('message', 'Registration Successfull');
         return Redirect::to('/login');
-
-        // return view('auth.login');
     }
 
     public function registerEmployer()

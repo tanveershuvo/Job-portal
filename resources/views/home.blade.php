@@ -98,6 +98,7 @@
 </div>
 
 @if(isset($categories))
+
 <div class="home-categories-wrap p-4">
     <div class="container">
         <div class="card card-custom">
@@ -109,7 +110,7 @@
                     @foreach($categories as $category)
                     <div class="col-md-4 col-sm-6 col-xs-12">
                         <p>
-                            <a href="{{url('jobs', ['category'=>$category->category_slug])}}" class="category-link"><i
+                            <a href="{{route('jobs_listing', ['category' => $category->id])}}" class="category-link"><i
                                     class="fa fa-angle-right" aria-hidden="true"></i>
                                 {{$category->category_name}} <span class="text-muted">({{$category->job_count}})</span>
                             </a>
@@ -158,9 +159,7 @@
                                     class="text-muted">
                                     {{$job->employer->company}}
                                 </a>
-                            </p>hr.new4 {
-                            border: 1px solid red;
-                            }
+                            </p>
 
                             <p class="text-muted m-0">
                                 <i class="la la-map-marker"></i>
