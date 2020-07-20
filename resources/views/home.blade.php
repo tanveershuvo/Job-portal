@@ -301,45 +301,13 @@
                         @lang('app.all_blog_posts')</a>
 
                 </div>
+
             </div>
         </div>
 
 
     </div>
 </div>
-
-
-
-<div class="new-registration-page bg-white pb-5 pt-5">
-    <div class="container">
-        <div class="row">
-
-            <div class="col-md-12">
-
-                <div class="call-to-action-post-job justify-content-center">
-                    <div class="job-post-icon my-auto">
-                        <img src="{{asset('assets/images/job.png')}}" />
-                    </div>
-                    <div class="job-post-details mr-3 ml-3 p-3 my-auto">
-                        <h1>Post your job</h1>
-                        <p>
-                            Job seekers looking for quality job always. <br /> Post your job to get the talents
-                        </p>
-                    </div>
-
-                    <div class="job-post-button my-auto">
-                        <a href="{{route('post_new_job')}}" class="btn btn-success btn-lg">Post a Job</a>
-
-                    </div>
-                </div>
-
-            </div>
-
-        </div>
-    </div>
-</div>
-
-
 
 
 @endsection

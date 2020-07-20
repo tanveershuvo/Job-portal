@@ -1,6 +1,6 @@
 @import url('../../css/app.css');
 @import url('bootsrapSocial.css');
-* {
+button, input:not([type="checkbox"]), .btn, select {
     outline: none;
     box-shadow: none !important;
     -webkit-appearance: none;

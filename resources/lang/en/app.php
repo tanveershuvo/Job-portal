@@ -275,7 +275,7 @@ return [
     'additional_requirements_info_text' => 'Write one line per additional requirements',
     'benefits_info_text' => 'Company offering which benefits? Write one line per benefits',
     'updated' => 'Updated',
-
+    'remember_me' => 'Remember me',
     'category_name' => 'Category Name',
     'save_new_category' => 'Save New Category',
     'category_exists_in_db' => 'This category already exists',

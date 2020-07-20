@@ -73,7 +73,7 @@
                     <ul class="navbar-nav ml-auto">
                         <li class="nav-item">
                             <a class="nav-link btn btn-bd-post d-sm-inline-block mb-3 mb-md-0 ml-md-1"
-                                href="{{route('post_new_job')}}">{{__('app.post_new_job')}}
+                                href="{{route('post_new_job')}}">@lang('app.post_new_job')
                             </a>
                         </li>
                         <!-- Authentication Links -->

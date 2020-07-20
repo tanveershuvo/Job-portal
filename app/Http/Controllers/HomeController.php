@@ -8,7 +8,6 @@ use App\Jobs\SendContactUsMailJob;
 use App\Jobs\SendContactUsSendToSenderMailJob;
 use App\Mail\ContactUs;
 use App\Pricing;
-use App\Rules\SubjectDefault;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Cache;
@@ -71,12 +70,14 @@ class HomeController extends Controller
         $rules = [
             'name' => 'required',
             'email' => 'required|email',
-            'subject' => [new SubjectDefault],
         ];
 
         $this->validate($request, $rules);
 
         try {
+
+            // Mail::send(new ContactUs($request->all()));
+            // Mail::send(new ContactUsSendToSender($request->all()));
 
             SendContactUsMailJob::withChain([
                 new SendContactUsSendToSenderMailJob($request->all()),
