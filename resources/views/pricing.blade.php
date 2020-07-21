@@ -23,7 +23,7 @@
 
       <div class="col-xs-12 col-md-4">
         <div class="pricing-table-wrap bg-light pt-5 pb-5 text-center">
-          <h1 class="display-4">$0</h1>
+          <h1 class="display-4">{{ get_option('currency_sign')}} 0</h1>
           <h3>Free</h3>
 
           <div class="pricing-package-ribbon pricing-package-ribbon-light">Regular</div>
@@ -42,7 +42,7 @@
       @foreach($packages as $package)
       <div class="col-xs-12 col-md-4">
         <div class="pricing-table-wrap bg-light pt-5 pb-5 text-center">
-          <h1 class="display-4">{!! get_amount($package->price) !!}</h1>
+          <h1 class="display-4">{{ get_option('currency_sign')}} {{$package->price}}</h1>
           <h3>{{$package->package_name}}</h3>
           <div class="pricing-package-ribbon pricing-package-ribbon-green">Premium</div>
 
@@ -57,7 +57,7 @@
             <input type="hidden" name="amount" value="{{$package->price}}">
             <input type="submit" class="btn btn-success mt-4" value="Purchase Here!"
               data-key="pk_test_51H7O04B1SFSETAH5hrCTSj3ymIU2bqjVBEXHzeXu2GyKhaNuRjkc47CoFjxHVtT4VsSxjVV5dnfoIYau4uKfECFa00PgR9wsVv"
-              data-name="Payment of {!! get_amount($package->price) !!}" data-description="Job Portal Package purchase">
+              data-name="Payment of  {{$package->price}}" data-description="Job Portal Package purchase">
           </form>
           @else
           <a href="{{url('/login')}}" class="btn btn-success mt-4">Sign up to Purchase!</a>

@@ -30,7 +30,7 @@ class CreateUsersTable extends Migration
             $table->string('website')->nullable();
             $table->string('phone')->nullable();
             $table->string('photo')->nullable();
-            $table->enum('user_type', ['user', 'employer', 'agent', 'admin']);
+            $table->enum('user_type', ['user', 'employer', 'admin']);
 
             $table->string('company')->nullable();
             $table->string('company_slug')->nullable();
