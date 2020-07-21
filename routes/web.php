@@ -25,11 +25,9 @@ Route::get('/job-seeker-register/{social}/callback', 'SocialiteController@handle
 Route::get('employer-register', 'UserController@registerEmployer')->name('register_employer');
 Route::post('employer-register', 'UserController@registerEmployerPost');
 
-Route::post('get-states-options', 'LocationController@getStatesOption')->name('get_state_option_by_country');
-
 // Route::get('apply_job', function () {
 //     return redirect(route('home'));
-// });
+// });f
 Route::post('apply_job', ['as' => 'apply_job', 'uses' => 'JobController@applyJob']);
 Route::post('flag-job/{id}', ['as' => 'flag_job_post', 'uses' => 'JobController@flagJob']);
 Route::post('share-by-email', ['as' => 'share_by_email', 'uses' => 'JobController@shareByEmail']);
@@ -37,8 +35,6 @@ Route::get('employer/{user_name}/jobs', 'JobController@jobsByEmployer')->name('j
 Route::post('follow-unfollow', 'FollowerController@followUnfollow')->name('follow_unfollow');
 
 Route::get('jobs/', 'JobController@jobsListing')->name('jobs_listing');
-
-Route::get('p/{slug}', ['as' => 'single_page', 'uses' => 'PostController@showPage']);
 
 Route::group(['layout' => 'layouts.theme'], function () {
     Route::livewire('pricing', 'package-pricing')->name('pricing');
@@ -106,13 +102,6 @@ Route::group(['prefix' => 'dashboard', 'middleware' => 'dashboard'], function ()
 
     Route::group(['middleware' => 'only_admin_access'], function () {
 
-        Route::get('posts', 'PostController@indexPost')->name('posts');
-        Route::get('post/add', 'PostController@addPost')->name('add_post');
-        Route::post('post/add', 'PostController@storePost');
-
-        Route::get('post/edit/{id}', 'PostController@postEdit')->name('post_edit');
-        Route::post('post/edit/{id}', 'PostController@postUpdate');
-
         Route::group(['prefix' => 'categories'], function () {
             Route::get('/', ['as' => 'dashboard_categories', 'uses' => 'CategoriesController@index']);
             Route::post('/', ['uses' => 'CategoriesController@store']);
@@ -177,3 +166,14 @@ Route::group(['prefix' => 'dashboard', 'middleware' => 'dashboard'], function ()
 
 Route::get('{slug}', 'JobController@view')->name('job_view');
 Route::post('/', 'HomeController@langswitch')->name('language');
+
+// Route::get('/example2', 'SslCommerzPaymentController@exampleHostedCheckout');
+
+// Route::post('/pay', 'SslCommerzPaymentController@index');
+// Route::post('/pay-via-ajax', 'SslCommerzPaymentController@payViaAjax');
+
+// Route::post('/success', 'SslCommerzPaymentController@success');
+// Route::post('/fail', 'SslCommerzPaymentController@fail');
+// Route::post('/cancel', 'SslCommerzPaymentController@cancel');
+
+// Route::post('/ipn', 'SslCommerzPaymentController@ipn');

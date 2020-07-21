@@ -22,15 +22,8 @@ class JobController extends Controller
     public function newJob()
     {
         $title = __('app.post_new_job');
-
         $categories = Category::orderBy('category_name', 'asc')->get();
-        $countries = Country::all();
-        $old_country = false;
-        if (old('country')) {
-            $old_country = Country::find(old('country'));
-        }
-
-        return view('admin.post-new-job', compact('title', 'categories', 'countries', 'old_country'));
+        return view('admin.post-new-job', compact('title', 'categories'));
     }
 
     public function newJobPost(Request $request)
@@ -87,10 +80,12 @@ class JobController extends Controller
 
         $job = Job::create($data);
         if (!$job) {
-            return back()->with('error', 'app.something_went_wrong')->withInput($request->input());
+            return back()->with('error', 'app.something_went_wrong');
         }
-
         $job->update(['job_id' => $job->id . $job_id]);
+        $jobcount = Job::where(['category_id' => $job->category_id, 'status' => 1])->count();
+        //dd($jobcount);
+        $category_job_count = Category::where('id', $job->category_id)->update(['job_count' => $jobcount]);
         return redirect(route('posted_jobs'))->with('success', __('app.job_posted_success'));
     }
 

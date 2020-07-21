@@ -116,6 +116,7 @@
                             </a>
                         </p>
                     </div>
+
                     @endforeach
                 </div>
             </div>
@@ -151,7 +152,7 @@
                         <div class="col-md-8 col-sm-6">
 
                             <p class="job-title">
-                                <a href="{{route('job_view', $job->job_slug)}}">{!! $job->job_title !!}</a>
+                                <a href="{{route('job_view', $job->job_slug)}}">{{ $job->job_title }}</a>
                             </p>
 
                             <p class="text-muted m-0">
@@ -163,15 +164,7 @@
 
                             <p class="text-muted m-0">
                                 <i class="la la-map-marker"></i>
-                                @if($job->city_name)
-                                {!! $job->city_name !!},
-                                @endif
-                                @if($job->state_name)
-                                {!! $job->state_name !!},
-                                @endif
-                                @if($job->state_name)
-                                {!! $job->country_name !!}
-                                @endif
+                                {{ $job->district }}
                             </p>
                         </div>
                     </div>
@@ -202,25 +195,32 @@
                 <div class="card col-md-4">
                     <div class="card-body">
                         <div class="card-title">
-                            <a href="{{route('job_view', $regular_job->job_slug)}}">{!! $regular_job->job_title
-                                !!}</a>
+                            <a href="{{route('job_view', $regular_job->job_slug)}}">{{ $regular_job->job_title
+                                }}</a>
                         </div>
-                        <p class="text-muted  m-0">
-                            <i class="la la-map-marker"></i>
-                            @if($regular_job->city_name)
-                            {!! $regular_job->city_name !!},
-                            @endif
-                            @if($regular_job->state_name)
-                            {!! $regular_job->state_name !!},
-                            @endif
-                            @if($regular_job->state_name)
-                            {!! $regular_job->country_name !!}
-                            @endif
+                        <p class="text-muted mb-1 mt-1">
+                            <i class="la la-clock-o"></i> @lang('app.posted')
+                            {{$regular_job->created_at->diffForHumans()}} ,
+                            <i class="la la-calendar-times-o"></i> @lang('app.deadline') :
+                            {{$regular_job->deadline->format(get_option('date_format'))}}
                         </p>
+                        <p class="text-muted m-0">
+                            <i class="la la-map-marker"></i>
+                            {{ $regular_job->job_title }}
+                        </p>
+                        <p class="text-muted m-0">
+                            <a href="{{route('jobs_by_employer', $regular_job->employer->company_slug)}}"
+                                class="text-muted">
+                                {{$regular_job->employer->company}}
+                            </a>
+                        </p>
+
                     </div>
                 </div>
+
                 @endforeach
             </div>
+
         </div>
     </div>
 </div>

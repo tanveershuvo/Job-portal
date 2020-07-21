@@ -134,9 +134,7 @@
 
                         <h5><a href="{{route('job_view', $job->job_slug)}}">{!! $job->job_title !!}</a> </h5>
                         <p class="text-muted mb-1 mt-1">
-
                             <i class="la la-clock-o"></i> @lang('app.posted') {{$job->created_at->diffForHumans()}}
-
                             <i class="la la-calendar-times-o"></i> @lang('app.deadline') :
                             {{$job->deadline->format(get_option('date_format'))}} <span
                                 class="text-small text-muted">{{$job->deadline->diffForHumans()}}</span>
@@ -160,9 +158,7 @@
                             <i class="la la-building-o"></i> {{$job->employer->company}}
                             <i class="la la-briefcase"></i> @lang('app.'.$job->job_type)
                             <i class="la la-map-marker"></i>
-                            @if($job->city_name)
-                            {!! $job->city_name !!},
-                            @endif
+                            {{ $job->district }}
                         </p>
 
                     </div>

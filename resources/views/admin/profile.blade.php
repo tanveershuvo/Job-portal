@@ -5,7 +5,7 @@
 <div class="row">
     <div class="col-md-12">
 
-        @if($user->is_employer() || $user->is_agent() || $user->is_admin())
+        @if($user->is_employer() || $user->is_admin())
         <div class="profile-company-logo mb-3">
             <img src="{{$user->logo_url}}" class="img-fluid" style="max-width: 100px;" />
         </div>
@@ -55,14 +55,6 @@
         <h3 class="mb-4">About Company</h3>
 
         <table class="table table-bordered table-striped">
-            <tr>
-                <th>@lang('app.state')</th>
-                <td>{{ $user->state_name }}</td>
-            </tr>
-            <tr>
-                <th>@lang('app.city')</th>
-                <td>{{ $user->city }}</td>
-            </tr>
 
             <tr>
                 <th>@lang('app.website')</th>
