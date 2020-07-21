@@ -74,8 +74,7 @@
                         <select class="form-control" name="category" id="category">
                             <option value="">@lang('app.select_category')</option>
                             @foreach($categories as $category)
-                            <option value="{{$category->category_slug}}"
-                                {{selected($category->category_slug, request('category'))}}>
+                            <option value="{{$category->id}}" {{selected($category->id, request('category'))}}>
                                 {{$category->category_name}}</option>
                             @endforeach
                         </select>

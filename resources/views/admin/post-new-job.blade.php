@@ -450,7 +450,7 @@
 
                         @if($employer->premium_jobs_balance)
                         <label> <input type="checkbox" name="is_premium" value="1" {{checked('1', old('is_premium'))}}>
-                            @lang('app.location_anywhere') </label>
+                        </label>
                         @else
                         <a href="{{route('pricing')}}" target="_blank">You don't have any premium jobs balance to add
                             premium jobs, please purchase a package to earn ability of posting premium jobs</a>
@@ -482,4 +482,14 @@
 
 @section('page-js')
 <script src="{{asset('assets/plugins/bootstrap-datepicker-1.6.4/js/bootstrap-datepicker.js')}}" defer></script>
+<script>
+    $( document ).ready(function() {
+            $('.date_picker').datepicker({
+            format: "yyyy-mm-dd",
+            todayHighlight: true,
+            startDate: new Date(),
+            autoclose: true
+            });
+        });
+</script>
 @endsection

@@ -3,12 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Category;
-use App\Country;
 use App\FlagJob;
 use App\Job;
 use App\JobApplication;
 use App\Mail\ShareByEMail;
-use App\State;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -83,9 +81,13 @@ class JobController extends Controller
             return back()->with('error', 'app.something_went_wrong');
         }
         $job->update(['job_id' => $job->id . $job_id]);
-        $jobcount = Job::where(['category_id' => $job->category_id, 'status' => 1])->count();
-        //dd($jobcount);
+        $jobcount = Job::where(['category_id' => $job->category_id])->count();
         $category_job_count = Category::where('id', $job->category_id)->update(['job_count' => $jobcount]);
+        if (isset($request->is_premium)) {
+            $accountBalance = Auth::user()->premium_jobs_balance;
+            $newbalance = ($accountBalance - 1000);
+            $updateBalance = User::findorFail(Auth::user()->id)->update(['premium_jobs_balance' => $newbalance]);
+        }
         return redirect(route('posted_jobs'))->with('success', __('app.job_posted_success'));
     }
 
@@ -109,13 +111,8 @@ class JobController extends Controller
         }
 
         $categories = Category::orderBy('category_name', 'asc')->get();
-        $countries = Country::all();
-        $old_country = false;
-        if ($job->country_id) {
-            $old_country = Country::find($job->country_id);
-        }
 
-        return view('admin.edit-job', compact('title', 'job', 'categories', 'countries', 'old_country'));
+        return view('admin.edit-job', compact('title', 'job', 'categories'));
     }
 
     /**
@@ -128,9 +125,6 @@ class JobController extends Controller
      */
     public function update(Request $request, $id)
     {
-        if (env('IS_DEMO')) {
-            return back()->with('error', __('app.disable_for_demo'));
-        }
 
         $job = Job::find($id);
 
@@ -149,13 +143,6 @@ class JobController extends Controller
         $this->validate($request, $rules);
 
         $job_title = $request->job_title;
-
-        $country = Country::find($request->country);
-        $state_name = null;
-        if ($request->state) {
-            $state = State::find($request->state);
-            $state_name = $state->state_name;
-        }
 
         $data = [
             'company_name' => $request->company_name,
@@ -183,11 +170,7 @@ class JobController extends Controller
             'additional_requirements' => $request->additional_requirements,
             'benefits' => $request->benefits,
             'apply_instruction' => $request->apply_instruction,
-            'country_id' => $request->country,
-            'country_name' => $country->country_name,
-            'state_id' => $request->state,
-            'state_name' => $state_name,
-            'city_name' => $request->city_name,
+            'district' => $request->district,
             'deadline' => $request->deadline,
         ];
 

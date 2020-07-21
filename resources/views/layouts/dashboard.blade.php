@@ -21,7 +21,8 @@
     @yield('page-css')
 
     <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
+
+
 
     <script type='text/javascript'>
         /* <![CDATA[ */
@@ -64,31 +65,25 @@
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ml-auto">
 
-                        <li class="nav-item">
-                            <a class="nav-link btn btn-success text-white" href="{{route('post_new_job')}}"><i
-                                    class="la la-save"></i>{{__('app.post_new_job')}} </a>
-                        </li>
-
-                        <li class="nav-item dropdown">
-                            <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
-                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                {{ Auth::user()->name }}
-                                <span class="badge badge-warning"><i
-                                        class="la la-briefcase"></i>{{auth()->user()->premium_jobs_balance}}</span>
-                                <span class="caret"></span>
+                        <li class="nav-item badge badge-warning">
+                            <a class="nav-link" style="font-size:15px;color:black;"> Balance :
+                                ৳{{auth()->user()->premium_jobs_balance}}
                             </a>
 
-                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                    {{ __('Logout') }}
-                                </a>
+                        </li>
 
-                                <form id="logout-form" action="{{ route('logout') }}" method="POST"
-                                    style="display: none;">
-                                    @csrf
-                                </form>
-                            </div>
+                        <li class="nav-item"> <a class="nav-link"
+                                href="{{route('dashboard')}}">{{ Auth::user()->name }}</a></i>
+                        </li>
+
+                        <li class="nav-item"> <a class="nav-link" href="{{ route('logout') }}" onclick="event.preventDefault();
+                                document.getElementById('logout-form').submit();">
+                                {{ __('Logout') }}
+                            </a>
+
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                @csrf
+                            </form>
                         </li>
 
                     </ul>
@@ -262,10 +257,7 @@
                             @yield('content')
                         </div>
 
-                        <div class="dashboard-footer mb-3">
-                            <a href="https://bd-job-portal.herokuapp.com/" target="_blank">Job Portal</a> Version
-                            {{config('app.version')}}
-                        </div>
+
                     </div>
 
                 </div>
@@ -276,8 +268,13 @@
     </div>
 
     <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous">
+    </script>
+    <script src="{{ asset('assets/js/admin.js') }}"></script>
     @yield('page-js')
-    <script src="{{ asset('assets/js/admin.js') }}" defer></script>
+
 
 </body>
 

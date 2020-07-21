@@ -15,6 +15,9 @@ Auth::routes();
 
 Route::get('/', 'HomeController@index')->name('home');
 
+Route::get('stripe', 'StripePaymentController@stripe');
+Route::post('stripe', 'StripePaymentController@stripePost')->name('stripeCheckout');
+
 Route::get('new-register', 'HomeController@newRegister')->name('new_register');
 Route::get('job-seeker-register', 'UserController@registerJobSeeker')->name('register_job_seeker');
 Route::post('job-seeker-register', 'UserController@registerJobSeekerPost')->name('register_job_seek');
@@ -36,10 +39,7 @@ Route::post('follow-unfollow', 'FollowerController@followUnfollow')->name('follo
 
 Route::get('jobs/', 'JobController@jobsListing')->name('jobs_listing');
 
-Route::group(['layout' => 'layouts.theme'], function () {
-    Route::livewire('pricing', 'package-pricing')->name('pricing');
-});
-
+Route::get('pricing', 'HomeController@pricing')->name('pricing');
 Route::get('contact-us', 'HomeController@contactUs')->name('contact_us');
 Route::post('contact-us', 'HomeController@contactUsPost');
 
@@ -166,14 +166,3 @@ Route::group(['prefix' => 'dashboard', 'middleware' => 'dashboard'], function ()
 
 Route::get('{slug}', 'JobController@view')->name('job_view');
 Route::post('/', 'HomeController@langswitch')->name('language');
-
-// Route::get('/example2', 'SslCommerzPaymentController@exampleHostedCheckout');
-
-// Route::post('/pay', 'SslCommerzPaymentController@index');
-// Route::post('/pay-via-ajax', 'SslCommerzPaymentController@payViaAjax');
-
-// Route::post('/success', 'SslCommerzPaymentController@success');
-// Route::post('/fail', 'SslCommerzPaymentController@fail');
-// Route::post('/cancel', 'SslCommerzPaymentController@cancel');
-
-// Route::post('/ipn', 'SslCommerzPaymentController@ipn');

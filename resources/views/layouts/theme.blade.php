@@ -26,7 +26,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-170075362-1"></script>
     @yield('page-css')
-    @livewireStyles
+
 </head>
 
 
@@ -250,10 +250,10 @@
     <!-- Scripts -->
 
     <!-- Latest compiled and minified JavaScript -->
-    <script src="{{ asset('assets/js/main.js') }}" defer></script>
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="{{ asset('assets/js/main.js') }}"></script>
     @yield('page-js')
-    @livewireScripts
+
 </body>
 
 </html>

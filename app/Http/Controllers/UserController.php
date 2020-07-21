@@ -242,9 +242,7 @@ class UserController extends Controller
             $user = User::find($id);
         }
 
-        $countries = Country::all();
-
-        return view('admin.profile_edit', compact('title', 'user', 'countries'));
+        return view('admin.profile_edit', compact('title', 'user'));
     }
 
     public function profileEditPost($id = null, Request $request)
