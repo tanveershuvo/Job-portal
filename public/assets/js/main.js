@@ -1,4 +1,5 @@
-(function ($) {
+(function ($)
+{
     "use strict";
 
 
@@ -14,7 +15,8 @@
     }
 
 
-    $(document).on('click', '.employer-follow-button', function (e) {
+    $(document).on('click', '.employer-follow-button', function (e)
+    {
         e.preventDefault();
 
         var $that = $(this);
@@ -24,10 +26,12 @@
             type: 'POST',
             url: page_data.routes.follow_unfollow,
             data: { employer_id: employer_id, _token: page_data.csrf_token },
-            beforeSend: function () {
+            beforeSend: function ()
+            {
                 $that.addClass('updating-btn');
             },
-            success: function (data) {
+            success: function (data)
+            {
                 if (data.success) {
                     if (typeof data.btn_text !== 'undefined') {
                         $that.html(data.btn_text);
@@ -38,7 +42,8 @@
                     }
                 }
             },
-            complete: function () {
+            complete: function ()
+            {
                 $that.removeClass('updating-btn');
             }
         });

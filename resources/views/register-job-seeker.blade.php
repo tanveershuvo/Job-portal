@@ -149,16 +149,16 @@
 @section('page-js')
 <script>
     $(document).ready(function() {
-    $("#icon-click").on('click', function() {
-        $('#icon-click i').toggleClass( "fa-eye-slash" );
-    const pass = $('#password');
-     if(pass.attr("type") == "password"){
-    pass.attr('type', 'text');
-    }else if(pass.attr("type") == "text"){
-        pass.attr('type', 'password');
+        $("#icon-click").on('click', function() {
+            $('#icon-click i').toggleClass( "fa-eye-slash" );
+            const pass = $('#password');
+            if(pass.attr("type") == "password"){
+            pass.attr('type', 'text');
+            }else if(pass.attr("type") == "text"){
+                pass.attr('type', 'password');
 
-    }
-    });
+            }
+        });
     });
 </script>
 

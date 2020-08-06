@@ -14,9 +14,11 @@
 Auth::routes();
 
 Route::get('/', 'HomeController@index')->name('home');
+Route::get('success/session_id={session_id}', 'StripePaymentController@successPayment');
+Route::get('cancel', 'StripePaymentController@cancelPayment');
 
-Route::get('stripe', 'StripePaymentController@stripe');
-Route::post('stripe', 'StripePaymentController@stripePost')->name('stripeCheckout');
+Route::post('paymentOptions', 'StripePaymentController@createSession')->name('createSession');
+Route::get('paymentOptions/package={package}', 'StripePaymentController@paymentOptions')->name('payment_options');
 
 Route::get('new-register', 'HomeController@newRegister')->name('new_register');
 Route::get('job-seeker-register', 'UserController@registerJobSeeker')->name('register_job_seeker');
@@ -85,7 +87,6 @@ Route::group(['prefix' => 'dashboard', 'middleware' => 'dashboard'], function ()
 
             Route::get('profile', 'UserController@employerProfile')->name('employer_profile');
             Route::post('profile', 'UserController@employerProfilePost');
-
         });
         Route::group(['prefix' => 'jobs'], function () {
             Route::get('/', 'JobController@pendingJobs')->name('pending_jobs');
@@ -97,7 +98,6 @@ Route::group(['prefix' => 'dashboard', 'middleware' => 'dashboard'], function ()
         });
 
         Route::get('/flagged', 'JobController@flaggedMessage')->name('flagged_jobs');
-
     });
 
     Route::group(['middleware' => 'only_admin_access'], function () {
@@ -125,7 +125,6 @@ Route::group(['prefix' => 'dashboard', 'middleware' => 'dashboard'], function ()
 
     Route::group(['prefix' => 'payments'], function () {
         Route::get('/', 'PaymentController@index')->name('payments');
-
         Route::get('view/{id}', ['as' => 'payment_view', 'uses' => 'PaymentController@view']);
         Route::get('status-change/{id}/{status}', ['as' => 'status_change', 'uses' => 'PaymentController@markSuccess']);
     });
@@ -154,14 +153,12 @@ Route::group(['prefix' => 'dashboard', 'middleware' => 'dashboard'], function ()
             Route::get('change-password', ['as' => 'change_password', 'uses' => 'UserController@changePassword']);
             Route::post('change-password', 'UserController@changePasswordPost');
         });
-
     });
 
     Route::group(['prefix' => 'account'], function () {
         Route::get('change-password', 'UserController@changePassword')->name('change_password');
         Route::post('change-password', 'UserController@changePasswordPost');
     });
-
 });
 
 Route::get('{slug}', 'JobController@view')->name('job_view');

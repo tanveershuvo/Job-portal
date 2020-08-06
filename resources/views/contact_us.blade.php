@@ -30,7 +30,7 @@
                             name="name" value="{{ old('name') }}">
                         @error('name')
                         <span class="invalid-feedback" role="alert">
-                            <strong> new {{ $message }}</strong>
+                            <strong>{{ $message }}</strong>
                         </span>
                         @enderror
                     </div>
