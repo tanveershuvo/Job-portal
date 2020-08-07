@@ -44,7 +44,7 @@ class StripePaymentController extends Controller
     public function cancelPayment()
     {
         Session::flash('msg', ['status' => 'danger', 'data' => 'Payment Cancelled.']);
-        return url()->previous();
+        return redirect(session('previous-url'));
     }
     /**
      * success response method.
@@ -76,6 +76,7 @@ class StripePaymentController extends Controller
                 'cancel_url' => config('app.url') . '/cancel',
             ]);
             // dd($session);
+            Session::flash('previous-url', url()->previous());
             return Response::json($session);
         } catch (CardException $e) {
             Session::flash('msg', [
