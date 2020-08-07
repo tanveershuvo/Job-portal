@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Pricing;
 use App\User;
-
+use Illuminate\Http\Request;
 use Stripe\Stripe;
 use Stripe\Checkout\Session as StripeSession;
 use Stripe\Exception\CardException;
@@ -38,8 +38,8 @@ class StripePaymentController extends Controller
         $accountBalance = Auth::user()->premium_jobs_balance;
         $newbalance = (($session->amount_total / 100) + $accountBalance);
         $updateBalance = User::findorFail(Auth::user()->id)->update(['premium_jobs_balance' => $newbalance]);
-        Session::flash('msg', ['status' => 'success', 'data' => 'Payment Successful . Balance Added.']);
-        return redirect(route('home'));
+        Session::flash('msg', ['status' => 'success', 'data' => 'Payment Successful . Balance Added']);
+        return redirect()->back();
     }
     public function cancelPayment()
     {
@@ -51,9 +51,10 @@ class StripePaymentController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function createSession()
+    public function createSession(Request $request)
     {
         try {
+            $packageDetails = Pricing::findorFail($request->id);
             $session = StripeSession::create([
                 'payment_method_types' => [
                     'card'
@@ -62,9 +63,9 @@ class StripePaymentController extends Controller
                     'price_data' => [
                         'currency' => 'bdt',
                         'product_data' => [
-                            'name' => 'T-shirt',
+                            'name' => $packageDetails->package_name,
                         ],
-                        'unit_amount' => 2000 * 100,
+                        'unit_amount' => $packageDetails->price * 100,
                     ],
                     'quantity' => 1,
                 ]],
