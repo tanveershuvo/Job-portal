@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Pricing;
 use App\User;
 
 use Stripe\Stripe;
@@ -23,9 +24,10 @@ class StripePaymentController extends Controller
         Stripe::setApiKey(config('stripe.secret'));
     }
 
-    public function paymentOptions()
+    public function paymentOptions($id)
     {
-        return view('paymentOptions');
+        $package = Pricing::findorFail($id);
+        return view('paymentOptions', compact('package', $package));
     }
 
 

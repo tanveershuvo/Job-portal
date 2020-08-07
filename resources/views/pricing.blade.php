@@ -14,11 +14,7 @@
             </div>
         </div>
 
-        @if (Session::has('msg'))
-        <div class="alert alert-{{Session::get('msg.status')}} col-md-6">
-            {{Session::get('msg.data')}}
-        </div>
-        @endif
+
         <div class="row">
 
             <div class="col-xs-12 col-md-4">

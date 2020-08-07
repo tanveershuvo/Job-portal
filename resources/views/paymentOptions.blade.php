@@ -2,6 +2,16 @@
 
 @section('content')
 
+@if (Session::has('msg'))
+<div class="alert alert-{{Session::get('msg.status')}} col-md-6">
+    {{Session::get('msg.data')}}
+</div>
+@endif
+
+<div class="alert alert-primary col-md-6">
+    thanks! You chose {{$package->package_name}} package!
+</div>
+
 <button id="checkout-button">stripe</button>
 
 @endsection

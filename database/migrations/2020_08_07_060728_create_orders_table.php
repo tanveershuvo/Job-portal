@@ -1,8 +1,8 @@
 <?php
 
-use Illuminate\Database\Migrations\Migration;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Database\Migrations\Migration;
 
 class CreateOrdersTable extends Migration
 {
@@ -18,8 +18,8 @@ class CreateOrdersTable extends Migration
             $table->string('name')->nullable();
             $table->string('email')->nullable();
             $table->string('phone')->nullable();
-            $table->string('amount')->nullable();
-            $table->string('address')->nullable();
+            $table->double('amount')->nullable();
+            $table->longText('address')->nullable();
             $table->string('status')->nullable();
             $table->string('transaction_id')->nullable();
             $table->string('currency')->nullable();

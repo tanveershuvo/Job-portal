@@ -14,6 +14,23 @@
 Auth::routes();
 
 Route::get('/', 'HomeController@index')->name('home');
+
+// SSLCOMMERZ Start
+Route::get('/example1', 'SslCommerzPaymentController@exampleEasyCheckout');
+Route::get('/example2', 'SslCommerzPaymentController@exampleHostedCheckout');
+
+Route::post('/pay', 'SslCommerzPaymentController@index');
+Route::post('/pay-via-ajax', 'SslCommerzPaymentController@payViaAjax');
+
+Route::post('/success', 'SslCommerzPaymentController@success');
+Route::post('/fail', 'SslCommerzPaymentController@fail');
+Route::post('/cancel', 'SslCommerzPaymentController@cancel');
+
+
+
+Route::post('/ipn', 'SslCommerzPaymentController@ipn');
+
+
 Route::get('success/session_id={session_id}', 'StripePaymentController@successPayment');
 Route::get('cancel', 'StripePaymentController@cancelPayment');
 
