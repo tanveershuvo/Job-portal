@@ -34,6 +34,7 @@ class StripePaymentController extends Controller
     public function successPayment($session_id)
     {
         $session = StripeSession::retrieve($session_id);
+        dd($session);
         $accountBalance = Auth::user()->premium_jobs_balance;
         $newbalance = (($session->amount_total / 100) + $accountBalance);
         $updateBalance = User::findorFail(Auth::user()->id)->update(['premium_jobs_balance' => $newbalance]);
