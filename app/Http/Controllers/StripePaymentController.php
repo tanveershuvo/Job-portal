@@ -44,7 +44,7 @@ class StripePaymentController extends Controller
     public function cancelPayment()
     {
         Session::flash('msg', ['status' => 'danger', 'data' => 'Payment Cancelled.']);
-        return redirect()->back();
+        return url()->previous();
     }
     /**
      * success response method.
