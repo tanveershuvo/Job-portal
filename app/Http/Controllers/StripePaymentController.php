@@ -16,6 +16,9 @@ use Stripe\Exception\ApiConnectionException;
 use Stripe\Exception\AuthenticationException;
 use Stripe\Exception\InvalidRequestException;
 use Illuminate\Support\Facades\Session;
+use Stripe\BalanceTransaction;
+use Stripe\Charge;
+use Stripe\PaymentIntent;
 
 class StripePaymentController extends Controller
 {
@@ -34,7 +37,24 @@ class StripePaymentController extends Controller
     public function successPayment($session_id)
     {
         $session = StripeSession::retrieve($session_id);
-        //dd($session);
+        $payment_details = PaymentIntent::retrieve(
+            $session->payment_intent,
+            []
+        );
+        $currency = $payment_details->currency;
+        $status = $payment_details->status;
+        $amount = $payment_details->amount / 100;
+        $payment_method_types = $payment_details->payment_method_types[0];
+        $charge = Charge::retrieve(
+            $payment_details->charges->data[0]['id'],
+            []
+        );
+        $transaction_id = BalanceTransaction::retrieve(
+            $payment_details->charges->data[0]['balance_transaction'],
+            []
+        );
+
+
         $accountBalance = Auth::user()->premium_jobs_balance;
         $newbalance = (($session->amount_total / 100) + $accountBalance);
         $updateBalance = User::findorFail(Auth::user()->id)->update(['premium_jobs_balance' => $newbalance]);
