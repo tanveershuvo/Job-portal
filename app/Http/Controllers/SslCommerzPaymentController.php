@@ -95,6 +95,8 @@ class SslCommerzPaymentController extends Controller
         # In orders table order uniq identity is "transaction_id","status" field contain status of the transaction, "amount" is the order amount to be paid and "currency" is for storing Site Currency which will be checked with paid currency.
 
         $post_data = array();
+        // $post_data['store_id'] = env("STORE_ID");
+        // $post_data['store_passwd'] = env("STORE_PASSWORD");
         $post_data['total_amount'] = '10'; # You cant not pay less than 10
         $post_data['currency'] = "BDT";
         $post_data['tran_id'] = uniqid(); // tran_id must be unique
@@ -150,7 +152,7 @@ class SslCommerzPaymentController extends Controller
         //dd($update_product);
 
         $sslc = new SslCommerzNotification();
-        dd($sslc);
+        //dd($sslc);
         # initiate(Transaction Data , false: Redirect to SSLCOMMERZ gateway/ true: Show all the Payement gateway here )
         $payment_options = $sslc->makePayment($post_data, 'checkout', 'json');
 

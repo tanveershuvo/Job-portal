@@ -8,10 +8,9 @@ return [
     // For Live, use "https://securepay.sslcommerz.com"
     'apiDomain' => env("API_DOMAIN_URL", "https://sandbox.sslcommerz.com"),
     'apiCredentials' => [
-        'store_id' => env("STORE_ID"),
-        'store_password' => env("STORE_PASSWORD"),
+        'store_id' => env("STORE_ID", "jobpo5f16f6c3dfa2f"),
+        'store_password' => env("STORE_PASSWORD", "jobpo5f16f6c3dfa2f@ssl"),
     ],
-    'store_id' => env("STORE_ID"),
     'apiUrl' => [
         'make_payment' => "/gwprocess/v4/api.php",
         'transaction_status' => "/validator/api/merchantTransIDvalidationAPI.php",
