@@ -24,12 +24,12 @@ Route::post('/pay-via-ajax', 'SslCommerzPaymentController@payViaAjax');
 
 Route::post('/success', 'SslCommerzPaymentController@success');
 Route::post('/fail', 'SslCommerzPaymentController@fail');
-Route::post('/cancel', 'SslCommerzPaymentController@cancel');
+//Route::post('/cancel', 'SslCommerzPaymentController@cancel');
 Route::post('/ipn', 'SslCommerzPaymentController@ipn');
 
 //Stripe Payment Route
-Route::get('success/session_id={session_id}', 'StripePaymentController@successPayment');
-Route::get('cancel', 'StripePaymentController@cancelPayment');
+Route::get('/success/session_id={session_id}', 'StripePaymentController@successPayment');
+Route::get('/cancel', 'StripePaymentController@cancelPayment');
 
 Route::post('paymentOptions', 'StripePaymentController@createSession')->name('createSession');
 Route::get('paymentOptions/package={package}', 'StripePaymentController@paymentOptions')->name('payment_options');
