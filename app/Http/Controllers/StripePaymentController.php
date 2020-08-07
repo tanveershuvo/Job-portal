@@ -71,10 +71,10 @@ class StripePaymentController extends Controller
                 'locale' => 'auto',
                 'client_reference_id' => Auth::user()->id,
                 'mode' => 'payment',
-                'success_url' => config('app.url') . '/success/session_id={CHECKOUT_SESSION_ID}',
-                'cancel_url' => config('app.url') . '/cancel',
+                'success_url' => config('app.url') . 'success/session_id={CHECKOUT_SESSION_ID}',
+                'cancel_url' => config('app.url') . 'cancel',
             ]);
-            dd($session);
+            // dd($session);
             return Response::json($session);
         } catch (CardException $e) {
             Session::flash('msg', [
