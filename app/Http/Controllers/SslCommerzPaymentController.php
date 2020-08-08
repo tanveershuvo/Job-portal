@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use DB;
+use App\Orders;
 use Illuminate\Http\Request;
 use App\Library\SslCommerz\SslCommerzNotification;
 
