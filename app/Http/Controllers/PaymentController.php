@@ -296,7 +296,5 @@ class PaymentController extends Controller
         $payment->update($payments_data);
 
         return redirect(route('payment_success', $transaction_id));
-
     }
-
 }

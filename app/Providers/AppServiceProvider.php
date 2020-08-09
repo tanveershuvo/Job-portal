@@ -48,10 +48,8 @@ class AppServiceProvider extends ServiceProvider
                     'redirect' => url('job-seeker-register/github/callback'),
                 ],
             ];
-
             config($githubConfig);
             config($facebookConfig);
-
         } catch (\Exception $e) {
             echo $e->getMessage();
         }
@@ -64,6 +62,5 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-
     }
 }

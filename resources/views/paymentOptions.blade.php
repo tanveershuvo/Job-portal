@@ -1,9 +1,6 @@
 @extends('layouts.theme')
 
 @section('content')
-
-
-
 <div class="pricing p-4">
     <div class="container ">
         <div class="row">
@@ -20,7 +17,7 @@
                         {{Session::get('msg.data')}}
                     </div>
                     @endif
-
+                    <input type="hidden" id="package_id" name="package_id" value="{{$package->id}}">
                     <h3 class="card-title">You chose {{$package->package_name}} package!</h3>
                     <h5 class="card-subtitle my-2 alert alert-warning">
                         <i class="fa fa-exclamation-triangle"></i> You will be charged BDT
@@ -63,6 +60,8 @@
         var stripe = Stripe("{{config('stripe.key')}}");
         var elements = stripe.elements();
         var checkoutButton = document.getElementById('checkout-button');
+        var package_id = $('#package_id').val();
+        var option = 'stripe';
 
         checkoutButton.addEventListener('click', function() {
             event.preventDefault();
@@ -73,8 +72,9 @@
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
                 type: "POST",
-                data: { id: {{$package->id}} },
+                data: { package_id:package_id, option:option},
                 success: function(response) {
+                    console.log(response);
                     stripe.redirectToCheckout({
                         sessionId: response.id
                     });
@@ -88,6 +88,10 @@
     });
 </script>
 {{--  SSLCOMMERZ  --}}
+{{--  var obj = {};
+    obj.package_id = $('#package_id').val();
+    obj.option = 'sslcommerz';
+    $('#sslczPayBtn').prop('postdata', obj);  --}}
 <script>
     $(document).ready(function() {
     var loader = function () {

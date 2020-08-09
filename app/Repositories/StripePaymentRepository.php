@@ -1,40 +1,37 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Repositories;
 
-use App\Pricing;
 use App\User;
-use Illuminate\Http\Request;
+use App\Pricing;
+use Stripe\Charge;
 use Stripe\Stripe;
-use Stripe\Checkout\Session as StripeSession;
+use Stripe\PaymentIntent;
+use Stripe\BalanceTransaction;
 use Stripe\Exception\CardException;
 use Illuminate\Support\Facades\Auth;
+use App\Repositories\PaymentInterface;
+use Illuminate\Support\Facades\Session;
 use Stripe\Exception\ApiErrorException;
-use Illuminate\Support\Facades\Response;
 use Stripe\Exception\RateLimitException;
 use Stripe\Exception\ApiConnectionException;
+use Stripe\Checkout\Session as StripeSession;
 use Stripe\Exception\AuthenticationException;
 use Stripe\Exception\InvalidRequestException;
-use Illuminate\Support\Facades\Session;
-use Stripe\BalanceTransaction;
-use Stripe\Charge;
-use Stripe\PaymentIntent;
 
-class StripePaymentController extends Controller
+class StripePaymentRepository implements PaymentInterface
 {
     public function __construct()
     {
         Stripe::setApiKey(config('stripe.secret'));
     }
-
-    public function paymentOptions($id)
-    {
-        $package = Pricing::findorFail($id);
-        return view('paymentOptions', compact('package', $package));
-    }
-
-
-    public function successPayment($session_id)
+    /**
+     * After successful payment
+     *
+     * @param var $session_id
+     * @return successpage
+     */
+    public function paymentSucceed($session_id)
     {
         $session = StripeSession::retrieve($session_id);
         $payment_details = PaymentIntent::retrieve(
@@ -53,16 +50,15 @@ class StripePaymentController extends Controller
             $payment_details->charges->data[0]['balance_transaction'],
             []
         );
-
-
         $accountBalance = Auth::user()->premium_jobs_balance;
         $newbalance = (($session->amount_total / 100) + $accountBalance);
         $updateBalance = User::findorFail(Auth::user()->id)->update(['premium_jobs_balance' => $newbalance]);
         Session::flash('msg', ['status' => 'success', 'data' => 'Payment Successful . Balance Added']);
         return redirect()->back();
     }
-    public function cancelPayment()
+    public function paymentCancelled()
     {
+        dd(session('previous-url'));
         Session::flash('msg', ['status' => 'danger', 'data' => 'Payment Cancelled.']);
         return redirect(session('previous-url'));
     }
@@ -71,11 +67,11 @@ class StripePaymentController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function createSession(Request $request)
+    public function initiatePayment(array $request)
     {
         try {
-            $packageDetails = Pricing::findorFail($request->id);
-            $session = StripeSession::create([
+            $packageDetails = Pricing::findorFail($request['package_id']);
+            return StripeSession::create([
                 'payment_method_types' => [
                     'card'
                 ],
@@ -95,9 +91,7 @@ class StripePaymentController extends Controller
                 'success_url' => config('app.url') . '/success/session_id={CHECKOUT_SESSION_ID}',
                 'cancel_url' => config('app.url') . '/cancel',
             ]);
-            // dd($session);
             Session::flash('previous-url', url()->previous());
-            return Response::json($session);
         } catch (CardException $e) {
             Session::flash('msg', [
                 'status' => 'danger',

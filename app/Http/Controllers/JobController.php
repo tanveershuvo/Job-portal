@@ -2,18 +2,18 @@
 
 namespace App\Http\Controllers;
 
-use App\Category;
-use App\FlagJob;
 use App\Job;
+use App\User;
+use App\FlagJob;
+use App\Category;
 use App\JobApplication;
 use App\Mail\ShareByEMail;
-use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
-use Mockery\Exception;
+use Illuminate\Http\RedirectResponse;
 
 class JobController extends Controller
 {
@@ -120,7 +120,7 @@ class JobController extends Controller
      * @param $id
      * @return \Illuminate\Http\RedirectResponse
      * @throws \Illuminate\Validation\ValidationException
-     *
+     * @todo Something
      * Updating Job
      */
     public function update(Request $request, $id)
@@ -129,9 +129,9 @@ class JobController extends Controller
         $job = Job::find($id);
 
         $user = Auth::user();
-        if (!$user->is_admin() && $user->id != $job->user_id) {
-            return redirect(route('dashboard'))->with('error', trans('app.access_restricted'));
-        }
+        // if (!$user->is_admin() && $user->id != $job->user_id) {
+        //     return redirect(route('dashboard'))->with('error', trans('app.access_restricted'));
+        // }
 
         $rules = [
             'job_title' => ['required', 'string', 'max:190'],
@@ -185,6 +185,7 @@ class JobController extends Controller
      *
      * View any single page
      */
+
     public function view($slug = null)
     {
         $job = Job::whereJobSlug($slug)->first();
@@ -198,9 +199,8 @@ class JobController extends Controller
         return view('job-view', compact('title', 'job'));
     }
 
-    /**
-     * Apply to job
-     */
+
+
     public function applyJob(Request $request)
     {
         $rules = [
@@ -257,7 +257,6 @@ class JobController extends Controller
 
                 session()->forget('job_validation_fails');
                 return redirect()->back()->withInput($request->input())->with('success', trans('app.job_applied_success_msg'));
-
             } catch (\Exception $e) {
                 return redirect()->back()->withInput($request->input())->with('error', $e->getMessage());
             }
@@ -444,5 +443,4 @@ class JobController extends Controller
 
         return view('jobs', compact('title', 'jobs', 'categories'));
     }
-
 }

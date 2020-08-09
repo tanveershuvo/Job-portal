@@ -31,8 +31,8 @@ Route::post('/ipn', 'SslCommerzPaymentController@ipn');
 Route::get('/success/session_id={session_id}', 'StripePaymentController@successPayment');
 Route::get('/cancel', 'StripePaymentController@cancelPayment');
 
-Route::post('paymentOptions', 'StripePaymentController@createSession')->name('createSession');
-Route::get('paymentOptions/package={package}', 'StripePaymentController@paymentOptions')->name('payment_options');
+Route::post('paymentOptions', 'PaymentChargeController@initiatePayment')->name('createSession');
+Route::get('paymentOptions/package={package}', 'PaymentChargeController@paymentOptions')->name('payment_options');
 
 Route::get('new-register', 'HomeController@newRegister')->name('new_register');
 Route::get('job-seeker-register', 'UserController@registerJobSeeker')->name('register_job_seeker');
