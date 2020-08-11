@@ -17,6 +17,12 @@ Route::get('/', 'HomeController@index')->name('home');
 
 // SSLCOMMERZ Start
 
+//Stripe Payment Route
+Route::get('/success/session_id={session_id}', 'PaymentChargeController@getPaymentSucceed');
+Route::post('/success', 'PaymentChargeController@postPaymentSucceed');
+Route::match(['get', 'post'], '/cancel', 'PaymentChargeController@paymentCancelled');
+Route::post('paymentOptions', 'PaymentChargeController@initiatePayment')->name('createSession');
+Route::get('paymentOptions/package={package}', 'PaymentChargeController@paymentOptions')->name('payment_options');
 
 
 // Route::post('/fail', 'SslCommerzPaymentController@fail');
@@ -70,14 +76,6 @@ Route::post('payment/{transaction_id}/bank-transfer', 'PaymentController@payment
 //Dashboard Route
 Route::group(['prefix' => 'dashboard', 'middleware' => 'dashboard'], function () {
     Route::get('/', 'DashboardController@dashboard')->name('dashboard');
-
-    //Stripe Payment Route
-    Route::get('/success/session_id={session_id}', 'PaymentChargeController@getPaymentSucceed');
-    Route::post('/success', 'PaymentChargeController@postPaymentSucceed');
-    Route::match(['get', 'post'], '/cancel', 'PaymentChargeController@paymentCancelled');
-    Route::post('paymentOptions', 'PaymentChargeController@initiatePayment')->name('createSession');
-    Route::get('paymentOptions/package={package}', 'PaymentChargeController@paymentOptions')->name('payment_options');
-
 
     Route::get('applied-jobs', 'DashboardController@dashboard')->name('applied_jobs');
 
