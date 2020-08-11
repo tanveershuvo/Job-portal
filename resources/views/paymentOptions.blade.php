@@ -39,9 +39,13 @@
                         </li>
                         <li class="list-group-item">
                             <h5 class="mt-2">Payment Method 2 : SSL Commerz Payment</h5>
-                            <button class="btn btn-primary col-md-6 text-uppercase my-3" id="sslczPayBtn" token=""
-                                postdata="" order="blank" endpoint="{{ url('/pay-via-ajax') }}">
-                                SSL Payment </button>
+                            <form action="{{ route('createSession') }}" method="POST">
+                                <input type="hidden" id="package_id" name="package_id" value="{{$package->id}}">
+                                <input type="hidden" name="option" value="sslcommerz">
+                                @csrf
+                                <button type="submit" class="btn btn-primary col-md-6 text-uppercase my-3">
+                                    SSL Payment </button>
+                            </form>
                         </li>
                     </ul>
                 </div>
@@ -57,54 +61,38 @@
 <script src=" https://js.stripe.com/v3/"> </script>
 <script>
     $(document).ready(function() {
-        var stripe = Stripe("{{config('stripe.key')}}");
-        var elements = stripe.elements();
-        var checkoutButton = document.getElementById('checkout-button');
-        var package_id = $('#package_id').val();
-        var option = 'stripe';
+                                    var stripe = Stripe("{{config('stripe.key')}}");
+                                    var elements = stripe.elements();
+                                    var checkoutButton = document.getElementById('checkout-button');
+                                    var package_id = $('#package_id').val();
+                                    var option = 'stripe';
 
-        checkoutButton.addEventListener('click', function() {
-            event.preventDefault();
-            $('#spinner').addClass('spinner-border spinner-border-sm');
-            $.ajax({
-                url: "{{route('createSession')}}",
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                },
-                type: "POST",
-                data: { package_id:package_id, option:option},
-                success: function(response) {
-                    console.log(response);
-                    stripe.redirectToCheckout({
-                        sessionId: response.id
-                    });
-                },
-                error: function(xhr) {
-                    var res = xhr.responseJSON;
-                    console.log(res.message);
-                }
-            })
-        });
-    });
+                                    checkoutButton.addEventListener('click', function() {
+                                    event.preventDefault();
+                                    $('#spinner').addClass('spinner-border spinner-border-sm');
+                                    $.ajax({
+                                    url: "{{route('createSession')}}",
+                                    headers: {
+                                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                                    },
+                                    type: "POST",
+                                    data: { package_id:package_id, option:option},
+                                    success: function(response) {
+                                    console.log(response);
+                                    stripe.redirectToCheckout({
+                                    sessionId: response.id
+                                    });
+                                    },
+                                    error: function(xhr) {
+                                    var res = xhr.responseJSON;
+                                    console.log(res.message);
+                                    }
+                                    })
+                                    });
+                                    });
 </script>
-{{--  SSLCOMMERZ  --}}
-{{--  var obj = {};
-    obj.package_id = $('#package_id').val();
-    obj.option = 'sslcommerz';
-    $('#sslczPayBtn').prop('postdata', obj);  --}}
-<script>
-    $(document).ready(function() {
-    var loader = function () {
-        var script = document.createElement("script"), tag = document.getElementsByTagName("script")[0];
-        // script.src = "https://seamless-epay.sslcommerz.com/embed.min.js?" + Math.random().toString(36).substring(7); // USE THIS FOR LIVE
-        script.src = "https://sandbox.sslcommerz.com/embed.min.js?" + Math.random().toString(36).substring(7); // USE THIS FOR SANDBOX
-        tag.parentNode.insertBefore(script, tag);
-    };
 
-    window.addEventListener ? window.addEventListener("load", loader, true) : window.attachEvent("onload", loader);
-});
 
-</script>
 
 
 

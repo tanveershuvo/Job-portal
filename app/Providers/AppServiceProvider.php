@@ -3,9 +3,14 @@
 namespace App\Providers;
 
 use App\Option;
+use Illuminate\Support\Facades\App;
+use App\Repositories\PaymentInterface;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Facades\Request;
 use Illuminate\Support\ServiceProvider;
+use App\Repositories\SslPaymentRepository;
+use App\Repositories\StripePaymentRepository;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -53,6 +58,7 @@ class AppServiceProvider extends ServiceProvider
         } catch (\Exception $e) {
             echo $e->getMessage();
         }
+        session()->regenerate();
     }
 
     /**

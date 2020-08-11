@@ -1,4 +1,7 @@
 <?php
+
+use Illuminate\Http\Request;
+
 /**
  * @return mixed
  * Custom functions
@@ -32,6 +35,17 @@ if (!function_exists('pageJsonData')) {
         // $data['routes'] = $routes;
 
         return json_encode($data);
+    }
+}
+
+
+function helperRequest(Request $request)
+{
+    if (isset($request['cart_json'])) {
+        $collection = json_decode($request['cart_json']);
+        return $collection;
+    } else {
+        return $request;
     }
 }
 
@@ -326,7 +340,6 @@ function allDistricts()
     );
     $allDistrics = collect($districts)->sortby('name');
     return $allDistrics;
-
 }
 
 function get_currencies()
@@ -495,7 +508,6 @@ function get_currencies()
     );
     $listItem = collect($list)->sortKeys()->toArray();
     return $listItem;
-
 }
 
 /**
@@ -808,7 +820,6 @@ if (!function_exists('paypal_ipn_verify')) {
             if (count($keyval) == 2) {
                 $myPost[$keyval[0]] = urldecode($keyval[1]);
             }
-
         }
         // read the IPN message sent from PayPal and prepend 'cmd=_notify-validate'
         $req = 'cmd=_notify-validate';

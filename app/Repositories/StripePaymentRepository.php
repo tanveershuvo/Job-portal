@@ -7,6 +7,7 @@ use App\Pricing;
 use Stripe\Charge;
 use Stripe\Stripe;
 use Stripe\PaymentIntent;
+use Illuminate\Http\Request;
 use Stripe\BalanceTransaction;
 use Stripe\Exception\CardException;
 use Illuminate\Support\Facades\Auth;
@@ -25,14 +26,88 @@ class StripePaymentRepository implements PaymentInterface
     {
         Stripe::setApiKey(config('stripe.secret'));
     }
+
+    /**
+     * success response method.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function initiatePayment(array $request)
+    {
+        Session::put('previous-url', url()->previous());
+        try {
+            $packageDetails = Pricing::findorFail($request['package_id']);
+            return StripeSession::create([
+                'payment_method_types' => [
+                    'card'
+                ],
+                'line_items' => [[
+                    'price_data' => [
+                        'currency' => 'bdt',
+                        'product_data' => [
+                            'name' => $packageDetails->package_name,
+                        ],
+                        'unit_amount' => $packageDetails->price * 100, //Stripe calculates amount in cents or poysa
+                    ],
+                    'quantity' => 1,
+                ]],
+                'locale' => 'auto',
+                'client_reference_id' => Auth::user()->id,
+                'mode' => 'payment',
+                'success_url' => config('app.url') . '/success/session_id={CHECKOUT_SESSION_ID}',
+                'cancel_url' => config('app.url') . '/cancel',
+            ]);
+        } catch (CardException $e) {
+            return Session::flash('msg', [
+                'status' => 'danger',
+                'data' => '
+            Status is:' . $e->getHttpStatus() . '\n
+            Type is:' . $e->getError()->type . '\n
+            Code is:' . $e->getError()->code . '\n
+            Param is:' . $e->getError()->param . '\n
+            Message is:' . $e->getError()->message . ''
+            ]);
+        } catch (RateLimitException $e) {
+            return Session::flash('msg', [
+                'status' => 'danger',
+                'data' => 'Too many requests made to the API too quickly'
+            ]);
+        } catch (InvalidRequestException $e) {
+            return Session::flash('msg', [
+                'status' => 'danger',
+                'data' => 'Invalid parameters were supplied to Stripe\'s API'
+            ]);
+        } catch (AuthenticationException $e) {
+            return Session::flash('msg', [
+                'status' => 'danger',
+                'data' => 'Authentication with Stripe\'s API failed'
+            ]);
+        } catch (ApiConnectionException $e) {
+            return Session::flash('msg', [
+                'status' => 'danger',
+                'data' => 'Network communication with Stripe failed'
+            ]);
+        } catch (ApiErrorException $e) {
+            return Session::flash('msg', [
+                'status' => 'danger',
+                'data' => $e
+            ]);
+        } catch (Exception $e) {
+            return Session::flash('msg', [
+                'status' => 'danger',
+                'data' => $e
+            ]);
+        }
+    }
     /**
      * After successful payment
      *
      * @param var $session_id
      * @return successpage
      */
-    public function paymentSucceed($session_id)
+    public function getPaymentSucceed($session_id)
     {
+        Stripe::setApiKey(config('stripe.secret'));
         $session = StripeSession::retrieve($session_id);
         $payment_details = PaymentIntent::retrieve(
             $session->payment_intent,
@@ -40,6 +115,7 @@ class StripePaymentRepository implements PaymentInterface
         );
         $currency = $payment_details->currency;
         $status = $payment_details->status;
+        //Stripe calculates amount in cents or poysa
         $net_amount = $payment_details->amount / 100;
         $payment_method_types = $payment_details->payment_method_types[0];
         $charge = Charge::retrieve(
@@ -54,84 +130,18 @@ class StripePaymentRepository implements PaymentInterface
         $newbalance = (($session->amount_total / 100) + $accountBalance);
         $updateBalance = User::findorFail(Auth::user()->id)->update(['premium_jobs_balance' => $newbalance]);
         Session::flash('msg', ['status' => 'success', 'data' => 'Payment Successful . Balance Added']);
-        return redirect()->back();
+        return;
     }
+
+    public function postPaymentSucceed(array $request)
+    {
+        return null;
+    }
+
     public function paymentCancelled()
     {
-        dd(session('previous-url'));
         Session::flash('msg', ['status' => 'danger', 'data' => 'Payment Cancelled.']);
-        return redirect(session('previous-url'));
-    }
-    /**
-     * success response method.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function initiatePayment(array $request)
-    {
-        try {
-            $packageDetails = Pricing::findorFail($request['package_id']);
-            return StripeSession::create([
-                'payment_method_types' => [
-                    'card'
-                ],
-                'line_items' => [[
-                    'price_data' => [
-                        'currency' => 'bdt',
-                        'product_data' => [
-                            'name' => $packageDetails->package_name,
-                        ],
-                        'unit_amount' => $packageDetails->price * 100,
-                    ],
-                    'quantity' => 1,
-                ]],
-                'locale' => 'auto',
-                'client_reference_id' => Auth::user()->id,
-                'mode' => 'payment',
-                'success_url' => config('app.url') . '/success/session_id={CHECKOUT_SESSION_ID}',
-                'cancel_url' => config('app.url') . '/cancel',
-            ]);
-            Session::flash('previous-url', url()->previous());
-        } catch (CardException $e) {
-            Session::flash('msg', [
-                'status' => 'danger',
-                'data' => '
-            Status is:' . $e->getHttpStatus() . '\n
-            Type is:' . $e->getError()->type . '\n
-            Code is:' . $e->getError()->code . '\n
-            Param is:' . $e->getError()->param . '\n
-            Message is:' . $e->getError()->message . ''
-            ]);
-        } catch (RateLimitException $e) {
-            Session::flash('msg', [
-                'status' => 'danger',
-                'data' => 'Too many requests made to the API too quickly'
-            ]);
-        } catch (InvalidRequestException $e) {
-            Session::flash('msg', [
-                'status' => 'danger',
-                'data' => 'Invalid parameters were supplied to Stripe\'s API'
-            ]);
-        } catch (AuthenticationException $e) {
-            Session::flash('msg', [
-                'status' => 'danger',
-                'data' => 'Authentication with Stripe\'s API failed'
-            ]);
-        } catch (ApiConnectionException $e) {
-            Session::flash('msg', [
-                'status' => 'danger',
-                'data' => 'Network communication with Stripe failed'
-            ]);
-        } catch (ApiErrorException $e) {
-            Session::flash('msg', [
-                'status' => 'danger',
-                'data' => $e
-            ]);
-        } catch (Exception $e) {
-            Session::flash('msg', [
-                'status' => 'danger',
-                'data' => $e
-            ]);
-        }
+        $url = Session::get('previous-url');
+        return ($url);
     }
 }

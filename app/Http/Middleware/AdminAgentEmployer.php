@@ -14,14 +14,15 @@ class AdminAgentEmployer
      * @param  \Closure  $next
      * @return mixed
      */
-    public function handle($request, Closure $next){
-        if ( ! Auth::check()){
+    public function handle($request, Closure $next)
+    {
+        if (!Auth::check()) {
             return redirect()->guest(route('login'))->with('error', trans('app.unauthorized_access'));
         }
 
         $user = Auth::user();
 
-        if ( ! $user->is_admin() && ! $user->is_employer() && ! $user->is_agent() )
+        if (!$user->is_admin() && !$user->is_employer())
             return redirect(route('dashboard'))->with('error', trans('app.access_restricted'));
 
 
