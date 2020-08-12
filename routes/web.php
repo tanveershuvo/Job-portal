@@ -18,9 +18,10 @@ Route::get('/', 'HomeController@index')->name('home');
 // SSLCOMMERZ Start
 
 //Stripe Payment Route
-Route::get('/success/session_id={session_id}', 'PaymentChargeController@getPaymentSucceed');
-Route::post('/success', 'PaymentChargeController@postPaymentSucceed');
-Route::match(['get', 'post'], '/cancel', 'PaymentChargeController@paymentCancelled');
+Route::get('/success/session_id={session_id}', 'PaymentChargeController@stripePaymentSucceed');
+Route::post('/success', 'PaymentChargeController@sslPaymentSucceed');
+Route::get('/cancel', 'PaymentChargeController@stripePaymentCancelled');
+Route::post('/cancel', 'PaymentChargeController@sslPaymentCancelled');
 Route::post('paymentOptions', 'PaymentChargeController@initiatePayment')->name('createSession');
 Route::get('paymentOptions/package={package}', 'PaymentChargeController@paymentOptions')->name('payment_options');
 
@@ -55,28 +56,10 @@ Route::get('pricing', 'HomeController@pricing')->name('pricing');
 Route::get('contact-us', 'HomeController@contactUs')->name('contact_us');
 Route::post('contact-us', 'HomeController@contactUsPost');
 
-//checkout
-Route::get('checkout/{package_id}', 'PaymentController@checkout')->name('checkout')->middleware('auth');
-Route::post('checkout/{package_id}', 'PaymentController@checkoutPost')->middleware('auth');
-
-Route::get('payment/{transaction_id}', 'PaymentController@payment')->name('payment');
-Route::post('payment/{transaction_id}', 'PaymentController@paymentPost');
-
-Route::any('payment/{transaction_id}/success', 'PaymentController@paymentSuccess')->name('payment_success');
-Route::any('payment-cancel', 'PaymentController@paymentCancelled')->name('payment_cancel');
-
-//PayPal
-Route::post('payment/{transaction_id}/paypal', 'PaymentController@paypalRedirect')->name('payment_paypal_pay');
-Route::any('payment/paypal-notify/{transaction_id?}', 'PaymentController@paypalNotify')->name('paypal_notify');
-
-Route::post('payment/{transaction_id}/stripe', 'PaymentController@paymentStripeReceive')->name('payment_stripe_receive');
-
-Route::post('payment/{transaction_id}/bank-transfer', 'PaymentController@paymentBankTransferReceive')->name('bank_transfer_submit');
-
 //Dashboard Route
 Route::group(['prefix' => 'dashboard', 'middleware' => 'dashboard'], function () {
-    Route::get('/', 'DashboardController@dashboard')->name('dashboard');
 
+    Route::get('/', 'DashboardController@dashboard')->name('dashboard');
     Route::get('applied-jobs', 'DashboardController@dashboard')->name('applied_jobs');
 
     Route::group(['middleware' => 'admin_agent_employer'], function () {

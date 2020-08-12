@@ -4,10 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Pricing;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\App;
 use App\Http\Controllers\Controller;
-use App\Repositories\PaymentInterface;
-use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Response;
 use App\Repositories\SslPaymentRepository;
 use App\Repositories\StripePaymentRepository;
@@ -30,7 +27,6 @@ class PaymentChargeController extends Controller
 
     public function __construct(PaymentFactory $paymentFactory)
     {
-        //$this->middleware('auth:web');
         $this->paymentFactory = $paymentFactory;
     }
 
@@ -58,23 +54,27 @@ class PaymentChargeController extends Controller
     public function initiatePayment(Request $request)
     {
         $paymentInterface = $this->paymentFactory->paymentOption($request->option);
-        Session::put('paymentInterface', $paymentInterface);
         $createdSession = $paymentInterface->initiatePayment($request->all());
         return response()->json($createdSession);
     }
 
     /**
      * Payment Cancel function
-     * @session for getting paymentMethodObject
-     * @session get
-     * @session destroy
      * @return Redirect
      */
-    public function paymentCancelled()
+    public function stripePaymentCancelled(StripePaymentRepository $stripePaymentRepository)
     {
-        $paymentInterface = Session::get('paymentInterface');
-        $cancelledPayment = $paymentInterface->paymentCancelled();
-        Session::forget('paymentInterface');
+        $cancelledPayment = $stripePaymentRepository->paymentCancelled();
+        return redirect($cancelledPayment);
+    }
+
+    /**
+     * Payment Cancel function
+     * @return Redirect
+     */
+    public function sslPaymentCancelled(StripePaymentRepository $stripePaymentRepository)
+    {
+        $cancelledPayment = $stripePaymentRepository->paymentCancelled();
         return redirect($cancelledPayment);
     }
 
@@ -82,16 +82,11 @@ class PaymentChargeController extends Controller
      * Get payment succeed for Get requesting in success page
      *
      * @param Request $request
-     * @session used for holding the implementation of the imterface
-     * @session get
-     * @session destroy
      * @return Redirect to Successpage
      */
-    public function getPaymentSucceed($id)
+    public function stripePaymentSucceed($id, StripePaymentRepository $stripePaymentRepository)
     {
-        $paymentInterface = Session::get('paymentInterface');
-        $paymentInterface->getPaymentSucceed($id);
-        Session::forget('paymentInterface');
+        $stripePaymentRepository->getPaymentSucceed($id);
         return redirect()->back();
     }
 
@@ -99,16 +94,11 @@ class PaymentChargeController extends Controller
      * Post payment succeed for post requesting in success page
      *
      * @param Request $request
-     * @session used for holding the implementation of the imterface
-     * @session get
-     * @session destroy
      * @return Redirect to Successpage
      */
-    public function postPaymentSucceed(Request $request)
+    public function sslPaymentSucceed(Request $request, SslPaymentRepository $sslPaymentRepository)
     {
-        $paymentInterface = Session::get('paymentInterface');
-        $paymentInterface->postPaymentSucceed($request->all());
-        Session::forget('paymentInterface');
+        $sslPaymentRepository->postPaymentSucceed($request->all());
         return redirect()->back();
     }
 }

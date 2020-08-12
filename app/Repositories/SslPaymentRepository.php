@@ -56,17 +56,17 @@ class SslPaymentRepository implements PaymentInterface
         $post_data['value_d'] = "ref004";
 
         #Before  going to initiate the payment order status need to insert or update as Pending.
-        $update_product = DB::table('orders')
+        $update_product = DB::table('payments')
             ->where('transaction_id', $post_data['tran_id'])
             ->updateOrInsert([
+                'user_id' => Auth::user()->id,
                 'name' => $post_data['cus_name'],
                 'email' => $post_data['cus_email'],
-                'phone' => $post_data['cus_phone'],
                 'amount' => $post_data['total_amount'],
                 'status' => 'Pending',
                 'address' => $post_data['cus_add1'],
                 'transaction_id' => $post_data['tran_id'],
-                'currency' => $post_data['currency']
+                'currency' => $post_data['currency'],
             ]);
 
         $sslc = new SslCommerzNotification();

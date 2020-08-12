@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use GuzzleHttp\Exception\RequestException;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use Redirect;
 use Socialite;
@@ -17,7 +16,6 @@ class SocialiteController extends Controller
      */
     public function socialLogin($social)
     {
-        //dd($social);
         return Socialite::driver($social)->redirect();
     }
     /**
@@ -31,7 +29,6 @@ class SocialiteController extends Controller
             $userSocial = Socialite::driver($social)->stateless()->user();
             $arr = ['name' => $userSocial->getName(), 'email' => $userSocial->getEmail()];
             return Redirect::to('/job-seeker-register')->with('arr', $arr);
-
         } catch (RequestException $e) {
             $response = array([
                 'reason' => $e->getResponse()->getReasonPhrase(),
@@ -39,8 +36,6 @@ class SocialiteController extends Controller
             ]);
             Session::flash('message', $response);
             return view('register-job-seeker');
-
         }
     }
-
 }

@@ -2,8 +2,9 @@
 
 namespace App\Repositories\Factories;
 
-use App\Repositories\PaymentInterface;
 use Illuminate\Support\Facades\App;
+use App\Repositories\PaymentInterface;
+use Illuminate\Support\Facades\Session;
 use App\Repositories\SslPaymentRepository;
 use App\Repositories\StripePaymentRepository;
 
@@ -13,11 +14,15 @@ final class PaymentFactory
     {
         if ($option == 'stripe') {
             App::bind(PaymentInterface::class, function ($app) {
-                return new StripePaymentRepository;
+                $stripe = new StripePaymentRepository;
+                Session::put('paymentInterface', $stripe);
+                return $stripe;
             });
         } elseif ($option == 'sslcommerz') {
             App::bind(PaymentInterface::class, function ($app) {
-                return new SslPaymentRepository;
+                $ssl =  new SslPaymentRepository;
+                Session::put('paymentInterface', $ssl);
+                return $ssl;
             });
         }
         return App::make(PaymentInterface::class);
