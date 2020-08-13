@@ -2,11 +2,9 @@
 
 namespace App\Repositories;
 
-use App\Orders;
 use App\Payment;
 use App\Pricing;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use App\Repositories\PaymentInterface;
 use Illuminate\Support\Facades\Session;
@@ -16,7 +14,6 @@ class SslPaymentRepository implements PaymentInterface
 {
     public function initiatePayment(array $request)
     {
-        Session::put('previous-url', url()->previous());
         $packageDetails = Pricing::findorFail($request['package_id']);
 
         $post_data = array();
@@ -151,15 +148,12 @@ class SslPaymentRepository implements PaymentInterface
     }
 
 
-    public function paymentCancelled(Request $request)
+    public function paymentCancelled($request)
     {
-        //dd($request);
-        Payment::where('transaction_id', $request->tran_id)
+        Payment::where('transaction_id', $request['tran_id'])
             ->update([
-                'status' => $request->status
+                'status' => $request['status']
             ]);
-        Session::flash('msg', ['status' => 'danger', 'data' => 'Payment Cancelled.']);
-        // $url = Session::get('previous-url');
-        // return ($url);
+        return Session::flash('msg', ['status' => 'danger', 'data' => 'Payment Cancelled.']);;
     }
 }

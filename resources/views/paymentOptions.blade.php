@@ -81,10 +81,11 @@
                 data: { package_id: package_id, option: option },
                 success: function (response)
                 {
-                    //console.log(response);
+                    console.log(response);
                     stripe.redirectToCheckout({
                         sessionId: response.id
                     });
+
                 },
                 error: function (xhr)
                 {

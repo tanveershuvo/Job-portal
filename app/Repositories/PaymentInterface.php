@@ -4,6 +4,7 @@ namespace App\Repositories;
 
 interface PaymentInterface
 {
-    public function initiatePayment(array $data);
+    public function paymentCancelled($data);
+    public function initiatePayment(array $request);
     public function paymentSucceed($data);
 }

@@ -3,6 +3,7 @@
 namespace App\Repositories;
 
 use App\User;
+use App\Payment;
 use App\Pricing;
 use Stripe\Charge;
 use Stripe\Stripe;
@@ -34,10 +35,10 @@ class StripePaymentRepository implements PaymentInterface
      */
     public function initiatePayment(array $request)
     {
-        Session::put('previous-url', url()->previous());
+        $packageDetails = Pricing::findorFail($request['package_id']);
         try {
-            $packageDetails = Pricing::findorFail($request['package_id']);
-            return StripeSession::create([
+
+            $session = StripeSession::create([
                 'payment_method_types' => [
                     'card'
                 ],
@@ -55,8 +56,22 @@ class StripePaymentRepository implements PaymentInterface
                 'client_reference_id' => Auth::user()->id,
                 'mode' => 'payment',
                 'success_url' => config('app.url') . '/success/session_id={CHECKOUT_SESSION_ID}',
-                'cancel_url' => config('app.url') . '/cancel',
+                'cancel_url' => config('app.url') . '/cancel/session_id={CHECKOUT_SESSION_ID}',
             ]);
+            Payment::create([
+                'user_id' => Auth::user()->id,
+                'package_id' => $packageDetails->id,
+                'package_name' => $packageDetails->package_name,
+                'premium_jobs' => $packageDetails->premium_job,
+                'email' => Auth::user()->email,
+                'amount' => ($session->amount_total / 100),
+                'status' => 'Pending',
+                'session_id' => $session->id,
+                'payment_option' => 'Stripe',
+                'currency' => $session->currency,
+            ]);
+
+            return $session;
         } catch (CardException $e) {
             return Session::flash('msg', [
                 'status' => 'danger',
@@ -107,41 +122,42 @@ class StripePaymentRepository implements PaymentInterface
      */
     public function paymentSucceed($session_id)
     {
-        Stripe::setApiKey(config('stripe.secret'));
+        //Stripe::setApiKey(config('stripe.secret'));
         $session = StripeSession::retrieve($session_id);
         $payment_details = PaymentIntent::retrieve(
             $session->payment_intent,
             []
         );
-        $currency = $payment_details->currency;
+
         $status = $payment_details->status;
         //Stripe calculates amount in cents or poysa
         $net_amount = $payment_details->amount / 100;
         $payment_method_types = $payment_details->payment_method_types[0];
-        $charge = Charge::retrieve(
-            $payment_details->charges->data[0]['id'],
-            []
-        );
-        $transaction_id = BalanceTransaction::retrieve(
+
+        $transaction = BalanceTransaction::retrieve(
             $payment_details->charges->data[0]['balance_transaction'],
             []
         );
-        $accountBalance = Auth::user()->premium_jobs_balance;
-        $newbalance = (($session->amount_total / 100) + $accountBalance);
-        $updateBalance = User::findorFail(Auth::user()->id)->update(['premium_jobs_balance' => $newbalance]);
+        Payment::where('session_id', $session_id)
+            ->update([
+                'status' =>  $status,
+                'payment_method' => $payment_method_types,
+                'transaction_id' => $transaction->id,
+            ]);
+
+        // $accountBalance = Auth::user()->premium_jobs_balance;
+        // $newbalance = (($session->amount_total / 100) + $accountBalance);
+        // $updateBalance = User::findorFail(Auth::user()->id)->update(['premium_jobs_balance' => $newbalance]);
         Session::flash('msg', ['status' => 'success', 'data' => 'Payment Successful . Balance Added']);
         return;
     }
 
-    public function postPaymentSucceed(array $request)
+    public function paymentCancelled($id)
     {
-        return null;
-    }
-
-    public function paymentCancelled()
-    {
-        Session::flash('msg', ['status' => 'danger', 'data' => 'Payment Cancelled.']);
-        $url = Session::get('previous-url');
-        return ($url);
+        Payment::where('session_id', $id)
+            ->update([
+                'status' => 'CANCELLED',
+            ]);
+        return Session::flash('msg', ['status' => 'danger', 'data' => 'Payment Cancelled.']);
     }
 }
