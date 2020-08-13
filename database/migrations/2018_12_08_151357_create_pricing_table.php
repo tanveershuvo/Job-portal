@@ -18,7 +18,6 @@ class CreatePricingTable extends Migration
             $table->string('package_name')->nullable();
             $table->integer('price')->nullable();
             $table->integer('premium_job')->nullable();
-            $table->tinyInteger('status')->default(0)->nullable();
         });
     }
 

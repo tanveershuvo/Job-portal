@@ -105,7 +105,7 @@ class StripePaymentRepository implements PaymentInterface
      * @param var $session_id
      * @return successpage
      */
-    public function getPaymentSucceed($session_id)
+    public function paymentSucceed($session_id)
     {
         Stripe::setApiKey(config('stripe.secret'));
         $session = StripeSession::retrieve($session_id);

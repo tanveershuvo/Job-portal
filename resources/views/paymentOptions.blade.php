@@ -43,7 +43,7 @@
                                 <input type="hidden" id="package_id" name="package_id" value="{{$package->id}}">
                                 <input type="hidden" name="option" value="sslcommerz">
                                 @csrf
-                                <button type="submit" class="btn btn-primary col-md-6 text-uppercase my-3">
+                                <button type="submit" class="btn btn-primary col-md-4 text-uppercase my-3">
                                     SSL Payment </button>
                             </form>
                         </li>
@@ -60,40 +60,39 @@
 @section('page-js')
 <script src=" https://js.stripe.com/v3/"> </script>
 <script>
-    $(document).ready(function() {
-                                    var stripe = Stripe("{{config('stripe.key')}}");
-                                    var elements = stripe.elements();
-                                    var checkoutButton = document.getElementById('checkout-button');
-                                    var package_id = $('#package_id').val();
-                                    var option = 'stripe';
+    $(function ()
+    {
+        "use strict";
+        var stripe = Stripe("{{config('stripe.key')}}");
+        var checkoutButton = document.getElementById('checkout-button');
+        var package_id = $('#package_id').val();
+        var option = 'stripe';
 
-                                    checkoutButton.addEventListener('click', function() {
-                                    event.preventDefault();
-                                    $('#spinner').addClass('spinner-border spinner-border-sm');
-                                    $.ajax({
-                                    url: "{{route('createSession')}}",
-                                    headers: {
-                                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                                    },
-                                    type: "POST",
-                                    data: { package_id:package_id, option:option},
-                                    success: function(response) {
-                                    console.log(response);
-                                    stripe.redirectToCheckout({
-                                    sessionId: response.id
-                                    });
-                                    },
-                                    error: function(xhr) {
-                                    var res = xhr.responseJSON;
-                                    console.log(res.message);
-                                    }
-                                    })
-                                    });
-                                    });
+        checkoutButton.addEventListener('click', function ()
+        {
+            event.preventDefault();
+            $('#spinner').addClass('spinner-border spinner-border-sm');
+            $.ajax({
+                url: "{{route('createSession')}}",
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                type: "POST",
+                data: { package_id: package_id, option: option },
+                success: function (response)
+                {
+                    //console.log(response);
+                    stripe.redirectToCheckout({
+                        sessionId: response.id
+                    });
+                },
+                error: function (xhr)
+                {
+                    var res = xhr.responseJSON;
+                    //console.log(res.message);
+                }
+            })
+        });
+    });
 </script>
-
-
-
-
-
 @endsection

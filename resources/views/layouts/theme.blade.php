@@ -58,10 +58,10 @@
                             <a class="nav-link" href="{{route('home')}}">@lang('app.home')</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{route('pricing')}}">@lang('app.pricing')</a>
+                            <a class="nav-link" href="{{route('jobs_listing')}}">@lang('app.jobs')</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{route('jobs_listing')}}">@lang('app.jobs')</a>
+                            <a class="nav-link" href="{{route('pricing')}}">@lang('app.pricing')</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="{{route('contact_us')}}">@lang('app.contact_us')</a>

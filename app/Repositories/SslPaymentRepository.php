@@ -3,7 +3,9 @@
 namespace App\Repositories;
 
 use App\Orders;
+use App\Payment;
 use App\Pricing;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use App\Repositories\PaymentInterface;
@@ -56,18 +58,18 @@ class SslPaymentRepository implements PaymentInterface
         $post_data['value_d'] = "ref004";
 
         #Before  going to initiate the payment order status need to insert or update as Pending.
-        $update_product = DB::table('payments')
-            ->where('transaction_id', $post_data['tran_id'])
-            ->updateOrInsert([
-                'user_id' => Auth::user()->id,
-                'name' => $post_data['cus_name'],
-                'email' => $post_data['cus_email'],
-                'amount' => $post_data['total_amount'],
-                'status' => 'Pending',
-                'address' => $post_data['cus_add1'],
-                'transaction_id' => $post_data['tran_id'],
-                'currency' => $post_data['currency'],
-            ]);
+        Payment::create([
+            'user_id' => Auth::user()->id,
+            'package_id' => $packageDetails->id,
+            'package_name' => $post_data['product_name'],
+            'premium_jobs' => $packageDetails->premium_job,
+            'email' => $post_data['cus_email'],
+            'amount' => $post_data['total_amount'],
+            'status' => 'Pending',
+            'transaction_id' => $post_data['tran_id'],
+            'payment_option' => 'SSL Commerz',
+            'currency' => $post_data['currency'],
+        ]);
 
         $sslc = new SslCommerzNotification();
         # initiate(Transaction Data , false: Redirect to SSLCOMMERZ gateway/ true: Show all the Payement gateway here )
@@ -79,19 +81,20 @@ class SslPaymentRepository implements PaymentInterface
         }
     }
 
-    public function postPaymentSucceed(array $request)
+    public function paymentSucceed($request)
     {
-
         $tran_id = $request['tran_id'];
         $amount = $request['amount'];
         $currency = $request['currency'];
+        $card_type = $request['card_type'];
+        //dd($request);
 
         $sslc = new SslCommerzNotification();
 
         #Check order status in order tabel against the transaction id or order id.
-        $order_detials = DB::table('orders')
-            ->where('transaction_id', $tran_id)
-            ->select('transaction_id', 'status', 'currency', 'amount')->first();
+        $order_detials = Payment::where('transaction_id', $tran_id)
+            ->select('transaction_id', 'status', 'currency', 'amount')
+            ->first();
 
         if ($order_detials->status == 'Pending') {
             $validation = $sslc->orderValidate($tran_id, $amount, $currency, $request);
@@ -102,9 +105,11 @@ class SslPaymentRepository implements PaymentInterface
                 in order table as Processing or Complete.
                 Here you can also sent sms or email for successfull transaction to customer
                 */
-                $update_product = DB::table('orders')
-                    ->where('transaction_id', $tran_id)
-                    ->update(['status' => 'Complete']);
+                $update_product = Payment::where('transaction_id', $tran_id)
+                    ->update([
+                        'status' => 'Complete',
+                        'payment_method' => $card_type
+                    ]);
                 return Session::flash('msg', [
                     'status' => 'success',
                     'data' => 'Transaction Successfull. Balance Added.'
@@ -114,8 +119,7 @@ class SslPaymentRepository implements PaymentInterface
                 That means IPN did not work or IPN URL was not set in your merchant panel and Transation validation failed.
                 Here you need to update order status as Failed in order table.
                 */
-                DB::table('orders')
-                    ->where('transaction_id', $tran_id)
+                Payment::where('transaction_id', $tran_id)
                     ->update(['status' => 'Failed']);
                 return Session::flash('msg', [
                     'status' => 'danger',
@@ -126,17 +130,18 @@ class SslPaymentRepository implements PaymentInterface
             /*
              That means through IPN Order status already updated. Now you can just show the customer that transaction is completed. No need to udate database.
              */
-            $update_product = DB::table('orders')
-                ->where('transaction_id', $tran_id)
-                ->update(['status' => 'Complete']);
+            Payment::where('transaction_id', $tran_id)
+                ->update([
+                    'status' => 'Complete',
+                    'payment_methos' => $card_type
+                ]);
             return Session::flash('msg', [
                 'status' => 'success',
                 'data' => 'Transaction Successfull. Balance Added.'
             ]);
         } else {
             #That means something wrong happened. You can redirect customer to your product page.
-            DB::table('orders')
-                ->where('transaction_id', $tran_id)
+            Payment::where('transaction_id', $tran_id)
                 ->update(['status' => 'Failed']);
             return Session::flash('msg', [
                 'status' => 'danger',
@@ -144,15 +149,17 @@ class SslPaymentRepository implements PaymentInterface
             ]);
         }
     }
-    public function getPaymentSucceed($args)
-    {
-        return null;
-    }
 
-    public function paymentCancelled()
+
+    public function paymentCancelled(Request $request)
     {
+        //dd($request);
+        Payment::where('transaction_id', $request->tran_id)
+            ->update([
+                'status' => $request->status
+            ]);
         Session::flash('msg', ['status' => 'danger', 'data' => 'Payment Cancelled.']);
-        $url = Session::get('previous-url');
-        return ($url);
+        // $url = Session::get('previous-url');
+        // return ($url);
     }
 }

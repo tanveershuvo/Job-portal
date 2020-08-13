@@ -72,10 +72,10 @@ class PaymentChargeController extends Controller
      * Payment Cancel function
      * @return Redirect
      */
-    public function sslPaymentCancelled(StripePaymentRepository $stripePaymentRepository)
+    public function sslPaymentCancelled(Request $request, SslPaymentRepository $SslPaymentRepository)
     {
-        $cancelledPayment = $stripePaymentRepository->paymentCancelled();
-        return redirect($cancelledPayment);
+        $cancelledPayment = $SslPaymentRepository->paymentCancelled($request);
+        return redirect()->back();
     }
 
     /**
@@ -86,7 +86,7 @@ class PaymentChargeController extends Controller
      */
     public function stripePaymentSucceed($id, StripePaymentRepository $stripePaymentRepository)
     {
-        $stripePaymentRepository->getPaymentSucceed($id);
+        $stripePaymentRepository->paymentSucceed($id);
         return redirect()->back();
     }
 
@@ -98,7 +98,7 @@ class PaymentChargeController extends Controller
      */
     public function sslPaymentSucceed(Request $request, SslPaymentRepository $sslPaymentRepository)
     {
-        $sslPaymentRepository->postPaymentSucceed($request->all());
+        $sslPaymentRepository->paymentSucceed($request->all());
         return redirect()->back();
     }
 }
