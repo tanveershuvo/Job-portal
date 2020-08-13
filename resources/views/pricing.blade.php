@@ -7,7 +7,7 @@
             <div class="col-md-12">
                 <div class="pricing-section-heading mb-4 mt-0 text-center">
                     <h1>Pricing</h1>
-                    <h5 class="text-muted">Choose your pricing package</h5>
+                    <h5 class="text-muted">Choose Recruiters pricing package</h5>
                 </div>
             </div>
         </div>

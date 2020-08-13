@@ -15,13 +15,11 @@ final class PaymentFactory
         if ($option == 'stripe') {
             App::bind(PaymentInterface::class, function ($app) {
                 $stripe = new StripePaymentRepository;
-                Session::put('paymentInterface', $stripe);
                 return $stripe;
             });
         } elseif ($option == 'sslcommerz') {
             App::bind(PaymentInterface::class, function ($app) {
                 $ssl =  new SslPaymentRepository;
-                Session::put('paymentInterface', $ssl);
                 return $ssl;
             });
         }
