@@ -18,10 +18,10 @@ Route::get('/', 'HomeController@index')->name('home');
 // SSLCOMMERZ Start
 
 //Stripe Payment Route
-Route::get('/success/session_id={session_id}', 'PaymentChargeController@stripePaymentSucceed');
-Route::post('/success', 'PaymentChargeController@sslPaymentSucceed');
-Route::post('/cancel', 'PaymentChargeController@sslPaymentCancelled');
-Route::get('/cancel/session_id={session_id}', 'PaymentChargeController@stripePaymentCancelled');
+Route::get('/success/session_id={session_id}', 'PaymentChargeController@getPaymentSucceed');
+Route::post('/success', 'PaymentChargeController@postPaymentSucceed');
+Route::post('/cancel', 'PaymentChargeController@postPaymentCancelled');
+Route::get('/cancel/session_id={session_id}', 'PaymentChargeController@getPaymentCancelled');
 Route::post('paymentOptions', 'PaymentChargeController@initiatePayment')->name('createSession');
 Route::get('paymentOptions/package={package}', 'PaymentChargeController@paymentOptions')->name('payment_options');
 

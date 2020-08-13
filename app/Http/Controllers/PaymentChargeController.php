@@ -5,9 +5,8 @@ namespace App\Http\Controllers;
 use App\Pricing;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Response;
-use App\Repositories\SslPaymentRepository;
-use App\Repositories\StripePaymentRepository;
 use App\Repositories\Factories\PaymentFactory;
 
 class PaymentChargeController extends Controller
@@ -18,6 +17,7 @@ class PaymentChargeController extends Controller
      * @var
      */
     public $paymentFactory;
+    public $paymentInterface;
 
     /**
      * Construct Payment Factory
@@ -28,6 +28,19 @@ class PaymentChargeController extends Controller
     public function __construct(PaymentFactory $paymentFactory)
     {
         $this->paymentFactory = $paymentFactory;
+        if (Cache::has('paymentObject')) {
+            $this->paymentInterface = Cache::get('paymentObject');
+        }
+    }
+
+    /**
+     * cacheObjectRemove method in order to remove cached object that sets in Payment Factory
+     *
+     * @return void
+     */
+    public function cacheObjectRemove()
+    {
+        return Cache::forget('paymentObject');
     }
 
     /**
@@ -62,20 +75,22 @@ class PaymentChargeController extends Controller
      * Payment Cancel function
      * @return Redirect
      */
-    public function stripePaymentCancelled($id, StripePaymentRepository $stripePaymentRepository)
+    public function getPaymentCancelled($id)
     {
-        $stripePaymentRepository->paymentCancelled($id);
-        return redirect()->back();
+        $this->paymentInterface->paymentCancelled($id);
+        $this->cacheObjectRemove();
+        return back();
     }
 
     /**
      * Payment Cancel function
      * @return Redirect
      */
-    public function sslPaymentCancelled(Request $request, SslPaymentRepository $SslPaymentRepository)
+    public function postPaymentCancelled(Request $request)
     {
-        $SslPaymentRepository->paymentCancelled($request);
-        return redirect()->back();
+        $this->paymentInterface->paymentCancelled($request);
+        $this->cacheObjectRemove();
+        return back();
     }
 
     /**
@@ -84,10 +99,11 @@ class PaymentChargeController extends Controller
      * @param Request $request
      * @return Redirect to Successpage
      */
-    public function stripePaymentSucceed($id, StripePaymentRepository $stripePaymentRepository)
+    public function getPaymentSucceed($id)
     {
-        $stripePaymentRepository->paymentSucceed($id);
-        return redirect()->back();
+        $this->paymentInterface->paymentSucceed($id);
+        $this->cacheObjectRemove();
+        return back();
     }
 
     /**
@@ -96,9 +112,10 @@ class PaymentChargeController extends Controller
      * @param Request $request
      * @return Redirect to Successpage
      */
-    public function sslPaymentSucceed(Request $request, SslPaymentRepository $sslPaymentRepository)
+    public function postPaymentSucceed(Request $request)
     {
-        $sslPaymentRepository->paymentSucceed($request->all());
-        return redirect()->back();
+        $this->paymentInterface->paymentSucceed($request->all());
+        $this->cacheObjectRemove();
+        return back();
     }
 }
