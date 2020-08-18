@@ -64,6 +64,7 @@
             "@php artisan package:discover --ansi"
         ],
         "post-install-cmd": [
+            "php artisan clear-compiled",
             "chmod -R 777 public/"
         ]
     },
