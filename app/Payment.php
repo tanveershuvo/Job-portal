@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 /**
  * App\Payment
@@ -46,20 +47,24 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Payment extends Model
 {
+    /**
+     * @var array
+     */
     protected $guarded = [];
 
+    /**
+     * @return BelongsTo
+     */
     public function user()
     {
         return $this->belongsTo(User::class);
     }
 
-    public function addJobBalance()
-    {
-        $user = User::find($this->user_id);
-        $user->premium_jobs_balance = $user->premium_jobs_balance + $this->premium_job;
-        $user->save();
-    }
 
+    /**
+     * @param $query
+     * @return mixed
+     */
     public function scopeSuccess($query)
     {
         return $query->where('status', '=', 'success');

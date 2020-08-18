@@ -3,15 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Pricing;
-use Illuminate\Contracts\Foundation\Application;
-use Illuminate\Contracts\View\Factory;
-use Illuminate\Http\JsonResponse;
-use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Cache;
-use Illuminate\Support\Facades\Redirect;
-use App\Repositories\Factories\PaymentFactory;
-use Illuminate\View\View;
 
 class PaymentChargeController extends Controller
 {
@@ -37,7 +28,11 @@ class PaymentChargeController extends Controller
     }
 
     /**
+     * <<<<<<< HEAD
      * @return $this
+     * =======
+     * @return bool
+     * >>>>>>> 9164bba36511a6433cc356258b6bd4bfe688f731
      */
     public function cacheObjectRemove()
     {
@@ -67,7 +62,10 @@ class PaymentChargeController extends Controller
     }
 
     /**
+     * <<<<<<< HEAD
      * Payment Cancel function
+     * =======
+     * >>>>>>> 9164bba36511a6433cc356258b6bd4bfe688f731
      * @param $id
      * @return RedirectResponse
      */
@@ -79,9 +77,14 @@ class PaymentChargeController extends Controller
     }
 
     /**
+     * <<<<<<< HEAD
      * Payment Cancel function
      * @param Request $request
+     * @param Request $request
      * @return Redirect
+     * =======
+     * @return RedirectResponse
+     * >>>>>>> 9164bba36511a6433cc356258b6bd4bfe688f731
      */
     public function postPaymentCancelled(Request $request)
     {

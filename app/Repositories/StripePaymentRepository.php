@@ -8,12 +8,13 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use Stripe\BalanceTransaction;
 use Stripe\Checkout\Session as StripeSession;
-use Stripe\Exception\ApiErrorException;
-use Stripe\PaymentIntent;
-use Stripe\Stripe;
+
 
 class StripePaymentRepository implements PaymentInterface
 {
+    /**
+     * StripePaymentRepository constructor.
+     */
     public function __construct()
     {
         Stripe::setApiKey(config('stripe.secret'));
@@ -22,7 +23,10 @@ class StripePaymentRepository implements PaymentInterface
     /**
      * @param array $request
      * @return StripeSession
+     * <<<<<<< HEAD
      * @throws ApiErrorException
+     * =======
+     * >>>>>>> 9164bba36511a6433cc356258b6bd4bfe688f731
      */
     public function initiatePayment(array $request)
     {
@@ -97,11 +101,15 @@ class StripePaymentRepository implements PaymentInterface
         // $newbalance = (($session->amount_total / 100) + $accountBalance);
         // $updateBalance = User::findorFail(Auth::user()->id)->update(['premium_jobs_balance' => $newbalance]);
         Session::flash('msg', ['status' => 'success', 'data' => 'Payment Successful . Balance Added']);
-        return;
+
     }
 
     /**
      * @param $id
+     * <<<<<<< HEAD
+     * =======
+     * @return mixed
+     * >>>>>>> 9164bba36511a6433cc356258b6bd4bfe688f731
      */
     public function paymentCancelled($id)
     {

@@ -5,14 +5,12 @@ namespace App;
 use App\Events\PostCreated;
 use App\Events\PostDeleted;
 use App\Events\PostUpdated;
-use Eloquent;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 /**
  * App\Post
  *
- * @mixin Eloquent
  * @property int $id
  * @property int|null $user_id
  * @property string|null $title
@@ -45,6 +43,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @method static \Illuminate\Database\Eloquent\Builder|Post whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Post whereUserId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Post whereViews($value)
+ * @mixin \Eloquent
  */
 class Post extends Model
 {

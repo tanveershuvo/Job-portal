@@ -2,7 +2,13 @@
 
 namespace App;
 
+use Eloquent;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
 
 /**
@@ -38,71 +44,66 @@ use Illuminate\Support\Facades\Auth;
  * @property int|null $experience_plus
  * @property int|null $views
  * @property string|null $approved_at
- * @property \Illuminate\Support\Carbon|null $deadline
+ * @property Carbon|null $deadline
  * @property int|null $status
  * @property string|null $job_id
  * @property int|null $is_premium
- * @property \Illuminate\Support\Carbon|null $created_at
- * @property \Illuminate\Support\Carbon|null $updated_at
- * @property-read \Illuminate\Database\Eloquent\Collection|\App\JobApplication[] $application
+ * @property Carbon|null $created_at
+ * @property Carbon|null $updated_at
+ * @property-read Collection|JobApplication[] $application
  * @property-read int|null $application_count
- * @property-read \App\User|null $employer
- * @method static \Illuminate\Database\Eloquent\Builder|Job active()
- * @method static \Illuminate\Database\Eloquent\Builder|Job approved()
- * @method static \Illuminate\Database\Eloquent\Builder|Job blocked()
- * @method static \Illuminate\Database\Eloquent\Builder|Job newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|Job newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|Job pending()
- * @method static \Illuminate\Database\Eloquent\Builder|Job premium()
- * @method static \Illuminate\Database\Eloquent\Builder|Job query()
- * @method static \Illuminate\Database\Eloquent\Builder|Job whereAdditionalRequirements($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Job whereApplyInstruction($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Job whereApprovedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Job whereBenefits($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Job whereCategoryId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Job whereCompanyName($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Job whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Job whereDeadline($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Job whereDescription($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Job whereDistrict($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Job whereEducationalRequirements($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Job whereExpLevel($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Job whereExperiencePlus($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Job whereExperienceRequiredYears($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Job whereExperienceRequirements($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Job whereGender($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Job whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Job whereIsAnyWhere($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Job whereIsNegotiable($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Job whereIsPremium($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Job whereJobId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Job whereJobSlug($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Job whereJobTitle($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Job whereJobType($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Job wherePosition($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Job whereResponsibilities($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Job whereSalary($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Job whereSalaryCurrency($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Job whereSalaryCycle($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Job whereSalaryUpto($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Job whereSkills($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Job whereStatus($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Job whereUpdatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Job whereUserId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Job whereVacancy($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Job whereViews($value)
- * @mixin \Eloquent
+ * @property-read User|null $employer
+ * @method static Builder|Job active()
+ * @method static Builder|Job approved()
+ * @method static Builder|Job blocked()
+ * @method static Builder|Job newModelQuery()
+ * @method static Builder|Job newQuery()
+ * @method static Builder|Job pending()
+ * @method static Builder|Job premium()
+ * @method static Builder|Job query()
+ * @method static Builder|Job whereAdditionalRequirements($value)
+ * @method static Builder|Job whereApplyInstruction($value)
+ * @method static Builder|Job whereApprovedAt($value)
+ * @method static Builder|Job whereBenefits($value)
+ * @method static Builder|Job whereCategoryId($value)
+ * @method static Builder|Job whereCompanyName($value)
+ * @method static Builder|Job whereCreatedAt($value)
+ * @method static Builder|Job whereDeadline($value)
+ * @method static Builder|Job whereDescription($value)
+ * @method static Builder|Job whereDistrict($value)
+ * @method static Builder|Job whereEducationalRequirements($value)
+ * @method static Builder|Job whereExpLevel($value)
+ * @method static Builder|Job whereExperiencePlus($value)
+ * @method static Builder|Job whereExperienceRequiredYears($value)
+ * @method static Builder|Job whereExperienceRequirements($value)
+ * @method static Builder|Job whereGender($value)
+ * @method static Builder|Job whereId($value)
+ * @method static Builder|Job whereIsAnyWhere($value)
+ * @method static Builder|Job whereIsNegotiable($value)
+ * @method static Builder|Job whereIsPremium($value)
+ * @method static Builder|Job whereJobId($value)
+ * @method static Builder|Job whereJobSlug($value)
+ * @method static Builder|Job whereJobTitle($value)
+ * @method static Builder|Job whereJobType($value)
+ * @method static Builder|Job wherePosition($value)
+ * @method static Builder|Job whereResponsibilities($value)
+ * @method static Builder|Job whereSalary($value)
+ * @method static Builder|Job whereSalaryCurrency($value)
+ * @method static Builder|Job whereSalaryCycle($value)
+ * @method static Builder|Job whereSalaryUpto($value)
+ * @method static Builder|Job whereSkills($value)
+ * @method static Builder|Job whereStatus($value)
+ * @method static Builder|Job whereUpdatedAt($value)
+ * @method static Builder|Job whereUserId($value)
+ * @method static Builder|Job whereVacancy($value)
+ * @method static Builder|Job whereViews($value)
+ * @mixin Eloquent
  */
 class Job extends Model
 {
     protected $guarded = [];
 
 
-    /**
-     * The attributes that should be mutated to dates.
-     *
-     * @var array
-     */
     protected $dates = [
         'created_at',
         'updated_at',
@@ -110,60 +111,126 @@ class Job extends Model
         'deadline',
     ];
 
-    public function employer(){
+
+    /**
+     * @return BelongsTo
+     */
+    public
+    function employer()
+    {
         return $this->belongsTo(User::class, 'user_id');
     }
 
-    public function application(){
+    /**
+     * @return HasMany
+     */
+    public
+    function application()
+    {
         return $this->hasMany(JobApplication::class);
     }
 
-    public function scopePending($query){
+    /**
+     * @param $query
+     * @return mixed
+     */
+    public
+    function scopePending($query)
+    {
         return $query->where('status', '=', 0);
     }
-    public function scopeApproved($query){
+
+    /**
+     * @param $query
+     * @return mixed
+     */
+    public
+    function scopeApproved($query)
+    {
         return $query->where('status', '=', 1);
     }
-    public function scopeActive($query){
-        return $query->where('status', '=', 1)->where('deadline', '>=', date('Y-m-d').' 00:00:00');
+
+    /**
+     * @param $query
+     * @return mixed
+     */
+    public
+    function scopeActive($query)
+    {
+        return $query->where('status', '=', 1)->where('deadline', '>=', date('Y-m-d') . ' 00:00:00');
     }
-    public function scopeBlocked($query){
+
+    /**
+     * @param $query
+     * @return mixed
+     */
+    public
+    function scopeBlocked($query)
+    {
         return $query->where('status', '=', 2);
     }
-    public function scopePremium($query){
+
+    /**
+     * @param $query
+     * @return mixed
+     */
+    public
+    function scopePremium($query)
+    {
         return $query->whereIsPremium(1);
     }
 
-    public function nl2ulformat($string = null){
-        if ( ! $string){
+    /**
+     * @param null $string
+     * @return string
+     */
+    public
+    function nl2ulformat($string = null)
+    {
+        if (!$string) {
             return '';
         }
         $array = explode("\n", $string);
         $output = '';
-        if(is_array($array) && count($array)) {
+        if (is_array($array) && count($array)) {
             $output .= '<ul>';
-            foreach ($array as $item){
-                $output .= '<li class="mb-2">'.$item.'</li>';
+            foreach ($array as $item) {
+                $output .= '<li class="mb-2">' . $item . '</li>';
             }
             $output .= '</ul>';
         }
         return $output;
     }
 
-    public function is_active(){
+    /**
+     * @return bool
+     */
+    public
+    function is_active()
+    {
         return $this->status == 1;
     }
 
-    public function is_pending(){
+    /**
+     * @return bool
+     */
+    public
+    function is_pending()
+    {
         return $this->status == 0;
     }
 
-    public function can_edit(){
+    /**
+     * @return bool
+     */
+    public
+    function can_edit()
+    {
         $viewable = false;
 
-        if (Auth::check()){
+        if (Auth::check()) {
             $user = Auth::user();
-            if ( $user->is_admin() || $user->id == $this->user_id){
+            if ($user->is_admin() || $user->id == $this->user_id) {
                 $viewable = true;
             }
         }
@@ -171,18 +238,23 @@ class Job extends Model
         return $viewable;
     }
 
-    public function status_context(){
+    /**
+     * @return string
+     */
+    public
+    function status_context()
+    {
         $status = $this->status;
         $html = '';
-        switch ($status){
+        switch ($status) {
             case 0:
-                $html = '<span class="text-muted">'.trans('app.pending').'</span>';
+                $html = '<span class="text-muted">' . trans('app.pending') . '</span>';
                 break;
             case 1:
-                $html = '<span class="text-success">'.trans('app.published').'</span>';
+                $html = '<span class="text-success">' . trans('app.published') . '</span>';
                 break;
             case 2:
-                $html = '<span class="text-warning">'.trans('app.blocked').'</span>';
+                $html = '<span class="text-warning">' . trans('app.blocked') . '</span>';
                 break;
         }
         return $html;
