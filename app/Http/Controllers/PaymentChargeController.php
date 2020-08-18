@@ -3,28 +3,30 @@
 namespace App\Http\Controllers;
 
 use App\Pricing;
-use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Cache;
-use Illuminate\Support\Facades\Response;
 use App\Repositories\Factories\PaymentFactory;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
+use Illuminate\View\View;
 
 class PaymentChargeController extends Controller
 {
     /**
-     * Private variable
-     *
-     * @var
+     * @var PaymentFactory
      */
     public $paymentFactory;
+    /**
+     * @var mixed
+     */
     public $paymentInterface;
 
     /**
-     * Construct Payment Factory
-     *
+     * PaymentChargeController constructor.
      * @param PaymentFactory $paymentFactory
      */
-
     public function __construct(PaymentFactory $paymentFactory)
     {
         $this->paymentFactory = $paymentFactory;
@@ -34,9 +36,7 @@ class PaymentChargeController extends Controller
     }
 
     /**
-     * cacheObjectRemove method in order to remove cached object that sets in Payment Factory
-     *
-     * @return void
+     * @return bool
      */
     public function cacheObjectRemove()
     {
@@ -44,10 +44,8 @@ class PaymentChargeController extends Controller
     }
 
     /**
-     * Showing payment Option Page
-     *
-     * @param int $id
-     * @return View
+     * @param $id
+     * @return Application|Factory|View
      */
     public function paymentOptions($id)
     {
@@ -56,13 +54,8 @@ class PaymentChargeController extends Controller
     }
 
     /**
-     * Initiate payment session
-     *
      * @param Request $request
-     * @factoryPattern Implemented PaymentFactory
-     * #session set paymentMethodObject
-     * @todo Initiate payment session
-     * @return Response
+     * @return JsonResponse
      */
     public function initiatePayment(Request $request)
     {
@@ -72,8 +65,8 @@ class PaymentChargeController extends Controller
     }
 
     /**
-     * Payment Cancel function
-     * @return Redirect
+     * @param $id
+     * @return RedirectResponse
      */
     public function getPaymentCancelled($id)
     {
@@ -83,8 +76,8 @@ class PaymentChargeController extends Controller
     }
 
     /**
-     * Payment Cancel function
-     * @return Redirect
+     * @param Request $request
+     * @return RedirectResponse
      */
     public function postPaymentCancelled(Request $request)
     {
@@ -94,10 +87,8 @@ class PaymentChargeController extends Controller
     }
 
     /**
-     * Get payment succeed for Get requesting in success page
-     *
-     * @param Request $request
-     * @return Redirect to Successpage
+     * @param $id
+     * @return RedirectResponse
      */
     public function getPaymentSucceed($id)
     {
@@ -107,10 +98,8 @@ class PaymentChargeController extends Controller
     }
 
     /**
-     * Post payment succeed for post requesting in success page
-     *
      * @param Request $request
-     * @return Redirect to Successpage
+     * @return RedirectResponse
      */
     public function postPaymentSucceed(Request $request)
     {

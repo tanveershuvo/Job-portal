@@ -2,36 +2,34 @@
 
 namespace App\Repositories;
 
-use App\User;
 use App\Payment;
 use App\Pricing;
-use Stripe\Charge;
-use Stripe\Stripe;
-use Stripe\PaymentIntent;
-use Illuminate\Http\Request;
-use Stripe\BalanceTransaction;
-use Stripe\Exception\CardException;
 use Illuminate\Support\Facades\Auth;
-use App\Repositories\PaymentInterface;
 use Illuminate\Support\Facades\Session;
-use Stripe\Exception\ApiErrorException;
-use Stripe\Exception\RateLimitException;
-use Stripe\Exception\ApiConnectionException;
+use Stripe\BalanceTransaction;
 use Stripe\Checkout\Session as StripeSession;
+use Stripe\Exception\ApiConnectionException;
+use Stripe\Exception\ApiErrorException;
 use Stripe\Exception\AuthenticationException;
+use Stripe\Exception\CardException;
 use Stripe\Exception\InvalidRequestException;
+use Stripe\Exception\RateLimitException;
+use Stripe\PaymentIntent;
+use Stripe\Stripe;
 
 class StripePaymentRepository implements PaymentInterface
 {
+    /**
+     * StripePaymentRepository constructor.
+     */
     public function __construct()
     {
         Stripe::setApiKey(config('stripe.secret'));
     }
 
     /**
-     * success response method.
-     *
-     * @return \Illuminate\Http\Response
+     * @param array $request
+     * @return StripeSession
      */
     public function initiatePayment(array $request)
     {
@@ -114,11 +112,10 @@ class StripePaymentRepository implements PaymentInterface
             ]);
         }
     }
+
     /**
-     * After successful payment
-     *
-     * @param var $session_id
-     * @return successpage
+     * @param $session_id
+     * @throws ApiErrorException
      */
     public function paymentSucceed($session_id)
     {
@@ -140,7 +137,7 @@ class StripePaymentRepository implements PaymentInterface
         );
         Payment::where('session_id', $session_id)
             ->update([
-                'status' =>  $status,
+                'status' => $status,
                 'payment_method' => $payment_method_types,
                 'transaction_id' => $transaction->id,
             ]);
@@ -149,9 +146,13 @@ class StripePaymentRepository implements PaymentInterface
         // $newbalance = (($session->amount_total / 100) + $accountBalance);
         // $updateBalance = User::findorFail(Auth::user()->id)->update(['premium_jobs_balance' => $newbalance]);
         Session::flash('msg', ['status' => 'success', 'data' => 'Payment Successful . Balance Added']);
-        return;
+
     }
 
+    /**
+     * @param $id
+     * @return mixed
+     */
     public function paymentCancelled($id)
     {
         Payment::where('session_id', $id)
