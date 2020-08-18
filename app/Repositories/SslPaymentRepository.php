@@ -2,13 +2,11 @@
 
 namespace App\Repositories;
 
+use App\Library\SslCommerz\SslCommerzNotification;
 use App\Payment;
 use App\Pricing;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use App\Repositories\PaymentInterface;
 use Illuminate\Support\Facades\Session;
-use App\Library\SslCommerz\SslCommerzNotification;
 
 class SslPaymentRepository implements PaymentInterface
 {
@@ -130,7 +128,7 @@ class SslPaymentRepository implements PaymentInterface
             Payment::where('transaction_id', $tran_id)
                 ->update([
                     'status' => 'Complete',
-                    'payment_methos' => $card_type
+                    'payment_methods' => $card_type
                 ]);
             return Session::flash('msg', [
                 'status' => 'success',
@@ -154,6 +152,6 @@ class SslPaymentRepository implements PaymentInterface
             ->update([
                 'status' => $request['status']
             ]);
-        return Session::flash('msg', ['status' => 'danger', 'data' => 'Payment Cancelled.']);;
+        return Session::flash('msg', ['status' => 'danger', 'data' => 'Payment Cancelled.']);
     }
 }
