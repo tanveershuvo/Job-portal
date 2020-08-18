@@ -2,14 +2,17 @@
 
 namespace App;
 
-use Illuminate\Database\Eloquent\Model;
 use App\Events\PostCreated;
 use App\Events\PostDeleted;
 use App\Events\PostUpdated;
+use Eloquent;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 /**
  * App\Post
  *
+ * @mixin Eloquent
  * @property int $id
  * @property int|null $user_id
  * @property string|null $title
@@ -24,8 +27,8 @@ use App\Events\PostUpdated;
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property-read \App\User|null $author
- * @property-read mixed $feature_image_thumb_uri
- * @property-read mixed $feature_image_uri
+ * @property-read string $feature_image_thumb_uri
+ * @property-read string $feature_image_uri
  * @method static \Illuminate\Database\Eloquent\Builder|Post newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Post newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Post query()
@@ -42,29 +45,48 @@ use App\Events\PostUpdated;
  * @method static \Illuminate\Database\Eloquent\Builder|Post whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Post whereUserId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Post whereViews($value)
- * @mixin \Eloquent
  */
 class Post extends Model
 {
     protected $guarded = [];
+    /**
+     * @var mixed
+     */
+    private $feature_image;
 
-    public function getFeatureImageUriAttribute(){
-        if ($this->feature_image){
-            return asset('storage/uploads/images/blog/full/'.$this->feature_image);
+    /**
+     * @return string
+     */
+    public function getFeatureImageUriAttribute()
+    {
+        if ($this->feature_image) {
+            return asset('storage/uploads/images/blog/full/' . $this->feature_image);
         }
         return asset('assets/images/placeholder.png');
     }
-    public function getFeatureImageThumbUriAttribute(){
-        if ($this->feature_image){
-            return asset('storage/uploads/images/blog/thumb/'.$this->feature_image);
+
+    /**
+     * @return string
+     */
+    public function getFeatureImageThumbUriAttribute()
+    {
+        if ($this->feature_image) {
+            return asset('storage/uploads/images/blog/thumb/' . $this->feature_image);
         }
         return asset('assets/images/placeholder.png');
     }
 
-    public function author(){
+    /**
+     * @return BelongsTo
+     */
+    public function author()
+    {
         return $this->belongsTo(User::class, 'user_id');
     }
 
+    /**
+     * @var string[]
+     */
     protected $dispatchesEvents = [
         'created' => PostCreated::class,
         'deleted' => PostDeleted::class,

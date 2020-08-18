@@ -83,7 +83,7 @@
                         });
                     },
                     error: function (xhr) {
-                        var res = xhr.responseJSON;
+                        let res = xhr.responseJSON;
                         console.log(res.message);
                     }
                 })

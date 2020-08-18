@@ -2,24 +2,15 @@
 
 namespace App\Repositories;
 
-use App\User;
 use App\Payment;
 use App\Pricing;
-use Stripe\Charge;
-use Stripe\Stripe;
-use Stripe\PaymentIntent;
-use Illuminate\Http\Request;
-use Stripe\BalanceTransaction;
-use Stripe\Exception\CardException;
 use Illuminate\Support\Facades\Auth;
-use App\Repositories\PaymentInterface;
 use Illuminate\Support\Facades\Session;
-use Stripe\Exception\ApiErrorException;
-use Stripe\Exception\RateLimitException;
-use Stripe\Exception\ApiConnectionException;
+use Stripe\BalanceTransaction;
 use Stripe\Checkout\Session as StripeSession;
-use Stripe\Exception\AuthenticationException;
-use Stripe\Exception\InvalidRequestException;
+use Stripe\Exception\ApiErrorException;
+use Stripe\PaymentIntent;
+use Stripe\Stripe;
 
 class StripePaymentRepository implements PaymentInterface
 {
@@ -97,7 +88,7 @@ class StripePaymentRepository implements PaymentInterface
         );
         Payment::where('session_id', $session_id)
             ->update([
-                'status' =>  $status,
+                'status' => $status,
                 'payment_method' => $payment_method_types,
                 'transaction_id' => $transaction->id,
             ]);
@@ -111,14 +102,13 @@ class StripePaymentRepository implements PaymentInterface
 
     /**
      * @param $id
-     * @return mixed
      */
     public function paymentCancelled($id)
     {
         Payment::where('session_id', $id)
-            ->update([
+            ->update(array(
                 'status' => 'CANCELLED',
-            ]);
+            ));
         return Session::flash('msg', ['status' => 'danger', 'data' => 'Payment Cancelled.']);
     }
 }

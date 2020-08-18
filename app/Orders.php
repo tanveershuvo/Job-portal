@@ -2,15 +2,17 @@
 
 namespace App;
 
+use Eloquent;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 
 /**
  * App\Orders
  *
- * @method static \Illuminate\Database\Eloquent\Builder|Orders newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|Orders newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|Orders query()
- * @mixin \Eloquent
+ * @mixin Eloquent
+ * @method static Builder|Orders newModelQuery()
+ * @method static Builder|Orders newQuery()
+ * @method static Builder|Orders query()
  */
 class Orders extends Model
 {
