@@ -2,7 +2,10 @@
 
 namespace App;
 
+use Eloquent;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Carbon;
 
 /**
  * App\UserFollowingEmployer
@@ -10,17 +13,17 @@ use Illuminate\Database\Eloquent\Model;
  * @property int $id
  * @property int|null $user_id
  * @property int|null $employer_id
- * @property \Illuminate\Support\Carbon|null $created_at
- * @property \Illuminate\Support\Carbon|null $updated_at
- * @method static \Illuminate\Database\Eloquent\Builder|UserFollowingEmployer newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|UserFollowingEmployer newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|UserFollowingEmployer query()
- * @method static \Illuminate\Database\Eloquent\Builder|UserFollowingEmployer whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|UserFollowingEmployer whereEmployerId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|UserFollowingEmployer whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|UserFollowingEmployer whereUpdatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|UserFollowingEmployer whereUserId($value)
- * @mixin \Eloquent
+ * @property Carbon|null $created_at
+ * @property Carbon|null $updated_at
+ * @method static Builder|UserFollowingEmployer newModelQuery()
+ * @method static Builder|UserFollowingEmployer newQuery()
+ * @method static Builder|UserFollowingEmployer query()
+ * @method static Builder|UserFollowingEmployer whereCreatedAt($value)
+ * @method static Builder|UserFollowingEmployer whereEmployerId($value)
+ * @method static Builder|UserFollowingEmployer whereId($value)
+ * @method static Builder|UserFollowingEmployer whereUpdatedAt($value)
+ * @method static Builder|UserFollowingEmployer whereUserId($value)
+ * @mixin Eloquent
  */
 class UserFollowingEmployer extends Model
 {

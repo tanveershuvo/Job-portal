@@ -103,14 +103,12 @@ class Job extends Model
 {
     protected $guarded = [];
 
-
     protected $dates = [
         'created_at',
         'updated_at',
         'deleted_at',
         'deadline',
     ];
-
 
     /**
      * @return BelongsTo

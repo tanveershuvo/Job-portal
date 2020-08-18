@@ -5,8 +5,11 @@ namespace App;
 use App\Events\PostCreated;
 use App\Events\PostDeleted;
 use App\Events\PostUpdated;
+use Eloquent;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Support\Carbon;
 
 /**
  * App\Post
@@ -22,28 +25,28 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @property int|null $show_in_header_menu
  * @property int|null $show_in_footer_menu
  * @property int|null $views
- * @property \Illuminate\Support\Carbon|null $created_at
- * @property \Illuminate\Support\Carbon|null $updated_at
- * @property-read \App\User|null $author
+ * @property Carbon|null $created_at
+ * @property Carbon|null $updated_at
+ * @property-read User|null $author
  * @property-read string $feature_image_thumb_uri
  * @property-read string $feature_image_uri
- * @method static \Illuminate\Database\Eloquent\Builder|Post newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|Post newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|Post query()
- * @method static \Illuminate\Database\Eloquent\Builder|Post whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Post whereFeatureImage($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Post whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Post wherePostContent($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Post whereShowInFooterMenu($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Post whereShowInHeaderMenu($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Post whereSlug($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Post whereStatus($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Post whereTitle($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Post whereType($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Post whereUpdatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Post whereUserId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Post whereViews($value)
- * @mixin \Eloquent
+ * @method static Builder|Post newModelQuery()
+ * @method static Builder|Post newQuery()
+ * @method static Builder|Post query()
+ * @method static Builder|Post whereCreatedAt($value)
+ * @method static Builder|Post whereFeatureImage($value)
+ * @method static Builder|Post whereId($value)
+ * @method static Builder|Post wherePostContent($value)
+ * @method static Builder|Post whereShowInFooterMenu($value)
+ * @method static Builder|Post whereShowInHeaderMenu($value)
+ * @method static Builder|Post whereSlug($value)
+ * @method static Builder|Post whereStatus($value)
+ * @method static Builder|Post whereTitle($value)
+ * @method static Builder|Post whereType($value)
+ * @method static Builder|Post whereUpdatedAt($value)
+ * @method static Builder|Post whereUserId($value)
+ * @method static Builder|Post whereViews($value)
+ * @mixin Eloquent
  */
 class Post extends Model
 {
