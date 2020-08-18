@@ -69,7 +69,7 @@
         "sort-packages": true,
         "optimize-autoloader": true
     },
-    "post-install-cmd": [
+    "post-package-update": [
         "php artisan clear-compiled",
         "chmod -R 777 public/"
     ],
