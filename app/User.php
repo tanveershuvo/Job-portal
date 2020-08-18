@@ -86,6 +86,9 @@ class User extends Authenticated
         return $this->user_type === 'user';
     }
 
+    /**
+     * @return bool
+     */
     public function is_admin()
     {
         return $this->user_type === 'admin';
