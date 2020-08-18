@@ -3,10 +3,19 @@
 namespace App\Http\Controllers;
 
 use App\Category;
+use Exception;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Validation\ValidationException;
+use Illuminate\View\View;
 
 class CategoriesController extends Controller
 {
+    /**
+     * @return Application|Factory|View
+     */
     public function index()
     {
         $title = trans('app.categories');
@@ -15,6 +24,11 @@ class CategoriesController extends Controller
         return view('admin.categories', compact('title', 'categories'));
     }
 
+    /**
+     * @param Request $request
+     * @return RedirectResponse
+     * @throws ValidationException
+     */
     public function store(Request $request)
     {
         $rules = [
@@ -37,6 +51,10 @@ class CategoriesController extends Controller
         return back()->with('success', trans('app.category_created'));
     }
 
+    /**
+     * @param $id
+     * @return Application|Factory|View
+     */
     public function edit($id)
     {
         $title = trans('app.edit_category');
@@ -45,6 +63,12 @@ class CategoriesController extends Controller
         return view('admin.edit_category', compact('title', 'category'));
     }
 
+    /**
+     * @param Request $request
+     * @param $id
+     * @return RedirectResponse
+     * @throws ValidationException
+     */
     public function update(Request $request, $id)
     {
         if (env('IS_DEMO')) {
@@ -71,6 +95,11 @@ class CategoriesController extends Controller
         return back()->with('success', trans('app.category_updated'));
     }
 
+    /**
+     * @param Request $request
+     * @return array|RedirectResponse
+     * @throws Exception
+     */
     public function destroy(Request $request)
     {
         if (env('IS_DEMO')) {

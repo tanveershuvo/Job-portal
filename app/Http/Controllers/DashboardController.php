@@ -6,12 +6,18 @@ use App\Job;
 use App\JobApplication;
 use App\Payment;
 use App\User;
-use Illuminate\Http\Request;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\View\View;
+
 
 class DashboardController extends Controller
 {
-    public function dashboard(){
-
+    /**
+     * @return Application|Factory|View
+     */
+    public function dashboard()
+    {
         $data = [
             'usersCount' => User::count(),
             'totalPayments' => Payment::success()->sum('amount'),
@@ -22,8 +28,6 @@ class DashboardController extends Controller
             'totalApplicants' => JobApplication::count(),
 
         ];
-
-
         return view('admin.dashboard', $data);
     }
 }
