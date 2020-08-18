@@ -13,13 +13,13 @@ final class PaymentFactory
     public static function paymentOption($option)
     {
         if ($option == 'stripe') {
-            App::bind(PaymentInterface::class, function ($app) {
+            App::singleton(PaymentInterface::class, function ($app) {
                 $stripe = new StripePaymentRepository;
                 Cache::put('paymentObject', $stripe);
                 return $stripe;
             });
         } elseif ($option == 'sslcommerz') {
-            App::bind(PaymentInterface::class, function ($app) {
+            App::singleton(PaymentInterface::class, function ($app) {
                 $ssl =  new SslPaymentRepository;
                 Cache::put('paymentObject', $ssl);
                 return $ssl;
