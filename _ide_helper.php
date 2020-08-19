@@ -13506,6 +13506,7 @@
          *
          * @param string $label
          * @param \Closure $closure
+         * @return mixed 
          * @static 
          */ 
         public static function measure($label, $closure)
