@@ -2,7 +2,7 @@
 
 namespace App;
 
-use Eloquent;
+use Barryvdh\LaravelIdeHelper\Eloquent;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 
@@ -20,6 +20,7 @@ use Illuminate\Database\Eloquent\Model;
  * @method static Builder|Pricing wherePackageName($value)
  * @method static Builder|Pricing wherePremiumJob($value)
  * @method static Builder|Pricing wherePrice($value)
+ * @method static findorFail($id)
  * @mixin Eloquent
  */
 class Pricing extends Model

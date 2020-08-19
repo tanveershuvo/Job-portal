@@ -3,25 +3,31 @@
 namespace App\Http\Controllers;
 
 use GuzzleHttp\Exception\RequestException;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Session;
-use Redirect;
-use Socialite;
+use Illuminate\View\View;
+use Laravel\Socialite\Facades\Socialite;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 
 class SocialiteController extends Controller
 {
     /**
      * Handle Social login request
      *
-     * @return response
+     * @param $social
+     * @return RedirectResponse
      */
     public function socialLogin($social)
     {
         return Socialite::driver($social)->redirect();
     }
+
     /**
      * Obtain the user information from Social Logged in.
      * @param $social
-     * @return Response
+     * @return Application|Factory|\Illuminate\Http\RedirectResponse|View
      */
     public function handleProviderCallback($social)
     {

@@ -5,7 +5,7 @@ namespace App;
 use App\Events\PostCreated;
 use App\Events\PostDeleted;
 use App\Events\PostUpdated;
-use Eloquent;
+use Barryvdh\LaravelIdeHelper\Eloquent;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;

@@ -2,8 +2,12 @@
 
 namespace App;
 
-use App\Job;
+use Barryvdh\LaravelIdeHelper\Eloquent;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Notifications\DatabaseNotification;
+use Illuminate\Notifications\DatabaseNotificationCollection;
 use Illuminate\Notifications\Notifiable;
 
 /**
@@ -13,24 +17,29 @@ use Illuminate\Notifications\Notifiable;
  * @property string|null $category_name
  * @property string|null $category_slug
  * @property int|null $job_count
- * @property-read \Illuminate\Database\Eloquent\Collection|Job[] $active_jobs
+ * @property-read Collection|Job[] $active_jobs
  * @property-read int|null $active_jobs_count
- * @property-read \Illuminate\Database\Eloquent\Collection|Job[] $jobs
+ * @property-read Collection|Job[] $jobs
  * @property-read int|null $jobs_count
- * @property-read \Illuminate\Notifications\DatabaseNotificationCollection|\Illuminate\Notifications\DatabaseNotification[] $notifications
+ * @property-read DatabaseNotificationCollection|DatabaseNotification[] $notifications
  * @property-read int|null $notifications_count
- * @method static \Illuminate\Database\Eloquent\Builder|Category newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|Category newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|Category query()
- * @method static \Illuminate\Database\Eloquent\Builder|Category whereCategoryName($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Category whereCategorySlug($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Category whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Category whereJobCount($value)
- * @mixin \Eloquent
+ * @method static Builder|Category newModelQuery()
+ * @method static Builder|Category newQuery()
+ * @method static Builder|Category query()
+ * @method static Builder|Category whereCategoryName($value)
+ * @method static Builder|Category whereCategorySlug($value)
+ * @method static Builder|Category whereId($value)
+ * @method static Builder|Category whereJobCount($value)
+ * @method static orderBy(string $string, string $string1)
+ * @method static where(string $string, string $slug)
+ * @method static create(array $data)
+ * @method static find($id)
+ * @mixin Eloquent
  */
 class Category extends Model
 {
     use Notifiable;
+
     protected $guarded = [];
     public $timestamps = false;
 

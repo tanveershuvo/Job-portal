@@ -91,6 +91,7 @@ class JobController extends Controller
         return redirect(route('posted_jobs'))->with('success', __('app.job_posted_success'));
     }
 
+
     public function postedJobs()
     {
         $title = __('app.posted_jobs');
@@ -116,12 +117,8 @@ class JobController extends Controller
     }
 
     /**
-     * @param Request $request
-     * @param $id
-     * @return \Illuminate\Http\RedirectResponse
-     * @throws \Illuminate\Validation\ValidationException
-     * @todo Something
-     * Updating Job
+     *
+     *
      */
     public function update(Request $request, $id)
     {
