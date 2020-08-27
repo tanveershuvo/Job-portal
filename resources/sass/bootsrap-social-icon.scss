@@ -1,0 +1,276 @@
+/*
+ * Social Buttons for Bootstrap
+ *
+ * Copyright 2013-2016 Panayiotis Lipiridis
+ * Licensed under the MIT License
+ *
+ * https://github.com/lipis/bootstrap-social
+ */
+
+.btn-social {
+    position: relative;
+    padding-left: 44px;
+    text-align: left;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis
+}
+
+.btn-social > :first-child {
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 32px;
+    line-height: 34px;
+    font-size: 1.6em;
+    text-align: center;
+    border-right: 1px solid rgba(0, 0, 0, 0.2)
+}
+
+.btn-social.btn-lg {
+    padding-left: 61px
+}
+
+.btn-social.btn-lg > :first-child {
+    line-height: 45px;
+    width: 45px;
+    font-size: 1.8em
+}
+
+.btn-social.btn-sm {
+    padding-left: 38px
+}
+
+.btn-social.btn-sm > :first-child {
+    line-height: 28px;
+    width: 28px;
+    font-size: 1.4em
+}
+
+.btn-social.btn-xs {
+    padding-left: 30px
+}
+
+.btn-social.btn-xs > :first-child {
+    line-height: 20px;
+    width: 20px;
+    font-size: 1.2em
+}
+
+.btn-social-icon {
+    position: relative;
+    padding-left: 44px;
+    text-align: left;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    height: 34px;
+    width: 34px;
+}
+
+.btn-social-icon > :first-child {
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 32px;
+    line-height: 34px;
+    font-size: 1.6em;
+    text-align: center;
+    border-right: 1px solid rgba(0, 0, 0, 0.2)
+}
+
+.btn-social-icon.btn-lg {
+    padding-left: 61px
+}
+
+.btn-social-icon.btn-lg > :first-child {
+    line-height: 45px;
+    width: 45px;
+    font-size: 1.8em
+}
+
+.btn-social-icon.btn-sm {
+    padding-left: 38px
+}
+
+.btn-social-icon.btn-sm > :first-child {
+    line-height: 35px;
+    width: 28px;
+    font-size: 1.4em
+}
+
+.btn-social-icon.btn-xs {
+    padding-left: 30px
+}
+
+.btn-social-icon.btn-xs > :first-child {
+    line-height: 20px;
+    width: 20px;
+    font-size: 1.2em
+}
+
+.btn-social-icon > :first-child {
+    border: none;
+    text-align: center;
+    width: 100% !important
+}
+
+.btn-social-icon.btn-lg {
+    height: 45px;
+    width: 45px;
+    padding-left: 0;
+    padding-right: 0
+}
+
+.btn-social-icon.btn-sm {
+    height: 35px;
+    width: 35px;
+    padding-left: 0;
+    padding-right: 0;
+}
+
+.btn-social-icon.btn-xs {
+    height: 22px;
+    width: 22px;
+    padding-left: 0;
+    padding-right: 0
+}
+
+.btn-adn {
+    color: #fff;
+    background-color: #d87a68;
+    border-color: rgba(0, 0, 0, 0.2)
+}
+
+.btn-adn:focus,
+.btn-adn.focus {
+    color: #fff;
+    background-color: #ce563f;
+    border-color: rgba(0, 0, 0, 0.2)
+}
+
+.btn-adn:hover {
+    color: #fff;
+    background-color: #ce563f;
+    border-color: rgba(0, 0, 0, 0.2)
+}
+
+.btn-adn:active,
+.btn-adn.active,
+.open > .dropdown-toggle.btn-adn {
+    color: #fff;
+    background-color: #ce563f;
+    border-color: rgba(0, 0, 0, 0.2)
+}
+
+.btn-adn:active:hover,
+.btn-adn.active:hover,
+.open > .dropdown-toggle.btn-adn:hover,
+.btn-adn:active:focus,
+.btn-adn.active:focus,
+.open > .dropdown-toggle.btn-adn:focus,
+.btn-adn:active.focus,
+.btn-adn.active.focus,
+.open > .dropdown-toggle.btn-adn.focus {
+    color: #fff;
+    background-color: #b94630;
+    border-color: rgba(0, 0, 0, 0.2)
+}
+
+.btn-adn:active,
+.btn-adn.active,
+.open > .dropdown-toggle.btn-adn {
+    background-image: none
+}
+
+.btn-adn.disabled:hover,
+.btn-adn[disabled]:hover,
+fieldset[disabled] .btn-adn:hover,
+.btn-adn.disabled:focus,
+.btn-adn[disabled]:focus,
+fieldset[disabled] .btn-adn:focus,
+.btn-adn.disabled.focus,
+.btn-adn[disabled].focus,
+fieldset[disabled] .btn-adn.focus {
+    background-color: #d87a68;
+    border-color: rgba(0, 0, 0, 0.2)
+}
+
+.btn-adn .badge {
+    color: #d87a68;
+    background-color: #fff
+}
+
+@mixin btn-social($color-bg) {
+    color: #fff;
+    background-color: $color-bg;
+    border-color: rgba(0, 0, 0, 0.2);
+}
+
+.btn-facebook {
+    @include btn-social(#3b5998);
+}
+
+.btn-facebook:focus, .btn-facebook:hover, {
+    @include btn-social(#5079d0);
+}
+
+.btn-github {
+    @include btn-social(#444);
+}
+
+.btn-github:focus, .btn-github:hover, {
+    @include btn-social(#5c5a5a);
+}
+
+.btn-google {
+    @include btn-social(#dd4b39);
+}
+
+.btn-google:focus, .btn-google:hover, {
+    @include btn-social(#e56a5d);
+}
+
+.btn-linkedin {
+    @include btn-social(#007bb6);
+}
+
+.btn-linkedin:focus, .btn-linkedin:hover, {
+    @include btn-social(#0b99e2);
+}
+
+@mixin btn-transform($bg-color) {
+    color: #fff;
+    border-radius: 50% !important;
+    background-color: $bg-color;
+    border-color: rgba(0, 0, 0, 0.2);
+    -webkit-transition: -webkit-transform .4s ease-in-out;
+    transition: transform .4s ease-in-out;
+}
+
+.btn-circle-facebook {
+    @include btn-transform(#3b5998);
+}
+
+.btn-circle-google {
+    @include btn-transform(#dd4b39);
+}
+
+.btn-circle-linkedin {
+    @include btn-transform(#007bb6);
+}
+
+.btn-circle-github {
+    @include btn-transform(#444);
+}
+
+.btn-social-icon:focus,
+.btn-social-icon:hover {
+    color: rgb(0, 0, 0);
+    background-color: #ffffff;
+    border-color: rgba(0, 0, 0, 0.548);
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg) scale(1.4);
+}

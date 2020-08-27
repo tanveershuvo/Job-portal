@@ -4,17 +4,16 @@ namespace App\Http\Controllers;
 
 use App\Category;
 use Exception;
-use Illuminate\Contracts\Foundation\Application;
-use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 use Illuminate\Validation\ValidationException;
 use Illuminate\View\View;
 
 class CategoriesController extends Controller
 {
     /**
-     * @return Application|Factory|View
+     * @return View
      */
     public function index()
     {
@@ -36,7 +35,7 @@ class CategoriesController extends Controller
         ];
         $this->validate($request, $rules);
 
-        $slug = str_slug($request->category_name);
+        $slug = Str::slug($request->category_name);
         $duplicate = Category::where('category_slug', $slug)->count();
         if ($duplicate > 0) {
             return back()->with('error', trans('app.category_exists_in_db'));
@@ -53,13 +52,13 @@ class CategoriesController extends Controller
 
     /**
      * @param $id
-     * @return Application|Factory|View
+     * @return View
      */
-    public function edit($id)
+    public
+    function edit($id)
     {
         $title = trans('app.edit_category');
         $category = Category::find($id);
-
         return view('admin.edit_category', compact('title', 'category'));
     }
 
@@ -79,9 +78,7 @@ class CategoriesController extends Controller
             'category_name' => 'required',
         ];
         $this->validate($request, $rules);
-
-        $slug = str_slug($request->category_name);
-
+        $slug = Str::slug($request->category_name);
         $duplicate = Category::where('category_slug', $slug)->where('id', '!=', $id)->count();
         if ($duplicate > 0) {
             return back()->with('error', trans('app.category_exists_in_db'));
@@ -100,14 +97,13 @@ class CategoriesController extends Controller
      * @return array|RedirectResponse
      * @throws Exception
      */
-    public function destroy(Request $request)
+    public
+    function destroy(Request $request)
     {
         if (env('IS_DEMO')) {
             return back()->with('error', __('app.disable_for_demo'));
         }
-
         $id = $request->data_id;
-
         $delete = Category::where('id', $id)->delete();
         if ($delete) {
             return ['success' => 1, 'msg' => trans('app.category_deleted_success')];

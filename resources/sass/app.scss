@@ -1,14 +1,10 @@
-
-// Fonts
-@import url('https://fonts.googleapis.com/css2?family=Open+Sans+Condensed:wght@300;700&display=swap');
-
 // Variables
 @import 'variables';
-
 // Bootstrap
 @import '~bootstrap/scss/bootstrap';
-
-.navbar-laravel {
-  background-color: #fff;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
-}
+//font-awesome
+@import '~font-awesome/scss/font-awesome';
+//Custom
+@import 'style';
+//footer social icons
+@import 'bootsrap-social-icon';
