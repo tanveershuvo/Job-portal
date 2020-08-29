@@ -16,13 +16,12 @@ class ContactUs extends Mailable
     /**
      * Create a new message instance.
      *
-     * @return void
+     * @param $request
      */
     public function __construct($request)
     {
         $this->data = $request;
-        //dd($this->data['email']);
-        $this->subject = get_option('site_title') . " | New Contact-Us Query";
+        $this->subject = config('app.name') . " | New Contact-Us Query";
     }
 
     /**
@@ -33,7 +32,7 @@ class ContactUs extends Mailable
     public function build()
     {
         return $this->from($this->data['email'])
-            ->to(get_option('email_address'))
+            ->to(config('mail.username'))
             ->subject($this->subject)
             ->markdown('emails.contact_us');
     }

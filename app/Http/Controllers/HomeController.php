@@ -75,6 +75,7 @@ class HomeController extends Controller
         ];
 
         $this->validate($request, $rules);
+
         try {
             Mail::send(new ContactUs($request->all()));
             Mail::send(new ContactUsSendToSender($request->all()));
@@ -90,7 +91,7 @@ class HomeController extends Controller
      */
     public function langSwitch(Request $request)
     {
-        Session::put('locale', $request->locale);
+        if (isset($request->locale)) Session::put('locale', $request->locale);
         return redirect()->back();
 
     }

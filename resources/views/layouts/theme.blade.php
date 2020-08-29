@@ -11,10 +11,10 @@
     <title>{{ $title ?? 'JobPortal' }}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="shortcut icon" href="{{asset('images/logo.png')}}"/>
-    <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+    <link rel="stylesheet" href="{{ mix('css/app.css') }}">
 
     <script type='text/javascript'>
-        var page_data = {!! pageJsonData() !!};
+        let page_data = {!! pageJsonData() !!};
     </script>
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-170075362-1"></script>
