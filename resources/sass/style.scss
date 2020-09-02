@@ -1,6 +1,6 @@
 @import 'variables';
 
-button, input:not([type="checkbox"]), .btn, select {
+button, input:not([type="checkbox"]), .btn, textarea, select {
     outline: none;
     box-shadow: none !important;
     -webkit-appearance: none;
@@ -495,18 +495,7 @@ div.contact {
 }
 
 .contact .box {
-    transition: all 0.2s;
-    box-shadow: 0.3rem 0.5rem 1rem 0 rgba(0, 0, 0, 0.1);
-}
-
-.contact .box:hover {
-    margin-top: -.25rem;
-    margin-bottom: .25rem;
     box-shadow: 0.5rem 1rem 1rem 0 rgba(0, 0, 0, 0.3);
-}
-
-.contact .box:hover .btn {
-    opacity: 1;
 }
 
 .contact .btn {
@@ -519,4 +508,7 @@ div.contact {
     transition: all 0.2s;
 }
 
+.contact .box:hover .btn {
+    opacity: 1;
+}
 

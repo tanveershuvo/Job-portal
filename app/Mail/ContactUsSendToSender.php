@@ -12,16 +12,16 @@ class ContactUsSendToSender extends Mailable
 
     public $data;
     public $subject;
+
     /**
      * Create a new message instance.
      *
-     * @return void
+     * @param $request
      */
     public function __construct($request)
     {
         $this->data = $request;
-        $this->subject = get_option('site_title') . " | We Got Your Message";
-
+        $this->subject = config('app.name') . " | We Got Your Message";
     }
 
     /**
