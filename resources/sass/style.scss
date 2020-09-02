@@ -488,3 +488,35 @@ div.pricing {
         opacity: 1;
     }
 }
+
+div.contact {
+    /* background: $white; */
+    background: linear-gradient(to right, #ffffff, #f0edf8);
+}
+
+.contact .box {
+    transition: all 0.2s;
+    box-shadow: 0.3rem 0.5rem 1rem 0 rgba(0, 0, 0, 0.1);
+}
+
+.contact .box:hover {
+    margin-top: -.25rem;
+    margin-bottom: .25rem;
+    box-shadow: 0.5rem 1rem 1rem 0 rgba(0, 0, 0, 0.3);
+}
+
+.contact .box:hover .btn {
+    opacity: 1;
+}
+
+.contact .btn {
+    font-size: 80%;
+    border-radius: 2rem !important;
+    letter-spacing: .1rem;
+    font-weight: bold;
+    padding: 1rem;
+    opacity: 0.7;
+    transition: all 0.2s;
+}
+
+

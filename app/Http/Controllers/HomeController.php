@@ -18,6 +18,10 @@ use Illuminate\Support\Facades\Session;
 use Illuminate\Validation\ValidationException;
 use Illuminate\View\View;
 
+/**
+ * Class HomeController
+ * @package App\Http\Controllers
+ */
 class HomeController extends Controller
 {
     /**
@@ -94,7 +98,9 @@ class HomeController extends Controller
      */
     public function langSwitch(Request $request)
     {
-        if (isset($request->locale)) Session::put('locale', $request->locale);
+        if (isset($request['lang'])) {
+            Session::put('locale', $request->lang);
+        }
         return redirect()->back();
 
     }

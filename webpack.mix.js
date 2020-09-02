@@ -1,4 +1,19 @@
 const mix = require('laravel-mix');
+const imagemin = require('imagemin');
+const imageminJpegtran = require('imagemin-jpegtran');
+const imageminPngquant = require('imagemin-pngquant');
+
+(async () => {
+    const files = await imagemin(['public/assets/images/*.{jpg,png,svg,jpeg}'], {
+        destination: 'public/assets/min.images',
+        plugins: [
+            imageminJpegtran(),
+            imageminPngquant({
+                quality: [0.6, 0.8]
+            })
+        ]
+    });
+})();
 /*
  |--------------------------------------------------------------------------
  | Mix Asset Management

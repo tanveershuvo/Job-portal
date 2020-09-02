@@ -10,7 +10,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>{{ $title ?? 'JobPortal' }}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="shortcut icon" href="{{asset('images/logo.png')}}"/>
+    <link rel="shortcut icon" href="{{asset('assets/images/logo.png')}}"/>
     <link rel="stylesheet" href="{{ mix('css/app.css') }}">
 
     <script type='text/javascript'>
@@ -32,7 +32,7 @@
         <div class="container">
             <a class="navbar-brand" href="{{ route('dashboard') }}">
                 <h3><img src=" {{asset('assets/images/logo.png')}}" width="30" height="30"
-                         class="d-inline-block align-top" alt="" loading="lazy"> JobPortal</h3>
+                         class="d-inline-block align-top" loading="lazy"> JobPortal</h3>
             </a>
             <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
                     data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
@@ -154,7 +154,7 @@
                 <div class="btn-group ml-sm-2 mt-2 mt-lg-0" role="group">
                     <form action="{{route('language')}}" method="post">
                         @csrf
-                        <input type="hidden" name="locale" value="en">
+                        <input type="hidden" name="lang" value="en">
                         <button type="submit"
                                 class="btn btn-outline-light btn-sm @if(Session::get('locale') == 'en' || App::getlocale() == 'en'){ {{'active'}} }@endif">
                             <b>EN
@@ -162,7 +162,7 @@
                     </form>
                     <form action="{{route('language')}}" method="post">
                         @csrf
-                        <input type="hidden" name="locale" value="bn">
+                        <input type="hidden" name="lang" value="bn">
                         <button type="submit"
                                 class="btn btn-outline-light btn-sm @if(Session::get('locale') == 'bn'){ {{'active'}} }@endif">
                             <b>বাংলা</b>
