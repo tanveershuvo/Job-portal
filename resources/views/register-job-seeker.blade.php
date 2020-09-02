@@ -38,21 +38,21 @@
                         @enderror
                     </div>
                     <div class="form-group col-md-6">
-                        <label for="inputPassword4">Gender</label><br>
+                        <label for="inputPassword4">Gender<span class="mendatory-mark"> *</span></label><br>
                         <div class="btn-group btn-group-toggle" data-toggle="buttons">
                             <label class="btn btn-outline-primary active">
-                                <input type="radio" name="gender" checked="true" autocomplete="off"><i
+                                <input type="radio" name="gender" checked="true" autocomplete="off" value="Male"><i
                                     class="fa fa-male"></i> Male
                             </label>
 
                             <label class="btn btn-outline-primary mx-2">
-                                <input type="radio" name="gender" autocomplete="off">
+                                <input type="radio" name="gender" autocomplete="off" value="Female">
                                 <i class="fa fa-female"></i> Female
                             </label>
 
                             <label class="btn btn-outline-primary">
-                                <input type="radio" name="gender" autocomplete="off"> <i class="fa fa-transgender"></i>
-                                Others
+                                <input type="radio" name="gender" autocomplete="off" value="Other"> <i class="fa fa-transgender"></i>
+                                Other
                             </label>
                         </div>
                     </div>
@@ -71,10 +71,17 @@
                         </span>
                         @enderror
                     </div>
+                  
                     <div class="form-group col-md-6">
                         <label for="contact">Mobile Number</label>
-                        <input id="contact" type="text" class="form-control @error('contact') is-invalid @enderror"
+                        <div class="input-group">
+                         <div class="input-group-append">
+                                <div class="input-group-text">+880</i></div>
+                            </div>
+                             <input id="contact" type="text" class="form-control @error('contact') is-invalid @enderror"
                             name="contact" value="{{ old('contact') }}" placeholder="@lang('app.contact_ex')">
+                           
+                        </div>
 
                         @error('contact')
                         <span class="invalid-feedback" role="alert">

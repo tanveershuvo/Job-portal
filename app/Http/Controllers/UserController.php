@@ -2,16 +2,18 @@
 
 namespace App\Http\Controllers;
 
+use App\User;
 use App\Country;
 use App\JobApplication;
-use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Redirect;
+use Intervention\Image\Facades\Image;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Storage;
-use Intervention\Image\Facades\Image;
+use Illuminate\Support\Facades\Redirect;
+use App\Http\Requests\registerJobSeekerRequest;
+
 
 class UserController extends Controller
 {
@@ -72,24 +74,14 @@ class UserController extends Controller
         return view('register-job-seeker', compact('title'));
     }
 
-    public function registerJobSeekerPost(Request $request)
+    public function registerJobSeekerPost(registerJobSeekerRequest $request)
     {
-        $rules = [
-            'name' => ['required', 'string', 'max:100'],
-            'email' => ['required', 'string', 'email', 'max:190', 'unique:users'],
-            'password' => ['required', 'string', 'min:6', 'confirmed'],
-            'contact' => ['required', 'numeric'],
-        ];
-
-        $this->validate($request, $rules);
-
-        $data = $request->input();
-
+        dd($request->all());
         $user = User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
+            'name' => $request['name'],
+            'email' => $request['email'],
             'user_type' => 'user',
-            'password' => bcrypt($data['password']),
+            'password' => bcrypt($request['password']),
             'active_status' => 1,
         ]);
         Session::flash('message', 'Registration Successfull');

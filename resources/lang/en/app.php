@@ -369,5 +369,5 @@ return [
     'send_feedback' => 'Send Feedback',
     'message_has_been_sent' => 'Your Message has been sent, please check your E-Mail for confirmation',
     'payment_id' => 'Payment ID',
-    'contact_ex' => '01XX-XXXXXXX',
+    'contact_ex' => '1XX-XXXXXXX',
 ];
