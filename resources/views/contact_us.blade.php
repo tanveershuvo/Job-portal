@@ -6,7 +6,7 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="pricing-section-heading mb-3 text-center">
-                        <h1>Contact Us ll</h1>
+                        <h1>Contact Us</h1>
                     </div>
                 </div>
             </div>
