@@ -4,6 +4,10 @@ namespace App\Rules;
 
 use Illuminate\Contracts\Validation\Rule;
 
+/**
+ * Class StrongPassword
+ * @package App\Rules
+ */
 class StrongPassword implements Rule
 {
     /**
@@ -19,13 +23,13 @@ class StrongPassword implements Rule
     /**
      * Determine if the validation rule passes.
      *
-     * @param  string  $attribute
-     * @param  mixed  $value
+     * @param string $attribute
+     * @param mixed $value
      * @return bool
      */
     public function passes($attribute, $value)
     {
-        return preg_match('/^(?=.*?[A-Za-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/l',$value);
+        return preg_match("/^(?=.*?[A-Za-z])(?=.*?[0-9])(?=.*?[#?!@()$%^&*=_{}[\]:;\"'|\\<>,.\/~`±§+-]).{8,}$/", $value);
     }
 
     /**
@@ -35,6 +39,6 @@ class StrongPassword implements Rule
      */
     public function message()
     {
-        return 'The validation error message.';
+        return 'Password must contain letter,digit and special carrecter.';
     }
 }

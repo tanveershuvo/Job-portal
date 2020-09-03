@@ -2,17 +2,18 @@
 
 namespace App\Http\Controllers;
 
-use App\User;
+use App\Category;
 use App\Country;
+use App\Http\Requests\registerJobSeekerRequest;
 use App\JobApplication;
+use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-use Intervention\Image\Facades\Image;
+use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Facades\Redirect;
-use App\Http\Requests\registerJobSeekerRequest;
+use Intervention\Image\Facades\Image;
 
 
 class UserController extends Controller
@@ -76,7 +77,7 @@ class UserController extends Controller
 
     public function registerJobSeekerPost(registerJobSeekerRequest $request)
     {
-        dd($request->all());
+        //dd($request->all());
         $user = User::create([
             'name' => $request['name'],
             'email' => $request['email'],
@@ -91,7 +92,8 @@ class UserController extends Controller
     public function registerEmployer()
     {
         $title = __('app.employer_register');
-        return view('employer-register', compact('title'));
+        $categories = Category::orderBy('category_name', 'asc')->get();
+        return view('employer-register', compact('title', 'categories'));
     }
 
     public function registerEmployerPost(Request $request)

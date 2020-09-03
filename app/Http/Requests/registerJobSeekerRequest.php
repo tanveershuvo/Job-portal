@@ -27,10 +27,9 @@ class registerJobSeekerRequest extends FormRequest
         return [
             'name' => ['required', 'string', 'max:100'],
             'email' => ['required', 'string', 'email', 'max:190', 'unique:users'],
-            'password' => ['required', 'string', new StrongPassword, 'confirmed'],
-            'contact' => ['numeric','digits:10'],
-            'gender' =>['required']
-
+            'password' => ['required', 'string', 'min:8', new StrongPassword, 'confirmed'],
+            'contact' => ['numeric', 'digits:10'],
+            'gender' => ['required']
         ];
     }
 }
