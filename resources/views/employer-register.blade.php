@@ -2,9 +2,9 @@
 
 @section('content')
     <div class="container py-4">
-        <div class="d-flex register flex-md-row flex-column bg-white p-3">
+        <div class="d-flex employee-register flex-md-row flex-column bg-white p-3">
             <div class="col-md-12">
-                <h3 class="mb-5 text-center highlight">@lang('app.company_register')</h3>
+                <h3 class="mb-5 text-center highlight">Employer Registration</h3>
                 <form method="POST" action="">
                     @csrf
                     <h4 class="mb-4">Account Information</h4>
