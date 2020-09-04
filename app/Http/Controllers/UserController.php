@@ -102,6 +102,7 @@ class UserController extends Controller
 
     public function registerEmployerPost(Request $request)
     {
+        dd($request->all());
         $rules = [
             'employeer_name' => ['required', 'string', 'max:80'],
             'company' => 'required',

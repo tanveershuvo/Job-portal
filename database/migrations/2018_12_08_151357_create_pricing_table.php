@@ -14,7 +14,7 @@ class CreatePricingTable extends Migration
     public function up()
     {
         Schema::create('pricings', function (Blueprint $table) {
-            $table->increments('id');
+            $table->bigIncrements('id');
             $table->string('package_name')->nullable();
             $table->integer('price')->nullable();
             $table->integer('premium_job')->nullable();

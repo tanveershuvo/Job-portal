@@ -1,8 +1,8 @@
 <?php
 
-use Illuminate\Support\Facades\Schema;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 
 class CreateFlagJobTable extends Migration
 {
@@ -14,7 +14,7 @@ class CreateFlagJobTable extends Migration
     public function up()
     {
         Schema::create('flag_jobs', function (Blueprint $table) {
-            $table->increments('id');
+            $table->bigIncrements('id');
             $table->integer('job_id')->nullable();
             $table->string('reason')->nullable();
             $table->string('email')->nullable();

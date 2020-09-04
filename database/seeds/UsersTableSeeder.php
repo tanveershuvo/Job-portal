@@ -2,6 +2,7 @@
 
 use Carbon\Carbon;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
 class UsersTableSeeder extends Seeder
 {
@@ -12,7 +13,7 @@ class UsersTableSeeder extends Seeder
      */
     public function run()
     {
-        \Illuminate\Support\Facades\DB::table('users')->insert([
+        DB::table('users')->insert([
             'name' => 'John Doe',
             'email' => 'admin@demo.com',
             'password' => bcrypt('123456'),
