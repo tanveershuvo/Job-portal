@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="container py-4">
-        <div class="d-flex employee-register flex-md-row flex-column bg-white p-3">
+        <div class="d-flex border employee-register flex-md-row flex-column bg-white p-3">
             <div class="col-md-12">
                 <h3 class="mb-5 text-center highlight">Employer Registration</h3>
                 <form method="POST" action="">
@@ -14,7 +14,7 @@
                                 <span class="mendatory-mark">*</span></label>
                             <input id="email" type="email"
                                    class="form-control @error('email') is-invalid @enderror"
-                                   name="email" placeholder="Type Email Address" value="{{ old('email') }}">
+                                   name="email" placeholder="Type Email Address" value="{{ old('email') }}" autofocus>
                             @error('email')
                             <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -24,7 +24,7 @@
                         <div class="form-group col-md-4">
                             <label for="password">@lang('app.password') <span class="mendatory-mark">*</span></label>
                             <div class="input-group">
-                                <input type="password" id="password"
+                                <input type="password" id="password" placeholder="Type your password"
                                        class="form-control @error('password') is-invalid @enderror" name="password">
                                 <div class="input-group-append" id="icon-click">
                                     <div class="input-group-text"><i class="fa fa-eye"></i></div>
@@ -43,8 +43,9 @@
 
                         <div class="form-group col-md-4">
                             <label for="password-confirm">@lang('Confirm
-                                Password')</label>
-                            <input id="password-confirm" type="password" class="form-control"
+                                Password') <span class="mendatory-mark">*</span></label>
+                            <input id="password-confirm" type="password" placeholder="Type password again"
+                                   class="form-control"
                                    name="password_confirmation">
                         </div>
                     </div>
@@ -57,7 +58,7 @@
                             <input id="company_name" type="text"
                                    class="form-control @error('company_name') is-invalid @enderror "
                                    name="company_name" placeholder="Type company name"
-                                   value="{{ old('company_name') }}" autofocus>
+                                   value="{{ old('company_name') }}">
                             @error('company_name')
                             <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -83,18 +84,28 @@
                         <div class="form-group col-md-6">
                             <select class="form-control" name="divison" id="divison">
                                 <option value="">Select Divison</option>
-                                @foreach($categories as $category)
-                                    <option value="{{$category->id}}">
-                                        {{$category->category_name}}</option>
+                                @foreach($divisions as $division)
+                                    <option value="{{$division->id}}">
+                                        @langis('bn')
+                                        {{$division->bn_name}}
+                                        @elselangis('en')
+                                        {{$division->name}}
+                                        @endlangis
+                                    </option>
                                 @endforeach
                             </select>
                         </div>
                         <div class="form-group col-md-6">
                             <select class="form-control" name="district" id="district">
                                 <option value="">Select District</option>
-                                @foreach($categories as $category)
-                                    <option value="{{$category->id}}">
-                                        {{$category->category_name}}</option>
+                                @foreach($districts as $district)
+                                    <option value="{{$district->id}}">
+                                        @langis('bn')
+                                        {{$district->bn_name}}
+                                        @elselangis('en')
+                                        {{$district->name}}
+                                        @endlangis
+                                    </option>
                                 @endforeach
                             </select>
                         </div>
@@ -112,7 +123,7 @@
                         <div class="form-group col-md-6">
                             <label for="trade_license">Business/ Trade License No
                                 <span class="mendatory-mark">*</span></label>
-                            <input id="trade_license" type="text"
+                            <input id="trade_license" type="text" placeholder="Input trade license"
                                    class="form-control @error('trade_license') is-invalid @enderror "
                                    name="trade_license"
                                    value="{{ old('trade_license') }}" autofocus>
@@ -123,9 +134,8 @@
                             @enderror
                         </div>
                         <div class="form-group col-md-6">
-                            <label for="rl_no">RL No (Only for Recruiting Agency)
-                                <span class="mendatory-mark">*</span></label>
-                            <input id="rl_no" type="text"
+                            <label for="rl_no">RL No (Only for Recruiting Agency)</label>
+                            <input id="rl_no" type="text" placeholder="Type RL number"
                                    class="form-control @error('rl_no') is-invalid @enderror"
                                    name="rl_no" value="{{ old('rl_no') }}">
                             @error('rl_no')
@@ -139,6 +149,7 @@
                         <label for="desciption">Business Description
                             <span class="mendatory-mark">*</span></label>
                         <textarea type="text" name="desciption" rows="2" id="desciption"
+                                  placeholder="Write your company's description"
                                   class="form-control"></textarea>
                         @error('desciption')
                         <span class="invalid-feedback" role="alert">
@@ -146,10 +157,11 @@
                                 </span>
                         @enderror
                     </div>
-                    <div class="form-group ">
-                        <label for="website_url">Website URL
-                            <span class="mendatory-mark">*</span></label>
-                        <input type="text" name="website_url" id="website_url" class="form-control">
+                    <div class="form-group">
+                        <label for="website_url">Website URL</label>
+                        <input type="text" name="website_url" id="website_url"
+                               placeholder="Type your company's website URL"
+                               class="form-control">
                         @error('website_url')
                         <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -172,7 +184,8 @@
                             @enderror
                         </div>
                         <div class="form-group col-md-6">
-                            <label for="contact_phone">Contact Person's Phone</label>
+                            <label for="contact_phone">Contact Person's Phone <span
+                                    class="mendatory-mark">*</span></label>
                             <div class="input-group">
                                 <div class="input-group-append">
                                     <div class="input-group-text">+880</div>
@@ -193,8 +206,8 @@
                     </div>
                     <hr>
                     <div class="form-group row mb-0">
-                        <div class="col-md-6 offset-md-3">
-                            <button type="submit" class="form-control btn btn-success">
+                        <div class="col-md-4 offset-md-4">
+                            <button type="submit" class="form-control btn btn-primary">
                                 <i class="fa fa-save"></i> @lang('Register')
                             </button>
                         </div>
@@ -204,20 +217,4 @@
         </div>
     </div>
 @endsection
-@section('page-js')
-    <script>
-        $(document).ready(function () {
-            $("#icon-click").on('click', function () {
-                $('#icon-click i').toggleClass("fa-eye-slash");
-                const pass = $('#password');
-                if (pass.attr("type") == "password") {
-                    pass.attr('type', 'text');
-                } else if (pass.attr("type") == "text") {
-                    pass.attr('type', 'password');
 
-                }
-            });
-        });
-    </script>
-
-@endsection

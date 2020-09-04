@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Category;
 use App\Country;
+use App\District;
+use App\Divison;
 use App\Http\Requests\registerJobSeekerRequest;
 use App\JobApplication;
 use App\User;
@@ -93,7 +95,9 @@ class UserController extends Controller
     {
         $title = __('app.employer_register');
         $categories = Category::orderBy('category_name', 'asc')->get();
-        return view('employer-register', compact('title', 'categories'));
+        $divisions = Divison::orderBy('name', 'asc')->get();
+        $districts = District::orderBy('name', 'asc')->get();
+        return view('employer-register', compact('title', 'categories', 'divisions', 'districts'));
     }
 
     public function registerEmployerPost(Request $request)

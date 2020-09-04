@@ -15,9 +15,12 @@ class CreateDistrictsTable extends Migration
     {
         Schema::create('districts', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->unsignedBigInteger('division_id');
+            $table->unsignedBigInteger('division_id')->nullable();
             $table->string('name');
             $table->string('bn_name')->nullable();
+            $table->foreign('division_id')
+                ->references('id')->on('divisions')
+                ->onDelete('cascade');
         });
     }
 

@@ -3,9 +3,9 @@
 @endsection
 @section('content')
     <div class="container py-4">
-        <div class="d-flex border flex-md-row flex-column bg-white p-3">
+        <div class="d-flex  border flex-md-row flex-column bg-white p-3">
             <div class="mr-auto col-md-8 p-2">
-                <h3 class="mb-4 text-primary">@lang('app.job-seeker-register')</h3>
+                <h3 class="mb-4 text-success">@lang('app.job-seeker-register')</h3>
                 @if (Session::has('message'))
                     @php
                         $message = Session::get('message');
@@ -40,17 +40,17 @@
                         <div class="form-group col-md-6">
                             <label for="inputPassword4">Gender<span class="mendatory-mark"> *</span></label><br>
                             <div class="btn-group btn-group-toggle" data-toggle="buttons">
-                                <label class="btn btn-outline-primary active">
+                                <label class="btn btn-outline-success active">
                                     <input type="radio" name="gender" checked autocomplete="off" value="Male"><i
                                         class="fa fa-male"></i> Male
                                 </label>
 
-                                <label class="btn btn-outline-primary mx-2">
+                                <label class="btn btn-outline-success mx-2">
                                     <input type="radio" name="gender" autocomplete="off" value="Female">
                                     <i class="fa fa-female"></i> Female
                                 </label>
 
-                                <label class="btn btn-outline-primary">
+                                <label class="btn btn-outline-success">
                                     <input type="radio" name="gender" autocomplete="off" value="Other"> <i
                                         class="fa fa-transgender"></i>
                                     Other
@@ -125,7 +125,7 @@
 
                     <div class="form-group row mb-0 mt-3">
                         <div class="col-md-4 offset-md-4">
-                            <button type="submit" class="btn btn-primary btn-block">
+                            <button type="submit" class="btn btn-success btn-block">
                                 <i class="fa fa-save"></i> @lang('Register')
                             </button>
                         </div>
@@ -150,27 +150,8 @@
                    style="color:white;"> <span class="fa fa-linkedin"></span>
                     Import from LinkedIn
                 </a>
-
             </div>
-
         </div>
     </div>
-
 @endsection
-@section('page-js')
-    <script>
-        $(document).ready(function () {
-            $("#icon-click").on('click', function () {
-                $('#icon-click i').toggleClass("fa-eye-slash");
-                const pass = $('#password');
-                if (pass.attr("type") == "password") {
-                    pass.attr('type', 'text');
-                } else if (pass.attr("type") == "text") {
-                    pass.attr('type', 'password');
 
-                }
-            });
-        });
-    </script>
-
-@endsection

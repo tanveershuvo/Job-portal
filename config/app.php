@@ -175,11 +175,12 @@ return [
         App\Providers\EventServiceProvider::class,
         //App\Providers\TelescopeServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
-
+        App\Providers\BladeServiceProvider::class,
         //Custom
         // Barryvdh\Debugbar\ServiceProvider::class,
         Intervention\Image\ImageServiceProvider::class,
         Laravel\Socialite\SocialiteServiceProvider::class,
+
 
     ],
 
