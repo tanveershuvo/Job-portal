@@ -3,14 +3,18 @@
 namespace App\Http\Controllers;
 
 use App\Category;
-use App\Country;
 use App\District;
 use App\Divison;
+use App\Http\Requests\RegisterEmployerRequest;
 use App\Http\Requests\registerJobSeekerRequest;
 use App\JobApplication;
+use App\RecruiterDetails;
 use App\User;
+use Exception;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Session;
@@ -43,7 +47,7 @@ class UserController extends Controller
     /**
      * @param $id
      * @param null $status
-     * @return \Illuminate\Http\RedirectResponse
+     * @return RedirectResponse
      */
     public function statusChange($id, $status = null)
     {
@@ -79,15 +83,14 @@ class UserController extends Controller
 
     public function registerJobSeekerPost(registerJobSeekerRequest $request)
     {
-        //dd($request->all());
-        $user = User::create([
+        User::create([
             'name' => $request['name'],
             'email' => $request['email'],
             'user_type' => 'user',
             'password' => bcrypt($request['password']),
             'active_status' => 1,
         ]);
-        Session::flash('message', 'Registration Successfull');
+        Session::flash('message', ['status' => 'success', 'data' => 'Registration Successfull']);
         return Redirect::to('/login');
     }
 
@@ -100,39 +103,37 @@ class UserController extends Controller
         return view('employer-register', compact('title', 'categories', 'divisions', 'districts'));
     }
 
-    public function registerEmployerPost(Request $request)
+    public function registerEmployerPost(RegisterEmployerRequest $request)
     {
-        dd($request->all());
-        $rules = [
-            'employeer_name' => ['required', 'string', 'max:80'],
-            'company' => 'required',
-            'email' => ['required', 'string', 'email', 'max:190', 'unique:users'],
-            'password' => ['required', 'string', 'min:6', 'confirmed'],
-            'phone' => 'required',
-            'address' => 'required',
-            'district' => 'required',
-        ];
-        $this->validate($request, $rules);
-
-        $company = $request->company;
-        $company_slug = unique_slug($company, 'User', 'company_slug');
-
-        User::create([
-            'name' => $request->employeer_name,
-            'company' => $company,
-            'company_slug' => $company_slug,
-            'email' => $request->email,
-            'user_type' => 'employer',
-            'password' => bcrypt($request->password),
-
-            'phone' => $request->phone,
-            'address' => $request->address,
-            'address_2' => $request->address_2,
-            'district' => $request->district,
-            'active_status' => 1,
-        ]);
-
-        return redirect(route('login'))->with('success', __('app.registration_successful'));
+        DB::beginTransaction();
+        try {
+            $user = User::create([
+                'email' => $request['email'],
+                'password' => bcrypt($request['password']),
+                'user_type' => 'employer',
+            ]);
+            RecruiterDetails::create([
+                'user_id' => $user->id,
+                'company_name' => $request['company_name'],
+                'category_id' => $request['category'],
+                'division_id' => $request['division'],
+                'district_id' => $request['district'],
+                'address' => $request['address'],
+                'trade_licence_no' => $request['trade_license'],
+                'rl_no' => $request['rl_no'],
+                'company_description' => $request['description'],
+                'website_url' => $request['website_url'],
+                'contact_name' => $request['contact_name'],
+                'contact_phone' => $request['contact_phone'],
+            ]);
+            DB::commit();
+        } catch (Exception $e) {
+            DB::rollback();
+            flashMessage('danger', $e->getMessage());
+            return Redirect::back();
+        }
+        flashMessage('success', 'Registration Completed!');
+        return Redirect::to('/login');
     }
 
     public function employerProfile()

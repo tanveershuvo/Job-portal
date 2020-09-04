@@ -109,7 +109,7 @@
                                     </div>
                                     <div class="row justify-content-center">
                                         <a class="btn btn-outline-primary col-6"
-                                           href="{{route('register_employer')}}"><i class="fa fa-user"
+                                           href="{{route('register_employer')}}"><i class="fa fa-users"
                                                                                     aria-hidden="true"></i>
                                             @lang('app.register_account')
                                         </a>

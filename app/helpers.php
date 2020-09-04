@@ -1,11 +1,19 @@
 <?php
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 
 /**
+ * @param $status
+ * @param $data
  * @return mixed
  * Custom functions
  */
+
+function flashMessage($status = 'warning', $data = null)
+{
+    return Session::flash('message', ['status' => $status, 'data' => $data]);
+}
 
 /**
  * @return string
@@ -153,6 +161,7 @@ function ad_status_change($ad_id = 0, $status = 1)
 
     return false;
 }
+
 function update_option($key, $value)
 {
     $option = \App\Option::firstOrCreate(['option_key' => $key]);
@@ -203,7 +212,7 @@ function get_amount_raw($amount = 0)
     $none_decimal_currencies = get_zero_decimal_currency();
 
     if (in_array(get_option('currency_sign'), $none_decimal_currencies)) {
-        $get_price = (int) $amount;
+        $get_price = (int)$amount;
     } else {
         if ($amount > 0) {
             $get_price = number_format($amount, 2);
@@ -735,7 +744,7 @@ if (!function_exists('selected')) {
 if (!function_exists('__checked_selected_helper')) {
     function __checked_selected_helper($helper, $current, $echo, $type)
     {
-        if ((string) $helper === (string) $current) {
+        if ((string)$helper === (string)$current) {
             $result = " $type='$type'";
         } else {
             $result = '';

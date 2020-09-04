@@ -4,7 +4,8 @@
     <div class="container py-4">
         <div class="d-flex border employee-register flex-md-row flex-column bg-white p-3">
             <div class="col-md-12">
-                <h3 class="mb-5 text-center highlight">Employer Registration</h3>
+                <h3 class="mb-5 text-center text-primary">Employer Registration</h3>
+                @include('flash_message')
                 <form method="POST" action="">
                     @csrf
                     <h4 class="mb-4">Account Information</h4>
@@ -25,7 +26,8 @@
                             <label for="password">@lang('app.password') <span class="mendatory-mark">*</span></label>
                             <div class="input-group">
                                 <input type="password" id="password" placeholder="Type your password"
-                                       class="form-control @error('password') is-invalid @enderror" name="password">
+                                       class="form-control @error('password') is-invalid @enderror" name="password"
+                                       value="{{ old('password') }}">
                                 <div class="input-group-append" id="icon-click">
                                     <div class="input-group-text"><i class="fa fa-eye"></i></div>
                                 </div>
@@ -45,8 +47,8 @@
                             <label for="password-confirm">@lang('Confirm
                                 Password') <span class="mendatory-mark">*</span></label>
                             <input id="password-confirm" type="password" placeholder="Type password again"
-                                   class="form-control"
-                                   name="password_confirmation">
+                                   class="form-control "
+                                   name="password_confirmation" value="{{ old('password_confirmation') }}">
                         </div>
                     </div>
 
@@ -69,23 +71,32 @@
                         <div class="form-group col-md-6">
                             <label for="category">Industry Type
                                 <span class="mendatory-mark">*</span></label>
-                            <select class="form-control" name="category" id="category">
+                            <select class="form-control @error('category') is-invalid @enderror" name="category"
+                                    id="category">
                                 <option value="">@lang('app.select_category')</option>
                                 @foreach($categories as $category)
-                                    <option value="{{$category->id}}">
+                                    <option
+                                        value="{{$category->id}}" {{ old('category') == $category->id ? 'selected' : '' }}>
                                         {{$category->category_name}}</option>
                                 @endforeach
                             </select>
+                            @error('category')
+                            <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
                         </div>
                     </div>
                     <label for="company_name">Company Address
                         <span class="mendatory-mark">*</span></label><br>
                     <div class="form-row">
                         <div class="form-group col-md-6">
-                            <select class="form-control" name="divison" id="divison">
+                            <select class="form-control @error('division') is-invalid @enderror" name="division"
+                                    id="division">
                                 <option value="">Select Divison</option>
                                 @foreach($divisions as $division)
-                                    <option value="{{$division->id}}">
+                                    <option
+                                        value="{{$division->id}}" {{ old('division') == $division->id ? 'selected' : '' }}>
                                         @langis('bn')
                                         {{$division->bn_name}}
                                         @elselangis('en')
@@ -94,12 +105,19 @@
                                     </option>
                                 @endforeach
                             </select>
+                            @error('division')
+                            <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
                         </div>
                         <div class="form-group col-md-6">
-                            <select class="form-control" name="district" id="district">
+                            <select class="form-control @error('district') is-invalid @enderror" name="district"
+                                    id="district">
                                 <option value="">Select District</option>
                                 @foreach($districts as $district)
-                                    <option value="{{$district->id}}">
+                                    <option
+                                        value="{{$district->id}}" {{ old('district') == $district->id ? 'selected' : '' }}>
                                         @langis('bn')
                                         {{$district->bn_name}}
                                         @elselangis('en')
@@ -108,15 +126,21 @@
                                     </option>
                                 @endforeach
                             </select>
+                            @error('district')
+                            <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
                         </div>
                     </div>
                     <div class="form-group">
-                        <textarea name="address" class="form-control" id="address" rows="2"
-                                  placeholder="Write Company Address"></textarea>
+                        <textarea name="address" class="form-control  @error('address') is-invalid @enderror"
+                                  id="address" rows="2"
+                                  placeholder=" Write Company Address">{{ old('address') }}</textarea>
                         @error('address')
-                        <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
+                        <span class=" invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                        </span>
                         @enderror
                     </div>
                     <div class="form-row">
@@ -146,12 +170,12 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="desciption">Business Description
+                        <label for="description">Business Description
                             <span class="mendatory-mark">*</span></label>
-                        <textarea type="text" name="desciption" rows="2" id="desciption"
+                        <textarea type="text" name="description" rows="2" id="description"
                                   placeholder="Write your company's description"
-                                  class="form-control"></textarea>
-                        @error('desciption')
+                                  class="form-control @error('description') is-invalid @enderror">{{ old('description') }}</textarea>
+                        @error('description')
                         <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>
@@ -161,11 +185,12 @@
                         <label for="website_url">Website URL</label>
                         <input type="text" name="website_url" id="website_url"
                                placeholder="Type your company's website URL"
-                               class="form-control">
+                               class="form-control @error('website_url') is-invalid @enderror"
+                               value="{{ old('website_url') }}">
                         @error('website_url')
                         <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
+                        <strong>{{ $message }}</strong>
+                        </span>
                         @enderror
                     </div>
                     <hr class="mt-4">
@@ -196,8 +221,7 @@
                                        placeholder="@lang('app.contact_ex')">
 
                             </div>
-
-                            @error('contact')
+                            @error('contact_phone')
                             <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
                         </span>

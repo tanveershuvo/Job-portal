@@ -9,16 +9,18 @@
                     <img src="{{asset('assets/images/aa.png')}}" width="100%" height="100%" alt="">
                 </div>
                 <div class="col-md-7 bg-white pt-4">
-                    <h1 class="mb-4 text-center">Contact Us</h1>
+                    <h1 class="text-center">Contact Us</h1>
+                    <h6 class="mb-4 text-muted text-center"><b><i class="fa fa-envelope-o"></i> Support Mail :</b>
+                        tanveershuvos@gmail.com
+                    </h6>
                     @include('admin.flash_msg')
                     <form method="POST" action="">
                         @csrf
                         <div class="form-group row">
                             <label for="name" class="col-md-3 control-label"><b>@lang('app.name') </b><span
                                     class="text-danger">*</span> :</label>
-
                             <div class="col-md-8">
-                                <input id="name" type="text"
+                                <input id="name" type="text" placeholder="write your name"
                                        class="form-control @error('name') is-invalid @enderror"
                                        name="name" value="{{ old('name') }}">
                                 @error('name')
@@ -34,7 +36,7 @@
                                     class="text-danger">*</span> :</label>
 
                             <div class="col-md-8">
-                                <input id="email" type="email"
+                                <input id="email" type="email" placeholder="write your mail address"
                                        class="form-control @error('email') is-invalid @enderror"
                                        name="email" value="{{ old('email') }}">
                                 @error('email')
@@ -50,7 +52,7 @@
                                     class="text-danger">*</span> :</label>
 
                             <div class="col-md-8">
-                                <input id="subject" type="text"
+                                <input id="subject" type="text" placeholder="write your mail subject"
                                        class="form-control @error('subject') is-invalid @enderror"
                                        name="subject" value="{{ old('subject') }}">
                                 @error('subject')
@@ -66,7 +68,7 @@
                                     class="text-danger">*</span> :</label>
                             <div class="col-md-8">
                                 <textarea name="message" class="form-control @error('message') is-invalid @enderror"
-                                          rows="3">{{ old('message') }}</textarea>
+                                          placeholder="write your message" rows="3">{{ old('message') }}</textarea>
                                 @error('message')
                                 <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>

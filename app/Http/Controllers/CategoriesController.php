@@ -31,19 +31,12 @@ class CategoriesController extends Controller
     public function store(Request $request)
     {
         $rules = [
-            'category_name' => 'required',
+            'category_name' => 'required|unique:categories',
         ];
         $this->validate($request, $rules);
 
-        $slug = Str::slug($request->category_name);
-        $duplicate = Category::where('category_slug', $slug)->count();
-        if ($duplicate > 0) {
-            return back()->with('error', trans('app.category_exists_in_db'));
-        }
-
         $data = [
             'category_name' => $request->category_name,
-            'category_slug' => $slug,
         ];
 
         Category::create($data);

@@ -23,7 +23,6 @@
     <!-- Scripts -->
 
 
-
     <script type='text/javascript'>
         /* <![CDATA[ */
         var page_data = {!! pageJsonData() !!};
@@ -59,7 +58,7 @@
                     <ul class="navbar-nav mr-auto">
                         <li class="nav-item"><a class="nav-link" target="_blank" href="{{route('home')}}"><i
                                     class="la la-home"></i>
-                                @lang('app.view_site')</a> </li>
+                                @lang('app.view_site')</a></li>
                     </ul>
 
                     <!-- Right Side Of Navbar -->
@@ -67,16 +66,16 @@
 
                         <li class="nav-item badge badge-warning">
                             <a class="nav-link" style="font-size:15px;color:black;"> Balance :
-                                ৳{{auth()->user()->premium_jobs_balance}}
+                                {{--                                ৳{{auth()->user()->premium_jobs_balance}}--}}
                             </a>
 
                         </li>
 
-                        <li class="nav-item"> <a class="nav-link"
+                        <li class="nav-item"><a class="nav-link"
                                 href="{{route('dashboard')}}">{{ Auth::user()->name }}</a></i>
                         </li>
 
-                        <li class="nav-item"> <a class="nav-link" href="{{ route('logout') }}" onclick="event.preventDefault();
+                        <li class="nav-item"><a class="nav-link" href="{{ route('logout') }}" onclick="event.preventDefault();
                                 document.getElementById('logout-form').submit();">
                                 {{ __('Logout') }}
                             </a>
@@ -186,13 +185,6 @@
 
 
                             @endif
-
-                            <li class="{{request()->is('dashboard/payments*')? 'active' : ''}}">
-                                <a href="{{route('payments')}}" class="list-group-item-action active">
-                                    <span class="sidebar-icon"><i class="la la-money"></i> </span>
-                                    <span class="title">@lang('app.payments')</span>
-                                </a>
-                            </li>
 
                             @if($user->is_admin())
 

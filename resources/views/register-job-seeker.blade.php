@@ -6,16 +6,7 @@
         <div class="d-flex  border flex-md-row flex-column bg-white p-3">
             <div class="mr-auto col-md-8 p-2">
                 <h3 class="mb-4 text-success">@lang('app.job-seeker-register')</h3>
-                @if (Session::has('message'))
-                    @php
-                        $message = Session::get('message');
-                    @endphp
-                    @foreach($message as $messages)
-                        <div class="alert alert-danger">
-                            <b>ERROR : {{ $messages['code'] }} </b> , {{ $messages['reason'] }}
-                        </div>
-                    @endforeach
-                @endif
+                @include('flash_message')
                 <form action="{{route('register_job_seek')}}" method="POST" enctype="multipart/form-data">
                     @csrf
                     @if (!empty(session('arr')))

@@ -3,6 +3,7 @@
 namespace App;
 
 use Barryvdh\LaravelIdeHelper\Eloquent;
+use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
@@ -39,9 +40,22 @@ use Illuminate\Notifications\Notifiable;
 class Category extends Model
 {
     use Notifiable;
+    use Sluggable;
 
     protected $guarded = [];
     public $timestamps = false;
+
+    /**
+     * @return array
+     */
+    public function sluggable(): array
+    {
+        return [
+            'category_slug' => [
+                'source' => 'category_name'
+            ]
+        ];
+    }
 
     public function jobs()
     {
@@ -57,4 +71,6 @@ class Category extends Model
     {
         return $this->hasMany(Job::class)->whereStatus(1)->count();
     }
+
+
 }
