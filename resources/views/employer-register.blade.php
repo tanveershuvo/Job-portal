@@ -99,7 +99,7 @@
                                         value="{{$division->id}}" {{ old('division') == $division->id ? 'selected' : '' }}>
                                         @langis('bn')
                                         {{$division->bn_name}}
-                                        @elselangis('en')
+                                        @elselangis
                                         {{$division->name}}
                                         @endlangis
                                     </option>
@@ -120,7 +120,7 @@
                                         value="{{$district->id}}" {{ old('district') == $district->id ? 'selected' : '' }}>
                                         @langis('bn')
                                         {{$district->bn_name}}
-                                        @elselangis('en')
+                                        @elselangis
                                         {{$district->name}}
                                         @endlangis
                                     </option>

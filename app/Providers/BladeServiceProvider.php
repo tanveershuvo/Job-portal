@@ -28,8 +28,8 @@ class BladeServiceProvider extends ServiceProvider
             return "<?php if(session()->get('locale') === $expression){ ?>";
         });
 
-        Blade::directive('elselangis', function ($expression) {
-            return "<?php }elseif(session()->get('locale') === $expression){ ?>";
+        Blade::directive('elselangis', function () {
+            return "<?php }else{ ?>";
         });
 
         Blade::directive('endlangis', function ($expression) {
