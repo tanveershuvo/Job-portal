@@ -28,8 +28,15 @@ class registerJobSeekerRequest extends FormRequest
             'name' => ['required', 'string', 'max:100'],
             'email' => ['required', 'string', 'email', 'max:190', 'unique:users'],
             'password' => ['required', 'string', 'min:8', new StrongPassword, 'confirmed'],
-            'contact' => ['numeric', 'digits:10'],
+            'phone' => ['numeric', 'digits:10', 'unique:users'],
             'gender' => ['required']
+        ];
+    }
+
+    public function attributes()
+    {
+        return [
+            'phone' => 'Contact number'
         ];
     }
 }

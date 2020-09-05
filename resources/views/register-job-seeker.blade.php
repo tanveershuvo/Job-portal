@@ -65,19 +65,19 @@
                         </div>
 
                         <div class="form-group col-md-6">
-                            <label for="contact">Mobile Number</label>
+                            <label for="phone">Mobile Number</label>
                             <div class="input-group">
                                 <div class="input-group-append">
                                     <div class="input-group-text">+880</div>
                                 </div>
-                                <input id="contact" type="text"
-                                       class="form-control @error('contact') is-invalid @enderror"
-                                       name="contact" value="{{ old('contact') }}"
+                                <input id="phone" type="text"
+                                       class="form-control @error('phone') is-invalid @enderror"
+                                       name="phone" value="{{ old('phone') }}"
                                        placeholder="@lang('app.contact_ex')">
 
                             </div>
 
-                            @error('contact')
+                            @error('phone')
                             <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
                         </span>

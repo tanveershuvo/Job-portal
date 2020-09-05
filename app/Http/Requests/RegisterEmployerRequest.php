@@ -38,7 +38,7 @@ class RegisterEmployerRequest extends FormRequest
             'description' => ['required', 'string', 'max:250'],
             'website_url' => ['max:250'],
             'contact_name' => ['required', 'string', 'max:80'],
-            'contact_phone' => ['required', 'numeric', 'digits:10'],
+            'phone' => ['required', 'numeric', 'digits:10', 'unique:users'],
         ];
     }
 
@@ -48,6 +48,7 @@ class RegisterEmployerRequest extends FormRequest
         return [
             'company_name' => 'Company name',
             'trade_license' => 'Trade license',
+            'phone' => 'Contact number',
         ];
     }
 

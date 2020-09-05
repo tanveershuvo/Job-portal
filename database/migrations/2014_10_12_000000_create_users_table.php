@@ -19,13 +19,13 @@ class CreateUsersTable extends Migration
             $table->bigIncrements('id');
             $table->string('name')->nullable();
             $table->string('email')->unique();
+            $table->string('phone')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->enum('gender', ['male', 'female'])->nullable();
             $table->string('photo')->nullable();
-            $table->enum('user_type', ['user', 'employer', 'admin']);
-            //active_status 0:pending, 1:active, 2:block;
-            $table->tinyInteger('active_status')->default(0);
+            $table->enum('user_type', ['jobseeker', 'employer', 'admin']);
+            $table->tinyInteger('active_status')->default(1);
             $table->rememberToken();
             $table->timestamps();
         });

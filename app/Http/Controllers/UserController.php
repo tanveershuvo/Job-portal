@@ -17,7 +17,6 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Redirect;
-use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Facades\Image;
 
@@ -85,12 +84,12 @@ class UserController extends Controller
     {
         User::create([
             'name' => $request['name'],
+            'phone' => phoneNumber($request['phone']),
             'email' => $request['email'],
-            'user_type' => 'user',
+            'user_type' => 'jobseeker',
             'password' => bcrypt($request['password']),
-            'active_status' => 1,
         ]);
-        Session::flash('message', ['status' => 'success', 'data' => 'Registration Successfull']);
+        flashMessage('success', 'Registration is completed! Now log in to continue.');
         return Redirect::to('/login');
     }
 
@@ -108,8 +107,10 @@ class UserController extends Controller
         DB::beginTransaction();
         try {
             $user = User::create([
+                'name' => $request['contact_name'],
                 'email' => $request['email'],
                 'password' => bcrypt($request['password']),
+                'phone' => phoneNumber($request['phone']),
                 'user_type' => 'employer',
             ]);
             RecruiterDetails::create([
@@ -123,8 +124,6 @@ class UserController extends Controller
                 'rl_no' => $request['rl_no'],
                 'company_description' => $request['description'],
                 'website_url' => $request['website_url'],
-                'contact_name' => $request['contact_name'],
-                'contact_phone' => $request['contact_phone'],
             ]);
             DB::commit();
         } catch (Exception $e) {

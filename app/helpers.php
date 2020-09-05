@@ -15,6 +15,12 @@ function flashMessage($status = 'warning', $data = null)
     return Session::flash('message', ['status' => $status, 'data' => $data]);
 }
 
+function phoneNumber($number)
+{
+    return '+880' . $number;
+}
+
+
 /**
  * @return string
  */

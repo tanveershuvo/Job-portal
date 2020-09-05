@@ -25,8 +25,6 @@ class CreateRecruiterDetails extends Migration
             $table->string('rl_no')->nullable();
             $table->string('company_description');
             $table->string('website_url')->nullable();
-            $table->string('contact_name');
-            $table->string('contact_phone');
             $table->string('company_slug')->nullable();
             $table->string('company_logo')->nullable();
             $table->integer('premium_jobs_balance')->default(0)->nullable();

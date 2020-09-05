@@ -209,19 +209,19 @@
                             @enderror
                         </div>
                         <div class="form-group col-md-6">
-                            <label for="contact_phone">Contact Person's Phone <span
+                            <label for="phone">Contact Person's Phone <span
                                     class="mendatory-mark">*</span></label>
                             <div class="input-group">
                                 <div class="input-group-append">
                                     <div class="input-group-text">+880</div>
                                 </div>
-                                <input id="contact_phone" type="text"
-                                       class="form-control @error('contact_phone') is-invalid @enderror"
-                                       name="contact_phone" value="{{ old('contact_phone') }}"
+                                <input id="phone" type="text"
+                                       class="form-control @error('phone') is-invalid @enderror"
+                                       name="phone" value="{{ old('phone') }}"
                                        placeholder="@lang('app.contact_ex')">
 
                             </div>
-                            @error('contact_phone')
+                            @error('phone')
                             <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
                         </span>
